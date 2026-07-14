@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stadtwerke Hamburg - Karriere & Vertragsportal</title>
+    <title>Stadtwerke Hamburg - Bürger- & Karriereportal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Caveat for cursive signatures -->
@@ -58,16 +58,16 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased flex flex-col justify-between">
 
     <!-- Modern Header & Navigation -->
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo Block -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-md shadow-swBlue-500/20">
-                        <i class="fa-solid fa-industry text-xl"></i>
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('startseite')">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-swBlue-800 to-swBlue-50 flex items-center justify-center text-white shadow-md shadow-swBlue-500/20">
+                        <i class="fa-solid fa-industry text-xl text-swBlue-800"></i>
                     </div>
                     <div>
                         <span class="text-lg font-extrabold tracking-tight text-swBlue-900 block leading-tight">STADTWERKE</span>
@@ -75,137 +75,103 @@
                     </div>
                 </div>
                 
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="#services" class="text-slate-600 hover:text-swBlue-800 font-medium text-sm transition-colors">Dienstleistungen</a>
-                    <a href="#vertrag-sektion" class="bg-swBlue-50 text-swBlue-800 hover:bg-swBlue-100 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 border border-swBlue-200/50">
-                        <i class="fa-solid fa-file-signature mr-2"></i>Einstellungs-Portal
-                    </a>
+                <!-- Desktop Navigation Links (Tab-Switcher) -->
+                <nav class="hidden md:flex space-x-4 items-center">
+                    <button id="nav-home" onclick="switchPage('startseite')" class="text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-house mr-2"></i>Startseite
+                    </button>
+                    <button id="nav-contract" onclick="switchPage('arbeitsvertrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-file-signature mr-2"></i>Arbeitsvertrag
+                    </button>
                 </nav>
                 
                 <!-- Indicator badge -->
                 <div class="flex items-center space-x-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-200 text-xs font-semibold">
                     <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Server-Online</span>
+                    <span>System Online</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="py-8">
+    <main class="py-8 flex-grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Welcome Banner -->
-            <div class="relative overflow-hidden bg-gradient-to-r from-swBlue-900 via-swBlue-800 to-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl mb-12 text-white">
-                <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-swBlue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -left-16 -top-16 w-96 h-96 bg-swOrange-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <div class="relative z-10 max-w-3xl">
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
-                        <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Karriereportal
-                    </span>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-                        Werde Teil unseres Teams der <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">Stadtwerke Hamburg</span>
-                    </h1>
-                    <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-                        Wir halten die Metropole am Laufen! Nutze unser volldigitales Einstellungsportal, um deinen Dienstvertrag bequem online auszufüllen, digital zu signieren und bei Bedarf sofort als PDF-Dokument herunterzuladen.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#vertrag-sektion" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
-                            Jetzt Vertrag unterzeichnen <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </a>
-                        <a href="#services" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10">
-                            Aufgabenbereiche ansehen
-                        </a>
+            <!-- SECTION 1: STARTSEITE (HOME VIEW) -->
+            <div id="view-startseite" class="space-y-12">
+                <!-- Welcome Banner -->
+                <div class="relative overflow-hidden bg-gradient-to-r from-swBlue-900 via-swBlue-800 to-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl text-white">
+                    <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-swBlue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -left-16 -top-16 w-96 h-96 bg-swOrange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="relative z-10 max-w-3xl">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Karriereportal
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                            Werde Teil unseres Teams der <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">Stadtwerke Hamburg</span>
+                        </h1>
+                        <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+                            Wir halten die Metropole am Laufen! Nutze unser volldigitales Portal, um deinen Arbeitsvertrag bequem online auszufüllen, digital zu signieren und bei Bedarf sofort als PDF-Dokument herunterzuladen.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="switchPage('arbeitsvertrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
+                                Jetzt Vertrag unterzeichnen <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                            <a href="#services-anchor" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
+                                Aufgabenbereiche ansehen
+                            </a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Departments / Services Info Section -->
+                <section id="services-anchor" class="scroll-mt-24">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Unsere Kerndienstleistungen</h2>
+                        <p class="text-slate-600 mt-2">Ein reibungsloser Betrieb ist nur durch das Zusammenspiel aller Abteilungen möglich.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Service Card 1 -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 text-swOrange-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-trash-can text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Abfallwirtschaft & Entsorgung</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Verantwortlich für die pünktliche und fachgerechte Leerung aller Müll- und Recyclingbehälter im gesamten Hamburger Stadtgebiet.
+                            </p>
+                        </div>
+
+                        <!-- Service Card 2 -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-truck-field text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Erhaltung der Verkehrssicherheit und Sauberkeit auf allen öffentlichen Verkehrsflächen sowie Koordination bei Extremwetterlagen.
+                            </p>
+                        </div>
+
+                        <!-- Service Card 3 -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-bolt text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Infrastruktur & Instandsetzung</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Wartung der Leitungsnetze, Beleuchtungsanlagen und Ampelsysteme sowie rasche Behebung von Störungen im städtischen Netzgebiet.
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
-            <!-- Departments / Services Info Section -->
-            <section id="services" class="mb-16">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Unsere Kerndienstleistungen</h2>
-                    <p class="text-slate-600 mt-2">Ein reibungsloser Betrieb ist nur durch das Zusammenspiel aller Abteilungen möglich.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Service Card 1 -->
-                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                        <div class="w-12 h-12 rounded-xl bg-orange-100 text-swOrange-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-trash-can text-xl"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Abfallwirtschaft & Entsorgung</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Verantwortlich für die pünktliche und fachgerechte Leerung aller Müll- und Recyclingbehälter im gesamten Hamburger Stadtgebiet.
-                        </p>
-                    </div>
-
-                    <!-- Service Card 2 -->
-                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                        <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-truck-field text-xl"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Erhaltung der Verkehrssicherheit und Sauberkeit auf allen öffentlichen Verkehrsflächen sowie Koordination bei Extremwetterlagen.
-                        </p>
-                    </div>
-
-                    <!-- Service Card 3 -->
-                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-bolt text-xl"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">Infrastruktur & Instandsetzung</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Wartung der Leitungsnetze, Beleuchtungsanlagen und Ampelsysteme sowie rasche Behebung von Störungen im städtischen Netzgebiet.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Main Contract Portal Grid -->
-            <section id="vertrag-sektion" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start scroll-mt-24">
-                
-                <!-- Left: Interactive Agreement Details / Info -->
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-md">
-                        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
-                            <i class="fa-solid fa-circle-check text-swBlue-500 mr-2"></i>Voraussetzungen
-                        </h3>
-                        <ul class="space-y-4 text-sm text-slate-600">
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-swBlue-800 mr-3">1</span>
-                                <span>Gültiger Personalausweis / ID für den Bürger-Eintrag.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-swBlue-800 mr-3">2</span>
-                                <span>Vorhandene Fahrerlaubnis (B) – Erweiterung (A/C) über die Stadtwerke möglich.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-swBlue-800 mr-3">3</span>
-                                <span>Akzeptanz der betrieblichen Dienstvorschriften.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Live Support Widget Mock -->
-                    <div class="bg-gradient-to-tr from-swBlue-800 to-swBlue-900 rounded-2xl p-6 text-white shadow-md">
-                        <div class="flex items-center space-x-3 mb-4">
-                            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
-                            <span class="text-xs font-semibold text-slate-300 uppercase tracking-widest">Personalabteilung Live</span>
-                        </div>
-                        <h4 class="font-bold text-base mb-1">Fragen zum Dienstverhältnis?</h4>
-                        <p class="text-xs text-slate-300 mb-4">Melde dich im Dienstfunk oder bei der zuständigen Geschäftsleitung der Stadtwerke.</p>
-                        <div class="border-t border-white/10 pt-4 flex justify-between items-center text-xs">
-                            <span class="text-slate-400">Erreichbarkeit:</span>
-                            <span class="font-bold text-swOrange-500">24/7 Service</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Fully Digitalized Contract Form -->
-                <div class="lg:col-span-8 bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+            <!-- SECTION 2: ARBEITSVERTRAG (CONTRACT VIEW - MINIMALIST) -->
+            <div id="view-arbeitsvertrag" class="hidden max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
@@ -220,7 +186,7 @@
 
                     <div class="p-6 sm:p-8 space-y-6">
                         <!-- Contract Document Viewer (Scrollable Content) -->
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 h-[300px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-600 space-y-4">
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 h-[320px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-600 space-y-4">
                             <h4 class="font-bold text-slate-900 text-sm border-b border-slate-200 pb-2 flex items-center">
                                 <i class="fa-solid fa-scroll mr-2 text-swBlue-500"></i>ALLGEMEINE DIENSTVEREINBARUNGEN & SANKTIONEN
                             </h4>
@@ -300,7 +266,8 @@
                         </form>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
     </main>
 
@@ -325,7 +292,7 @@
     </div>
 
     <!-- Footer Component -->
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-20 border-t border-slate-800">
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
             <div class="flex justify-center items-center space-x-3 text-white mb-4">
                 <i class="fa-solid fa-industry text-2xl text-swOrange-500"></i>
@@ -345,6 +312,35 @@
         // Global variables to store the generated contract state for manual downloading
         let signedPDFDoc = null;
         let generatedFileName = "";
+
+        // Page Routing / Tab Switcher Logic
+        function switchPage(pageId) {
+            const startseiteView = document.getElementById('view-startseite');
+            const arbeitsvertragView = document.getElementById('view-arbeitsvertrag');
+            const navHome = document.getElementById('nav-home');
+            const navContract = document.getElementById('nav-contract');
+
+            if (pageId === 'startseite') {
+                // Show Startseite, Hide Contract
+                startseiteView.classList.remove('hidden');
+                arbeitsvertragView.classList.add('hidden');
+
+                // Active Home Button Design
+                navHome.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+                navContract.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+            } else if (pageId === 'arbeitsvertrag') {
+                // Show Contract, Hide Startseite
+                startseiteView.classList.add('hidden');
+                arbeitsvertragView.classList.remove('hidden');
+
+                // Active Contract Button Design
+                navHome.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+                navContract.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+            }
+
+            // Scroll to the top when page changes
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // Update Live Signature visualization in real-time
         function updateLiveSignature() {
