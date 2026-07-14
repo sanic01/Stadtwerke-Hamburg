@@ -9,7 +9,7 @@
     <!-- Google Fonts: Inter & Caveat for cursive signatures -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&family=Reenie+Beanie&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght=1,600&family=Reenie+Beanie&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- jsPDF Engine -->
@@ -43,7 +43,7 @@
     </script>
     <style>
         .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f5f9;
@@ -179,65 +179,277 @@
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <h2 class="text-xl sm:text-2xl font-extrabold">Anstellungs- & Arbeitsvertrag</h2>
-                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg (Eigenbetrieb der Freien und Hansestadt Hamburg)</p>
+                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg (Tiefbau – Infrastruktur – Netzbetrieb)</p>
                             </div>
                             <div class="bg-white/10 border border-white/20 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
-                                Dokumenten-ID: SW-HH-2026
+                                Dokumenten-ID: SW-HH-2025-0427
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 sm:p-8 space-y-6">
-                        <!-- Contract Document Viewer (Scrollable Content) -->
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 h-[320px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-600 space-y-4">
-                            <h4 class="font-bold text-slate-900 text-sm border-b border-slate-200 pb-2 flex items-center">
-                                <i class="fa-solid fa-scroll mr-2 text-swBlue-500"></i>ALLGEMEINE DIENSTVEREINBARUNGEN & SANKTIONEN
-                            </h4>
+                    <div class="p-4 sm:p-8 space-y-6">
+                        <!-- REALISTIC CONTRACT VIEW PANEL (Based on content.jpg) -->
+                        <div class="bg-white border border-slate-300 rounded-2xl p-4 sm:p-8 h-[550px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-700 space-y-6 shadow-inner">
                             
-                            <p><strong>§1 Gegenstand des Vertrages:</strong> Der Arbeitnehmer verpflichtet sich, den Anweisungen der Führungsebene der Stadtwerke Hamburg Folge zu leisten und sämtliche ihm zugewiesenen Aufgaben gewissenhaft und pfleglich auszuführen.</p>
-                            
-                            <p><strong>§2 Sorgfaltspflichten & Fuhrparknutzung:</strong> Der Arbeitnehmer verspricht, alle Dienstfahrzeuge (z.B. Service-Transporter, Kehrmaschinen oder Müllabholfahrzeuge) pfleglich zu behandeln, vor Fahrtantritt auf Betriebssicherheit zu prüfen und festgestellte Mängel sofort zu melden.</p>
-                            
-                            <p><strong>§3 Verschwiegenheitsklausel:</strong> Sämtliche internen Betriebsabläufe, vertrauliche Daten, Funksprüche sowie Personalien der Mitarbeiter sind absolut vertraulich zu behandeln und dürfen nicht an unbefugte Dritte weitergegeben werden.</p>
-                            
-                            <p><strong>§4 Rechte der Bediensteten:</strong> Dem Angestellten steht die vollumfängliche, firmeninterne Finanzierung der Führerscheinklassen A (Motorrad) sowie C (LKW) zu. Zudem ist der Arbeitnehmer bei dienstlichen Einsätzen vollständig betrieblich abgesichert.</p>
-                            
-                            <p><strong>§5 Funkdisziplin & Verhalten im Verkehr:</strong> Die Einhaltung der betriebsinternen Status- und Funkcodes is für festangestelltes Personal verpflichtend. Einsatzfahrzeugen von Behörden (LSPD, LSMD, Feuerwehr) ist zu jeder Zeit Vorrang zu gewähren.</p>
-                            
-                            <p><strong>§6 Sanktionskatalog:</strong> Verstöße gegen diese Dienstordnung werden nach folgendem Stufenplan geahndet:
-                            <br>• 1. Verstoß: Mündliche Ermahnung & formlose Belehrung.
-                            <br>• 2. Verstoß: Schriftliche Abmahnung in die Personalakte & temporäres Fahrverbot für Dienstfahrzeuge.
-                            <br>• 3. Verstoß: Kündigung des Arbeitsverhältnisses oder fristlose Suspendierung.</p>
-                            
-                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400 italic">
-                                *Mit Ausfüllen und Absenden dieses Online-Formulars willigt der Unterzeichnende rechtsverbindlich in alle vorgenannten Bestimmungen ein.*
+                            <!-- PDF Top Metadata Bar -->
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 border border-slate-300 rounded-lg p-3 bg-slate-50 text-[11px] sm:text-xs">
+                                <div><span class="text-slate-400 font-medium">Vertragsnummer:</span> <strong class="text-slate-800">SW-HH-2025-0427</strong></div>
+                                <div><span class="text-slate-400 font-medium">Personalnummer:</span> <strong class="text-slate-800">SW-EMP-0587</strong></div>
+                                <div><span class="text-slate-400 font-medium">Einstellungsdatum:</span> <strong class="text-slate-800">01.06.2025</strong></div>
+                                <div><span class="text-slate-400 font-medium">Vertragsbeginn:</span> <strong class="text-slate-800">01.06.2025</strong></div>
+                                <div><span class="text-slate-400 font-medium">Abteilung / Bereich:</span> <strong class="text-slate-800">Infrastruktur & Netzbetrieb</strong></div>
+                                <div><span class="text-slate-400 font-medium">Standort:</span> <strong class="text-slate-800">Ausschläger Weg 67, 20537 HH</strong></div>
+                            </div>
+
+                            <!-- Header Section representing content.jpg -->
+                            <div class="text-center py-2 border-b border-slate-200">
+                                <h3 class="text-base sm:text-lg font-black uppercase text-slate-900 tracking-wider">Arbeitsvertrag</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">Zwischen der Stadtwerke Hamburg und dem Arbeitnehmer</p>
+                            </div>
+
+                            <!-- Parties Section -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs border-b border-slate-200 pb-4">
+                                <div>
+                                    <p class="font-bold text-slate-800">Arbeitgeber:</p>
+                                    <p class="text-slate-600">Stadtwerke Hamburg</p>
+                                    <p class="text-slate-600">Tiefbau – Infrastruktur – Netzbetrieb</p>
+                                    <p class="text-slate-600">Ausschläger Weg 67, 20537 Hamburg</p>
+                                </div>
+                                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                                    <p class="font-bold text-slate-800">Arbeitnehmer (Echtzeit-Daten):</p>
+                                    <p class="text-slate-600">Name: <span id="prevName" class="font-semibold text-swBlue-800 italic">___________</span></p>
+                                    <p class="text-slate-600">Geburtsdatum: <span id="prevBirth" class="font-semibold text-slate-800">___________</span></p>
+                                    <p class="text-slate-600">Anschrift: <span id="prevAddr" class="font-semibold text-slate-800">___________</span></p>
+                                </div>
+                            </div>
+
+                            <!-- §1 -->
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 1 TÄTIGKEIT UND AUFGABENBEREICH</h4>
+                                <p class="leading-relaxed">Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Bereich <strong>Infrastruktur & Netzbetrieb</strong> eingestellt.</p>
+                                <p class="text-slate-600">Zu den Aufgaben gehören insbesondere:</p>
+                                <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600 text-[11px] sm:text-xs">
+                                    <li>Wartung, Reparatur und Neubau von Strom-, Wasser-, Fernwärme- und Kommunikationsnetzen</li>
+                                    <li>Tiefbauarbeiten, Verlegung und Sicherung von Kabel- und Rohrtrassen</li>
+                                    <li>Instandhaltung der öffentlichen Beleuchtung</li>
+                                    <li>Bedienung und Wartung von Baumaschinen und Spezialwerkzeugen</li>
+                                    <li>Absicherung von Baustellen und Verkehrswegen</li>
+                                    <li>Zusammenarbeit mit Behörden, Polizei, Feuerwehr und Rettungsdiensten</li>
+                                    <li>Durchführung von Notfalleinsätzen und Störungsbeseitigungen (24/7 Einsatzbereitschaft)</li>
+                                    <li>Dokumentation der Arbeiten und Einhaltung der Qualitätsstandards</li>
+                                </ul>
+                            </div>
+
+                            <!-- §2 -->
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST</h4>
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full text-[11px] sm:text-xs border border-slate-200">
+                                        <thead>
+                                            <tr class="bg-slate-50 border-b border-slate-200">
+                                                <th class="px-3 py-1 text-left font-bold text-slate-700">Regelung</th>
+                                                <th class="px-3 py-1 text-left font-bold text-slate-700">Inhalt</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                                            <tr>
+                                                <td class="px-3 py-1 font-semibold text-slate-800">Regelarbeitszeit:</td>
+                                                <td class="px-3 py-1">40 Stunden pro Woche</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-3 py-1 font-semibold text-slate-800">Werktage:</td>
+                                                <td class="px-3 py-1">Montag – Freitag</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-3 py-1 font-semibold text-slate-800">Arbeitszeitrahmen:</td>
+                                                <td class="px-3 py-1">06:00 Uhr – 18:00 Uhr (je nach Einsatzplan)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-3 py-1 font-semibold text-slate-800">Bereitschaftsdienst:</td>
+                                                <td class="px-3 py-1">Nach Dienstplan / Rufbereitschaft</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-3 py-1 font-semibold text-slate-800">Überstunden:</td>
+                                                <td class="px-3 py-1">Werden erfasst und gemäß Betriebsvereinbarung ausgeglichen oder vergütet.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- §3 & §4 -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 3 VERGÜTUNG</h4>
+                                    <table class="min-w-full text-[11px] border border-slate-200">
+                                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                                            <tr class="bg-slate-50">
+                                                <td class="px-2 py-1 font-bold text-slate-800">Grundgehalt (brutto):</td>
+                                                <td class="px-2 py-1 text-right font-semibold">3.200,00 € / Monat</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-2 py-1 font-semibold">Bereitschaftsdienstpauschale:</td>
+                                                <td class="px-2 py-1 text-right">250,00 € / Monat</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-2 py-1 font-semibold">Gefahrenzulage:</td>
+                                                <td class="px-2 py-1 text-right">200,00 € / Monat</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-2 py-1 font-semibold">Schmutzzulage:</td>
+                                                <td class="px-2 py-1 text-right">100,00 € / Monat</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-2 py-1 font-semibold">Nachtarbeit (ab 20:00 Uhr):</td>
+                                                <td class="px-2 py-1 text-right">25,00 € / Einsatz</td>
+                                            </tr>
+                                            <tr class="bg-slate-100 border-t-2 border-slate-300 font-bold">
+                                                <td class="px-2 py-1 text-slate-800">Gesamt brutto:</td>
+                                                <td class="px-2 py-1 text-right text-swBlue-900">3.775,00 € / Monat</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 4 SONDERZAHLUNGEN</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px] sm:text-xs">
+                                        <li><strong>Urlaubsgeld:</strong> 50 % eines Monatsgehalts (im Juni)</li>
+                                        <li><strong>Weihnachtsgeld:</strong> 50 % eines Monatsgehalts (im November)</li>
+                                        <li><strong>Leistungsprämien:</strong> Nach betrieblicher Vereinbarung</li>
+                                    </ul>
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pt-2 pb-1">§ 5 PROBEZEIT</h4>
+                                    <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed">
+                                        Die Probezeit beträgt <strong>6 Monate</strong>. Während der Probezeit kann das Arbeitsverhältnis mit einer Frist von 2 Wochen gekündigt werden. Nach der Probezeit gilt die gesetzliche Kündigungsfrist.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-dashed border-slate-300 my-8 pt-4 text-center text-slate-400 text-xs">
+                                --- ENDE SEITE 1 / BEGINN SEITE 2 ---
+                            </div>
+
+                            <!-- §6 PSA -->
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
+                                    <i class="fa-solid fa-hard-hat mr-2"></i>§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)
+                                </h4>
+                                <p class="text-[11px] sm:text-xs">Der Arbeitgeber stellt die nachfolgende PSA zur Verfügung. Der Arbeitnehmer verpflichtet sich, diese bestimmungsgemäß zu tragen und in einwandfreiem Zustand zu halten:</p>
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-slate-600 pl-2">
+                                    <div><i class="fa-solid fa-shield-halved text-swBlue-500 mr-1.5"></i>Schutzhelm (EN 397)</div>
+                                    <div><i class="fa-solid fa-ear-deaf text-swBlue-500 mr-1.5"></i>Gehörschutz (EN 352)</div>
+                                    <div><i class="fa-solid fa-vest text-swBlue-500 mr-1.5"></i>Warnschutzkleidung Kl. 3 (EN ISO 20471)</div>
+                                    <div><i class="fa-solid fa-mask text-swBlue-500 mr-1.5"></i>Atemschutzmaske (bei Bedarf)</div>
+                                    <div><i class="fa-solid fa-socks text-swBlue-500 mr-1.5"></i>Sicherheitsschuhe S3 (EN ISO 20345)</div>
+                                    <div><i class="fa-solid fa-band-aid text-swBlue-500 mr-1.5"></i>Knieschutz (bei Bedarf) (EN 14404)</div>
+                                    <div><i class="fa-solid fa-hands text-swBlue-500 mr-1.5"></i>Schutzhandschuhe (EN 388)</div>
+                                    <div><i class="fa-solid fa-cloud-showers-heavy text-swBlue-500 mr-1.5"></i>Wetterschutzjacke (EN 343)</div>
+                                    <div><i class="fa-solid fa-glasses text-swBlue-500 mr-1.5"></i>Schutzbrille (EN 166)</div>
+                                    <div><i class="fa-solid fa-link text-swBlue-500 mr-1.5"></i>Auffanggurt (EN 361)</div>
+                                </div>
+                                <div class="p-2 bg-amber-50 rounded text-[11px] text-amber-800 italic border-l-2 border-amber-500 mt-2">
+                                    Das Nichttragen der vorgeschriebenen PSA kann arbeitsrechtliche Konsequenzen nach sich ziehen.
+                                </div>
+                            </div>
+
+                            <!-- §7 -->
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
+                                    <i class="fa-solid fa-triangle-exclamation mr-2"></i>§ 7 SICHERHEITSBELEHRUNG
+                                </h4>
+                                <p class="text-[11px] sm:text-xs">Der Arbeitnehmer wurde über die Gefahren seiner Tätigkeit umfassend belehrt. Er verpflichtet sich, alle Sicherheits- und Unfallverhütungsvorschriften einzuhalten. Dazu gehören insbesondere:</p>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-1 list-disc list-inside text-slate-600 text-[11px] pl-2">
+                                    <li>Arbeiten an elektrischen Anlagen</li>
+                                    <li>Arbeiten im öffentlichen Straßenverkehr</li>
+                                    <li>Tiefbauarbeiten und Arbeiten in Baugruben</li>
+                                    <li>Umgang mit schweren Maschinen und Werkzeugen</li>
+                                    <li>Arbeiten bei jeder Witterung und Sicht</li>
+                                    <li>Lastenheben und ergonomisches Arbeiten</li>
+                                    <li>Gefahrstoffe, Öl, Kraftstoffe und Chemikalien</li>
+                                    <li>Verhalten im Notfall und Erste-Hilfe-Maßnahmen</li>
+                                    <li>Brandschutz und Evakuierungspläne</li>
+                                </ul>
+                            </div>
+
+                            <!-- §8, §9 & §10 -->
+                            <div class="space-y-4 pt-2">
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 8 PFLICHTEN DES ARBEITNEHMERS</h4>
+                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                        Einhaltung aller gesetzlichen Vorschriften, sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen, unverzügliche Meldung von Mängeln, absolute Verschwiegenheit über interne Betriebsabläufe sowie die verpflichtende Teilnahme an Schulungen.
+                                    </p>
+                                </div>
+
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 9 HAFTUNG UND RISIKOHINWEIS</h4>
+                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                        Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder durch Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Vorsatz oder grober Fahrlässigkeit des Arbeitgebers sowie bei Verletzung von Leben, Körper oder Gesundheit.
+                                    </p>
+                                </div>
+
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 10 SCHLUSSBESTIMMUNGEN</h4>
+                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                        Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-slate-200 text-[10px] text-slate-400 italic text-center">
+                                * Stadtwerke Hamburg - Wir halten Hamburg am Laufen - SAUBER. SICHER. ZUVERLÄSSIG. *
                             </div>
                         </div>
 
                         <!-- Input and Signature Form -->
                         <form id="signatureForm" class="space-y-6" onsubmit="event.preventDefault();">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <!-- Signature Name Input -->
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Dein Name (Unterschrift) <span class="text-rose-500">*</span>
+                                        Vor- und Nachname <span class="text-rose-500">*</span>
                                     </label>
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-pen-nib"></i>
+                                            <i class="fa-solid fa-user-tie"></i>
                                         </div>
-                                        <input type="text" id="signatureInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. Max Mustermann" required>
+                                        <input type="text" id="signatureInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. Markus Helbing" required>
                                     </div>
                                 </div>
 
-                                <!-- Signature Interactive Visualization Panel -->
+                                <!-- Birthdate Input -->
                                 <div>
-                                    <span class="block text-sm font-semibold text-slate-900 mb-2">Visuelle Signatur (Echtzeit):</span>
-                                    <div class="h-[50px] w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden relative group">
-                                        <span class="absolute left-3 top-2 text-[10px] text-slate-400 uppercase tracking-widest pointer-events-none">VORSCHAU</span>
-                                        <div id="liveSignature" class="font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200">
-                                            Hier tippen...
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Geburtsdatum <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-calendar-days"></i>
                                         </div>
+                                        <input type="text" id="birthdateInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. 14.10.1998" required>
+                                    </div>
+                                </div>
+
+                                <!-- Address Input -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Anschrift <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <input type="text" id="addressInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. Hauptstraße 12, Hamburg" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Signature Visual -->
+                            <div>
+                                <span class="block text-sm font-semibold text-slate-900 mb-2">Deine handschriftliche Signatur (Echtzeit):</span>
+                                <div class="h-[60px] w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                                    <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase tracking-widest pointer-events-none">Echtzeit Vorschau</span>
+                                    <div id="liveSignature" class="font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200">
+                                        Unterschrift vorschau...
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +459,7 @@
                                 <label class="flex items-start cursor-pointer select-none">
                                     <input type="checkbox" id="termsCheck" class="mt-1 h-4 w-4 rounded text-swBlue-600 focus:ring-swBlue-500 border-slate-300 mr-3 cursor-pointer">
                                     <span class="text-xs sm:text-sm text-slate-600 leading-normal">
-                                        Ich habe die oben aufgeführten Dienstvorschriften der Stadtwerke Hamburg aufmerksam durchgelesen, verstanden und akzeptiere diese mit meiner Unterschrift vollumfänglich.
+                                        Ich erkläre mich mit meiner Unterschrift mit allen oben aufgeführten Paragraphen (§ 1 bis § 10) des Arbeitsvertrags der Stadtwerke Hamburg vollumfänglich und rechtsverbindlich einverstanden.
                                     </span>
                                 </label>
                             </div>
@@ -487,17 +699,25 @@
             }
         }
 
-        // Update Live Signature visualization in real-time
+        // Update Live Signature and text fields visualization in real-time
         function updateLiveSignature() {
-            const val = document.getElementById('signatureInput').value.trim();
-            const signContainer = document.getElementById('liveSignature');
+            const name = document.getElementById('signatureInput').value.trim();
+            const birth = document.getElementById('birthdateInput').value.trim();
+            const addr = document.getElementById('addressInput').value.trim();
             
-            if(val.length > 0) {
-                signContainer.innerText = val;
+            // Preview Text fields
+            document.getElementById('prevName').innerText = name.length > 0 ? name : "___________";
+            document.getElementById('prevBirth').innerText = birth.length > 0 ? birth : "___________";
+            document.getElementById('prevAddr').innerText = addr.length > 0 ? addr : "___________";
+
+            // Live cursive signature
+            const signContainer = document.getElementById('liveSignature');
+            if(name.length > 0) {
+                signContainer.innerText = name;
                 signContainer.classList.remove('text-slate-400', 'italic');
                 signContainer.classList.add('text-swBlue-800');
             } else {
-                signContainer.innerText = "Hier tippen...";
+                signContainer.innerText = "Unterschrift vorschau...";
                 signContainer.classList.add('text-slate-400');
                 signContainer.classList.remove('text-swBlue-800');
             }
@@ -588,10 +808,12 @@
         // Form Validation & PDF Generation Trigger for Contract
         function handleFormSubmission() {
             const name = document.getElementById('signatureInput').value.trim();
+            const birthdate = document.getElementById('birthdateInput').value.trim();
+            const address = document.getElementById('addressInput').value.trim();
             const termsChecked = document.getElementById('termsCheck').checked;
 
-            if(!name) {
-                showNotification("Achtung!", "Bitte trage deinen Vor- und Nachnamen in das Unterschriftenfeld ein.", "error");
+            if(!name || !birthdate || !address) {
+                showNotification("Achtung!", "Bitte fülle alle Pflichtfelder (Name, Geburtsdatum, Anschrift) aus.", "error");
                 return;
             }
 
@@ -605,98 +827,318 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 
-                // --- PDF Styling & Setup ---
-                const accentColor = [2, 132, 199]; // Sky Blue
-                const primaryColor = [15, 23, 42];  // Slate 900
-                
-                // Header Background Rectangle
-                doc.setFillColor(...primaryColor);
-                doc.rect(0, 0, 210, 40, 'F');
-                
-                // Header Titles
-                doc.setTextColor(255, 255, 255);
+                // Color Definitions
+                const primaryColor = [15, 23, 42];  // Slate 900 (Dark)
+                const orangeAccent = [234, 88, 12];  // swOrange 600
+                const lightSlate = [248, 250, 252]; // Slate 50
+                const borderGrey = [203, 213, 225]; // Slate 200
+
+                // Helper to render Page Header on each page
+                function renderPageHeader(pageNum) {
+                    doc.setFillColor(...primaryColor);
+                    doc.rect(0, 0, 210, 32, 'F');
+                    
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFont("Helvetica", "bold");
+                    doc.setFontSize(16);
+                    doc.text("STADTWERKE HAMBURG", 15, 15);
+                    
+                    doc.setFont("Helvetica", "normal");
+                    doc.setFontSize(8);
+                    doc.setTextColor(203, 213, 225);
+                    doc.text("Tiefbau – Infrastruktur – Netzbetrieb | Ausschläger Weg 67, 20537 Hamburg", 15, 22);
+                    doc.text("Telefon: 040 / 428 68 - 0 | info@stadtwerke.hamburg", 15, 26);
+
+                    // Contract reference number top-right
+                    doc.setFontSize(9);
+                    doc.setFont("Helvetica", "bold");
+                    doc.setTextColor(249, 115, 22); // Orange highlight
+                    doc.text("VERTRAGSNUMMER: SW-HH-2025-0427", 130, 15);
+                    
+                    doc.setFont("Helvetica", "normal");
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(8);
+                    doc.text(`SEITE ${pageNum} VON 2`, 180, 26);
+                }
+
+                // ================== PAGE 1 GENERATION ==================
+                renderPageHeader(1);
+
+                // Meta Info Box (Grid Layout)
+                doc.setFillColor(...lightSlate);
+                doc.setDrawColor(...borderGrey);
+                doc.rect(15, 40, 180, 30, 'FD');
+
+                doc.setFontSize(8);
                 doc.setFont("Helvetica", "bold");
-                doc.setFontSize(22);
-                doc.text("STADTWERKE HAMBURG", 20, 25);
-                
-                doc.setFont("Helvetica", "normal");
-                doc.setFontSize(10);
-                doc.setTextColor(226, 232, 240);
-                doc.text("Karriere- & Einstellungsportal | Offizieller Dienstvertrag", 20, 33);
-                
-                // Document Info Box
-                doc.setFillColor(248, 250, 252);
-                doc.setDrawColor(226, 232, 240);
-                doc.rect(20, 50, 170, 28, 'FD');
-                
-                doc.setFontSize(10);
                 doc.setTextColor(71, 85, 105);
-                doc.setFont("Helvetica", "bold");
-                doc.text("DIENSTVERTRAGS-INFORMATIONEN", 25, 57);
-                doc.setFont("Helvetica", "normal");
-                doc.text(`Angestellte(r):   ${name}`, 25, 64);
-                doc.text(`Einstellungsdatum: ${new Date().toLocaleDateString('de-DE')}`, 25, 71);
-                doc.text("Status:            Dienstbereit / Probezeit", 110, 64);
-                doc.text("Dokumenten-ID:     SW-HH-2026-ONLINE", 110, 71);
-                
-                // Contract Body Text
-                doc.setFontSize(12);
+                doc.text("Vertragsnummer: SW-HH-2025-0427", 20, 47);
+                doc.text("Personalnummer: SW-EMP-0587", 20, 54);
+                doc.text("Standort: Ausschläger Weg 67", 20, 61);
+
+                doc.text("Einstellungsdatum: 01.06.2025", 110, 47);
+                doc.text("Vertragsbeginn: 01.06.2025", 110, 54);
+                doc.text("Abteilung: Infrastruktur & Netzbetrieb", 110, 61);
+
+                // Section: Contract Parties
+                doc.setFontSize(14);
                 doc.setTextColor(...primaryColor);
                 doc.setFont("Helvetica", "bold");
-                doc.text("Vertragsbestimmungen & Pflichten", 20, 93);
-                
-                doc.setFontSize(9.5);
+                doc.text("ARBEITSVERTRAG", 15, 82);
+                doc.setFontSize(8);
                 doc.setFont("Helvetica", "normal");
-                doc.setTextColor(51, 65, 85);
+                doc.text("Zwischen der Stadtwerke Hamburg (Arbeitgeber) und dem Arbeitnehmer:", 15, 87);
+
+                // Parties detail Box
+                doc.setFillColor(...lightSlate);
+                doc.rect(15, 92, 180, 22, 'FD');
+                doc.setTextColor(...primaryColor);
+                doc.setFont("Helvetica", "bold");
+                doc.text(`Herr / Frau: ${name}`, 20, 98);
+                doc.setFont("Helvetica", "normal");
+                doc.text(`Geburtsdatum: ${birthdate}`, 20, 104);
+                doc.text(`Anschrift: ${address}`, 20, 110);
+
+                let currentY = 122;
+
+                // §1 Tätigkeit
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...orangeAccent);
+                doc.setFontSize(10);
+                doc.text("§ 1 TÄTIGKEIT UND AUFGABENBEREICH", 15, currentY);
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(8);
+                doc.setTextColor(...primaryColor);
+                currentY += 5;
+                const tasksIntro = "Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Bereich Infrastruktur & Netzbetrieb eingestellt. Zu den Aufgaben gehören insbesondere:";
+                doc.text(tasksIntro, 15, currentY);
+                currentY += 5;
+
+                const tasks = [
+                    "- Wartung, Reparatur und Neubau von Strom-, Wasser-, Fernwärme- und Kommunikationsnetzen",
+                    "- Tiefbauarbeiten, Verlegung und Sicherung von Kabel- und Rohrtrassen",
+                    "- Instandhaltung der öffentlichen Beleuchtung",
+                    "- Bedienung und Wartung von Baumaschinen und Spezialwerkzeugen",
+                    "- Absicherung von Baustellen und Verkehrswegen",
+                    "- Zusammenarbeit mit Behörden, Polizei, Feuerwehr und Rettungsdiensten",
+                    "- Durchführung von Notfalleinsätzen und Störungsbeseitigungen (24/7 Einsatzbereitschaft)",
+                    "- Dokumentation der Arbeiten und Einhaltung der Qualitätsstandards"
+                ];
+                tasks.forEach(task => {
+                    doc.text(task, 20, currentY);
+                    currentY += 4.5;
+                });
+
+                currentY += 3;
+
+                // §2 Arbeitszeit Table Layout
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...orangeAccent);
+                doc.setFontSize(10);
+                doc.text("§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST", 15, currentY);
+                currentY += 5;
+
+                doc.setFillColor(240, 244, 248);
+                doc.rect(15, currentY, 180, 5, 'F');
+                doc.setFont("Helvetica", "bold");
+                doc.setFontSize(8);
+                doc.setTextColor(...primaryColor);
+                doc.text("Regelungskategorie", 20, currentY + 3.5);
+                doc.text("Betriebliche Vereinbarung", 100, currentY + 3.5);
+                currentY += 5;
+
+                const scheduleData = [
+                    ["Regelarbeitszeit:", "40 Stunden pro Woche"],
+                    ["Werktage:", "Montag – Freitag"],
+                    ["Arbeitszeitrahmen:", "06:00 Uhr – 18:00 Uhr (je nach Einsatzplan)"],
+                    ["Bereitschaftsdienst:", "Nach Dienstplan / Rufbereitschaft"],
+                    ["Überstunden:", "Werden erfasst und gemäß Betriebsvereinbarung ausgeglichen / vergütet"]
+                ];
+
+                doc.setFont("Helvetica", "normal");
+                scheduleData.forEach(row => {
+                    doc.setDrawColor(...borderGrey);
+                    doc.line(15, currentY, 195, currentY);
+                    doc.text(row[0], 20, currentY + 4);
+                    doc.text(row[1], 100, currentY + 4);
+                    currentY += 6;
+                });
+                doc.line(15, currentY, 195, currentY);
+
+                currentY += 5;
+
+                // §3 & §4 Half-Columns
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...orangeAccent);
+                doc.setFontSize(10);
+                doc.text("§ 3 VERGÜTUNG", 15, currentY);
+                doc.text("§ 4 SONDERZAHLUNGEN & § 5 PROBEZEIT", 110, currentY);
+                currentY += 5;
+
+                // Column Left: Salary Table
+                doc.setFillColor(240, 244, 248);
+                doc.rect(15, currentY, 85, 5, 'F');
+                doc.setFont("Helvetica", "bold");
+                doc.setFontSize(7.5);
+                doc.setTextColor(...primaryColor);
+                doc.text("Position / Zulage", 18, currentY + 3.5);
+                doc.text("Betrag brutto", 70, currentY + 3.5);
+                currentY += 5;
+
+                const salaryRows = [
+                    ["Grundgehalt (brutto):", "3.200,00 € / Monat"],
+                    ["Bereitschaftspauschale:", "250,00 € / Monat"],
+                    ["Gefahrenzulage:", "200,00 € / Monat"],
+                    ["Schmutzzulage:", "100,00 € / Monat"],
+                    ["Nachtarbeit (ab 20:00 Uhr):", "25,00 € / Einsatz"],
+                    ["Gesamt brutto:", "3.775,00 € / Monat"]
+                ];
+
+                doc.setFont("Helvetica", "normal");
+                salaryRows.forEach((row, idx) => {
+                    if (idx === 5) {
+                        doc.setFillColor(226, 232, 240);
+                        doc.rect(15, currentY, 85, 6, 'F');
+                        doc.setFont("Helvetica", "bold");
+                    }
+                    doc.line(15, currentY, 100, currentY);
+                    doc.text(row[0], 18, currentY + 4);
+                    doc.text(row[1], 70, currentY + 4);
+                    currentY += 6;
+                });
+                doc.line(15, currentY, 100, currentY);
+
+                // Column Right: Special pay and probation info
+                let rightY = currentY - 41;
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(8);
+                doc.setTextColor(...primaryColor);
                 
-                const paragraph1 = "§1 Gegenstand des Vertrages: Der Arbeitnehmer verpflichtet sich, den Anweisungen der Führungsebene der Stadtwerke Hamburg Folge zu leisten und sämtliche ihm zugewiesenen Aufgaben im Rahmen des städtischen Betriebes gewissenhaft und pfleglich auszuführen.";
-                const paragraph2 = "§2 Sorgfaltspflichten & Fuhrparknutzung: Der Arbeitnehmer verspricht, alle Dienstfahrzeuge (Service-Transporter, Arbeitsgerät etc.) schonend zu behandeln und die geltenden Sicherheitsbestimmungen im Straßenverkehr gewissenhaft einzuhalten.";
-                const paragraph3 = "§3 Verschwiegenheitsklausel: Sämtliche internen Betriebsabläufe, vertrauliche Daten, Funksprüche sowie Personalien der Mitarbeiter sind absolut vertraulich zu behandeln und dürfen nicht an unbefugte Dritte weitergegeben werden.";
-                const paragraph4 = "§4 Rechte der Bediensteten: Dem Angestellten steht die vollumfängliche, firmeninterne Finanzierung der Führerscheinklassen A (Motorrad) sowie C (LKW) zu. Zudem ist der Arbeitnehmer bei dienstlichen Einsätzen über den Eigenbetrieb versichert.";
-                const paragraph5 = "§5 Sanktionen bei Verstößen: Zuwiderhandlungen gegen diese Dienstordnung können Abmahnungen, den Entzug der Fahrerlaubnis oder die fristlose Kündigung nach sich ziehen.";
+                const specialPay = [
+                    "- Urlaubsgeld: 50 % eines Monatsgehalts (Juni)",
+                    "- Weihnachtsgeld: 50 % eines Monatsgehalts (Nov)",
+                    "- Leistungsprämien: Nach betrieblicher Vereinbarung",
+                    "",
+                    "Die Probezeit beträgt 6 Monate. Während der",
+                    "Probezeit kann das Arbeitsverhältnis mit einer",
+                    "Frist von 2 Wochen gekündigt werden."
+                ];
+                specialPay.forEach(line => {
+                    doc.text(line, 110, rightY);
+                    rightY += 4.5;
+                });
 
-                let currentY = 100;
-                const pageMaxWidth = 170;
+                // ================== PAGE 2 GENERATION ==================
+                doc.addPage();
+                renderPageHeader(2);
 
-                const textLines1 = doc.splitTextToSize(paragraph1, pageMaxWidth);
-                doc.text(textLines1, 20, currentY);
-                currentY += (textLines1.length * 5) + 3;
+                currentY = 42;
 
-                const textLines2 = doc.splitTextToSize(paragraph2, pageMaxWidth);
-                doc.text(textLines2, 20, currentY);
-                currentY += (textLines2.length * 5) + 3;
+                // §6 PSA
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...orangeAccent);
+                doc.setFontSize(10);
+                doc.text("§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)", 15, currentY);
+                currentY += 5;
 
-                const textLines3 = doc.splitTextToSize(paragraph3, pageMaxWidth);
-                doc.text(textLines3, 20, currentY);
-                currentY += (textLines3.length * 5) + 3;
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(8.5);
+                doc.setTextColor(...primaryColor);
+                doc.text("Der Arbeitnehmer verpflichtet sich, folgende vom Arbeitgeber gestellte PSA ordnungsgemäß zu tragen:", 15, currentY);
+                currentY += 5;
 
-                const textLines4 = doc.splitTextToSize(paragraph4, pageMaxWidth);
-                doc.text(textLines4, 20, currentY);
-                currentY += (textLines4.length * 5) + 3;
+                const psaList = [
+                    ["- Schutzhelm EN 397", "- Gehörschutz (EN 352)"],
+                    ["- Warnschutzkleidung Klasse 3 (EN ISO 20471)", "- Atemschutzmaske (bei Bedarf)"],
+                    ["- Sicherheitsschuhe S3 (EN ISO 20345)", "- Knieschutz (bei Bedarf) (EN 14404)"],
+                    ["- Schutzhandschuhe (EN 388)", "- Wetterschutzjacke (EN 343)"],
+                    ["- Schutzbrille (EN 166)", "- Auffanggurt (bei Arbeiten in Höhe) (EN 361)"]
+                ];
 
-                const textLines5 = doc.splitTextToSize(paragraph5, pageMaxWidth);
-                doc.text(textLines5, 20, currentY);
+                psaList.forEach(row => {
+                    doc.text(row[0], 20, currentY);
+                    doc.text(row[1], 110, currentY);
+                    currentY += 5;
+                });
+
+                currentY += 2;
+
+                // §7 Sicherheitsbelehrung
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...orangeAccent);
+                doc.setFontSize(10);
+                doc.text("§ 7 SICHERHEITSBELEHRUNG", 15, currentY);
+                currentY += 5;
+
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(8.5);
+                doc.text("Der Arbeitnehmer wurde über Gefahren umfassend belehrt und verpflichtet sich zur Einhaltung aller Vorschriften bezüglich:", 15, currentY);
+                currentY += 5;
+
+                const hazardTopics = [
+                    ["- Arbeiten an elektrischen Anlagen", "- Lastenheben und ergonomisches Arbeiten"],
+                    ["- Arbeiten im öffentlichen Straßenverkehr", "- Gefahrstoffe, Öl, Kraftstoffe und Chemikalien"],
+                    ["- Tiefbauarbeiten und Baugruben", "- Verhalten im Notfall und Erste-Hilfe"],
+                    ["- Umgang mit schweren Baumaschinen", "- Brandschutz und Evakuierungspläne"]
+                ];
+
+                hazardTopics.forEach(row => {
+                    doc.text(row[0], 20, currentY);
+                    doc.text(row[1], 110, currentY);
+                    currentY += 5;
+                });
+
+                currentY += 2;
+
+                // §8, §9 & §10 Texts with Split Text to fit nicely
+                const clauses = [
+                    ["§ 8 PFLICHTEN DES ARBEITNEHMERS", "Einhaltung aller gesetzlichen Vorschriften und Betriebsanweisungen. Sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen. Melden von Mängeln und Gefahren unverzüglich. Absolute Verschwiegenheit über interne Angelegenheiten und Funksprüche."],
+                    ["§ 9 HAFTUNG UND RISIKOHINWEIS", "Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Verletzungen von Leben, Körper oder Gesundheit."],
+                    ["§ 10 SCHLUSSBESTIMMUNGEN", "Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt."]
+                ];
+
+                clauses.forEach(clause => {
+                    doc.setFont("Helvetica", "bold");
+                    doc.setTextColor(...orangeAccent);
+                    doc.setFontSize(10);
+                    doc.text(clause[0], 15, currentY);
+                    currentY += 4.5;
+
+                    doc.setFont("Helvetica", "normal");
+                    doc.setFontSize(8);
+                    doc.setTextColor(...primaryColor);
+                    const lines = doc.splitTextToSize(clause[1], 180);
+                    doc.text(lines, 15, currentY);
+                    currentY += (lines.length * 4) + 4;
+                });
+
+                // Signatures Sector
+                currentY = 240;
+                doc.setDrawColor(...borderGrey);
                 
-                // Signature Area
-                const signatureY = 230;
-                
-                // Left Line: City representative
-                doc.setDrawColor(203, 213, 225);
-                doc.line(20, signatureY, 90, signatureY);
+                // Left Representative
+                doc.line(15, currentY, 85, currentY);
                 doc.setFontSize(8);
                 doc.setTextColor(148, 163, 184);
-                doc.text("Stadtwerke Hamburg (Verwaltung)", 20, signatureY + 5);
-                
-                // Right Line: Employee
-                doc.line(120, signatureY, 190, signatureY);
-                doc.text("Unterschrift Angestellte(r)", 120, signatureY + 5);
-                
-                // Render Cursive Interactive Signature in PDF
+                doc.text("Für die Stadtwerke Hamburg (Leitung)", 15, currentY + 4);
                 doc.setFont("times", "italic");
-                doc.setFontSize(16);
-                doc.setTextColor(2, 132, 199);
-                doc.text(name, 125, signatureY - 4);
+                doc.setFontSize(11);
+                doc.setTextColor(...primaryColor);
+                doc.text("Markus Helbing", 15, currentY - 3);
+
+                // Right Employee
+                doc.line(110, currentY, 185, currentY);
+                doc.setFontSize(8);
+                doc.setTextColor(148, 163, 184);
+                doc.text("Unterschrift Arbeitnehmer", 110, currentY + 4);
                 
+                // Cursive styled sign
+                doc.setFont("times", "italic");
+                doc.setFontSize(15);
+                doc.setTextColor(2, 132, 199);
+                doc.text(name, 115, currentY - 3);
+                
+                // Format file name
                 const formattedName = name.replace(/\s+/g, '_');
                 const pdfBlob = doc.output('blob');
 
@@ -704,7 +1146,7 @@
                 signedPDFDoc = doc;
                 generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
 
-                // Webhook Send out
+                // Discord payload preparation
                 const formData = new FormData();
                 formData.append('file', pdfBlob, generatedFileName);
                 
@@ -714,11 +1156,12 @@
                     embeds: [{
                         title: "📝 Neuer Arbeitsvertrag eingereicht!",
                         description: `Der Bürger **${name}** hat erfolgreich seinen Dienstvertrag für die **Stadtwerke Hamburg** online unterzeichnet.`,
-                        color: 161840, // Accent color representation
+                        color: 161840,
                         fields: [
                             { name: "Mitarbeiter", value: name, inline: true },
-                            { name: "Datum", value: new Date().toLocaleDateString('de-DE'), inline: true },
-                            { name: "Status", value: "Dienstbereit / Probezeit", inline: true }
+                            { name: "Geburtsdatum", value: birthdate, inline: true },
+                            { name: "Anschrift", value: address, inline: true },
+                            { name: "Status", value: "Aktiv (Probezeit)", inline: true }
                         ],
                         footer: {
                             text: "Stadtwerke Hamburg - Karriereportal"
