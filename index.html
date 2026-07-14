@@ -496,12 +496,72 @@
                 doc.setTextColor(2, 132, 199);
                 doc.text(name, 125, signatureY - 4);
                 
-                // Save the finalized Document
                 const formattedName = name.replace(/\s+/g, '_');
-                doc.save(`Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                const pdfBlob = doc.output('blob');
 
-                // Display success confirmation modal
-                showNotification("Vertrag unterzeichnet!", `Hallo ${name}, dein Arbeitsvertrag wurde erfolgreich generiert und dein PDF-Dokument wird jetzt heruntergeladen. Ready for Duty!`, "success");
+                // HINWEIS: Ersetze diesen Platzhalter mit deiner echten Discord Webhook-URL
+                const webhookUrl = https://github.com/sanic01/Stadtwerke-Hamburg/edit/main/index.html; 
+
+                // Wir bereiten die Formulardaten für Discord vor (Multipart-Upload)
+                const formData = new FormData();
+                
+                // 1. Die PDF-Datei anhängen
+                formData.append('file', pdfBlob, `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                
+                // 2. Ein schönes Rich Embed für den Discord-Kanal als JSON mitsenden
+                const discordPayload = {
+                    username: "Stadtwerke Hamburg Portal",
+                    avatar_url: "https://placehold.co/150x150/075985/ffffff?text=SWHH",
+                    embeds: [{
+                        title: "📝 Neuer Arbeitsvertrag eingereicht!",
+                        description: `Der Bürger **${name}** hat erfolgreich seinen Dienstvertrag für die **Stadtwerke Hamburg** online unterzeichnet.`,
+                        color: 144200, // swBlue hexadezimaler Farbwert
+                        fields: [
+                            { name: "Mitarbeiter", value: name, inline: true },
+                            { name: "Datum", value: new Date().toLocaleDateString('de-DE'), inline: true },
+                            { name: "Status", value: "Dienstbereit / Probezeit", inline: true }
+                        ],
+                        footer: {
+                            text: "Stadtwerke Hamburg - Karriereportal"
+                        },
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+                
+                formData.append('payload_json', JSON.stringify(discordPayload));
+
+                // Sende die Daten an Discord
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Lokaler Download als Komfort-Feature für den Spieler
+                        doc.save(`Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                        
+                        // Erfolg anzeigen
+                        showNotification(
+                            "Vertrag unterzeichnet & gesendet!", 
+                            `Hallo ${name}, dein Arbeitsvertrag wurde erfolgreich an die Personalabteilung übermittelt und als PDF heruntergeladen!`, 
+                            "success"
+                        );
+                    } else {
+                        throw new Error("Discord Webhook meldet Fehler-Code");
+                    }
+                })
+                .catch(err => {
+                    console.error("Discord transfer failed: ", err);
+                    
+                    // Fallback: Selbst wenn Discord offline ist, soll der Spieler das PDF bekommen
+                    doc.save(`Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                    
+                    showNotification(
+                        "Übermittlungsfehler", 
+                        "Dein Vertrag wurde heruntergeladen, konnte aber nicht automatisch an Discord gesendet werden. Bitte reiche das PDF manuell ein!", 
+                        "error"
+                    );
+                });
 
             } catch (err) {
                 console.error("PDF generation failed: ", err);
