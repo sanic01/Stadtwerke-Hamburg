@@ -1,0 +1,69 @@
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-4 text-blue-800">Arbeitsvertrag Stadtwerke Hamburg</h1>
+    
+    <div class="prose mb-6">
+        <p><strong>§1 Gegenstand des Vertrages:</strong> Der Arbeitnehmer verpflichtet sich, den Anweisungen der Stadtwerke Hamburg Folge zu leisten.</p>
+        <p><strong>§2 Sorgfaltspflicht:</strong> Der Arbeitnehmer verspricht, alle Dienstfahrzeuge pfleglich zu behandeln und die Funkdisziplin einzuhalten.</p>
+        <p><strong>§3 Verschwiegenheit:</strong> Alle internen Betriebsabläufe sind vertraulich zu behandeln.</p>
+    </div>
+
+    <form id="contractForm" class="space-y-4">
+        <div>
+            <label class="flex items-center">
+                <input type="checkbox" id="agbCheck" class="mr-2" required>
+                <span>Ich habe die Dienstvorschriften gelesen und akzeptiere sie.</span>
+            </label>
+        </div>
+        
+        <div>
+            <label class="block font-semibold">Dein Name (Unterschrift):</label>
+            <input type="text" id="signaturInput" class="w-full p-2 border border-gray-300 rounded" placeholder="Max Mustermann" required>
+        </div>
+
+        <button type="button" onclick="generatePDF()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+            Vertrag unterschreiben & PDF herunterladen
+        </button>
+    </form>
+</div>
+
+<script>
+    function generatePDF() {
+        const name = document.getElementById('signaturInput').value;
+        const accepted = document.getElementById('agbCheck').checked;
+
+        if (!accepted) {
+            alert("Bitte bestätige die Dienstvorschriften.");
+            return;
+        }
+        if (!name) {
+            alert("Bitte gib deinen Namen ein.");
+            return;
+        }
+
+        // PDF erstellen
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(18);
+        doc.text("Arbeitsvertrag - Stadtwerke Hamburg", 20, 20);
+        
+        doc.setFontSize(12);
+        doc.text("Hiermit bestätigt der Unterzeichnende, die Dienstvorschriften der", 20, 40);
+        doc.text("Stadtwerke Hamburg gelesen und akzeptiert zu haben.", 20, 47);
+        
+        doc.text("Name: " + name, 20, 70);
+        doc.text("Datum: " + new Date().toLocaleDateString(), 20, 80);
+        
+        doc.setFontSize(10);
+        doc.text("__________________________", 20, 100);
+        doc.text("Unterschrift", 20, 105);
+
+        // PDF herunterladen
+        doc.save(`Arbeitsvertrag_${name.replace(/\s+/g, '_')}.pdf`);
+        
+        alert("Vertrag wurde generiert!");
+
+        // HIER WÜRDE SPÄTER DER FIREBASE-UPLOAD CODE FOLGEN
+        // console.log("Jetzt PDF an Firebase Storage senden...");
+    }
+</script>
