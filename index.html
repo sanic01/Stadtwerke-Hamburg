@@ -76,12 +76,15 @@
                 </div>
                 
                 <!-- Desktop Navigation Links (Tab-Switcher) -->
-                <nav class="hidden md:flex space-x-4 items-center">
+                <nav class="hidden md:flex space-x-2 items-center">
                     <button id="nav-home" onclick="switchPage('startseite')" class="text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent">
                         <i class="fa-solid fa-house mr-2"></i>Startseite
                     </button>
                     <button id="nav-contract" onclick="switchPage('arbeitsvertrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
                         <i class="fa-solid fa-file-signature mr-2"></i>Arbeitsvertrag
+                    </button>
+                    <button id="nav-order" onclick="switchPage('auftrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-file-invoice mr-2"></i>Auftrag einreichen
                     </button>
                 </nav>
                 
@@ -106,21 +109,21 @@
                     
                     <div class="relative z-10 max-w-3xl">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
-                            <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Karriereportal
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Bürger- & Karriereportal
                         </span>
                         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-                            Werde Teil unseres Teams der <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">Stadtwerke Hamburg</span>
+                            Werde Teil unseres Teams oder <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">reiche Aufträge ein</span>
                         </h1>
                         <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-                            Wir halten die Metropole am Laufen! Nutze unser volldigitales Portal, um deinen Arbeitsvertrag bequem online auszufüllen, digital zu signieren und bei Bedarf sofort als PDF-Dokument herunterzuladen.
+                            Wir halten die Metropole am Laufen! Nutze unser volldigitales Portal, um deinen Arbeitsvertrag bequem online auszufüllen oder einen Dienstleistungsauftrag einzureichen, falls unser Team gerade im Außendienst ist.
                         </p>
                         <div class="flex flex-wrap gap-4">
                             <button onclick="switchPage('arbeitsvertrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
                                 Jetzt Vertrag unterzeichnen <i class="fa-solid fa-arrow-right ml-2"></i>
                             </button>
-                            <a href="#services-anchor" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
-                                Aufgabenbereiche ansehen
-                            </a>
+                            <button onclick="switchPage('auftrag')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
+                                Dienstleistung anfordern <i class="fa-solid fa-file-invoice ml-2"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -199,7 +202,7 @@
                             
                             <p><strong>§4 Rechte der Bediensteten:</strong> Dem Angestellten steht die vollumfängliche, firmeninterne Finanzierung der Führerscheinklassen A (Motorrad) sowie C (LKW) zu. Zudem ist der Arbeitnehmer bei dienstlichen Einsätzen vollständig betrieblich abgesichert.</p>
                             
-                            <p><strong>§5 Funkdisziplin & Verhalten im Verkehr:</strong> Die Einhaltung der betriebsinternen Status- und Funkcodes ist für festangestelltes Personal verpflichtend. Einsatzfahrzeugen von Behörden (LSPD, LSMD, Feuerwehr) ist zu jeder Zeit Vorrang zu gewähren.</p>
+                            <p><strong>§5 Funkdisziplin & Verhalten im Verkehr:</strong> Die Einhaltung der betriebsinternen Status- und Funkcodes is für festangestelltes Personal verpflichtend. Einsatzfahrzeugen von Behörden (LSPD, LSMD, Feuerwehr) ist zu jeder Zeit Vorrang zu gewähren.</p>
                             
                             <p><strong>§6 Sanktionskatalog:</strong> Verstöße gegen diese Dienstordnung werden nach folgendem Stufenplan geahndet:
                             <br>• 1. Verstoß: Mündliche Ermahnung & formlose Belehrung.
@@ -268,6 +271,122 @@
                 </div>
             </div>
 
+            <!-- SECTION 3: AUFTRAG EINREICHEN (ORDER COMMISSION VIEW) -->
+            <div id="view-auftrag" class="hidden max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-extrabold">Dienstleistungs-Auftrag einreichen</h2>
+                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg - Bürger-Service & Schadensmeldungen</p>
+                            </div>
+                            <div class="bg-swOrange-500 border border-swOrange-600 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
+                                Außendienst-Modus aktiv
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 text-xs sm:text-sm rounded-2xl flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-exclamation text-base mt-0.5"></i>
+                            <div>
+                                <strong class="font-bold">Kein Mitarbeiter im Dienst?</strong> Du kannst hier unkompliziert deinen Auftrag zur Entsorgung, Straßenreinigung oder Infrastrukturwartung einreichen. Unser System erfasst deine Daten und alarmiert unsere Trupps vollautomatisch.
+                            </div>
+                        </div>
+
+                        <!-- Order Form -->
+                        <form id="orderForm" class="space-y-6" onsubmit="event.preventDefault();">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Client Name -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Dein Vor- und Nachname <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <input type="text" id="orderName" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. Max Mustermann" required>
+                                    </div>
+                                </div>
+
+                                <!-- Client Phone -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Telefonnummer <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                        <input type="tel" id="orderTel" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. 555-4819" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Dropdown Client Type -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Auftraggeber-Typ <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-building-user"></i>
+                                        </div>
+                                        <select id="orderType" onchange="toggleCompanyField()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition bg-white appearance-none">
+                                            <option value="privat">Privatperson</option>
+                                            <option value="firma">Firma / Organisation</option>
+                                        </select>
+                                        <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Conditional Company Name Input -->
+                                <div id="companyFieldWrapper" class="hidden transition-all duration-300">
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Name der Firma / Organisation <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <i class="fa-solid fa-building"></i>
+                                        </div>
+                                        <input type="text" id="orderCompany" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. LSPD, LSMD, Hansa AG">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description Textarea -->
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                    Auftragsbeschreibung <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <textarea id="orderDesc" rows="5" class="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition custom-scrollbar" placeholder="Beschreibe bitte möglichst genau, was wir tun sollen (z.B. Müllentsorgung an Baustelle, Straßenreinigung nach Event, Reparatur einer Laterne etc.)." required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons Container -->
+                            <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                <!-- Main Submit Button -->
+                                <button type="button" id="submitOrderBtn" onclick="handleOrderSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
+                                    <i class="fa-solid fa-paper-plane text-lg"></i>
+                                    <span>Auftrag abschicken</span>
+                                </button>
+                                
+                                <!-- Order Download Button (hidden until submitted) -->
+                                <button type="button" id="downloadOrderBtn" onclick="downloadGeneratedOrderPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
+                                    <i class="fa-solid fa-download text-lg"></i>
+                                    <span>Auftragsbestätigung herunterladen</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -309,37 +428,63 @@
 
     <!-- Scripts for dynamic functionality -->
     <script>
-        // Global variables to store the generated contract state for manual downloading
+        // Global variables to store the generated contract state and order state
         let signedPDFDoc = null;
         let generatedFileName = "";
+        
+        let signedOrderPDFDoc = null;
+        let generatedOrderFileName = "";
+
+        const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-";
 
         // Page Routing / Tab Switcher Logic
         function switchPage(pageId) {
             const startseiteView = document.getElementById('view-startseite');
             const arbeitsvertragView = document.getElementById('view-arbeitsvertrag');
+            const auftragView = document.getElementById('view-auftrag');
+            
             const navHome = document.getElementById('nav-home');
             const navContract = document.getElementById('nav-contract');
+            const navOrder = document.getElementById('nav-order');
+
+            // Reset tabs styling
+            navHome.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+            navContract.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+            navOrder.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+
+            startseiteView.classList.add('hidden');
+            arbeitsvertragView.classList.add('hidden');
+            auftragView.classList.add('hidden');
 
             if (pageId === 'startseite') {
-                // Show Startseite, Hide Contract
                 startseiteView.classList.remove('hidden');
-                arbeitsvertragView.classList.add('hidden');
-
-                // Active Home Button Design
                 navHome.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
-                navContract.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
             } else if (pageId === 'arbeitsvertrag') {
-                // Show Contract, Hide Startseite
-                startseiteView.classList.add('hidden');
                 arbeitsvertragView.classList.remove('hidden');
-
-                // Active Contract Button Design
-                navHome.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
                 navContract.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+            } else if (pageId === 'auftrag') {
+                auftragView.classList.remove('hidden');
+                navOrder.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
             }
 
             // Scroll to the top when page changes
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Company Input Visibility based on Client Type
+        function toggleCompanyField() {
+            const orderType = document.getElementById('orderType').value;
+            const companyWrapper = document.getElementById('companyFieldWrapper');
+            const companyInput = document.getElementById('orderCompany');
+
+            if (orderType === 'firma') {
+                companyWrapper.classList.remove('hidden');
+                companyInput.setAttribute('required', 'required');
+            } else {
+                companyWrapper.classList.add('hidden');
+                companyInput.removeAttribute('required');
+                companyInput.value = ''; // Reset value
+            }
         }
 
         // Update Live Signature visualization in real-time
@@ -359,7 +504,7 @@
         }
 
         // Custom Notification Handler
-        function showNotification(title, text, type = 'success') {
+        function showNotification(title, text, type = 'success', downloadAction = null) {
             const overlay = document.getElementById('customNotification');
             const card = document.getElementById('notificationCard');
             const header = document.getElementById('notificationHeader');
@@ -372,11 +517,13 @@
                 header.className = "w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4";
                 header.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
                 
-                // Add download option directly to modal
+                // Set download callback
+                const dlClickEvent = downloadAction ? downloadAction : "downloadGeneratedPDF()";
+
                 actionsEl.innerHTML = `
-                    <button onclick="downloadGeneratedPDF(); closeNotification();" class="w-2/3 bg-swOrange-500 hover:bg-swOrange-600 text-white font-semibold py-3 px-4 rounded-xl transition text-sm flex items-center justify-center space-x-2">
+                    <button onclick="${dlClickEvent}; closeNotification();" class="w-2/3 bg-swOrange-500 hover:bg-swOrange-600 text-white font-semibold py-3 px-4 rounded-xl transition text-sm flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-download"></i>
-                        <span>Vertrag herunterladen</span>
+                        <span>Herunterladen</span>
                     </button>
                     <button onclick="closeNotification()" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
                         Schließen
@@ -420,7 +567,7 @@
             }
         }
 
-        // Action triggered by clicking the download button
+        // Action triggered by clicking the contract download button
         function downloadGeneratedPDF() {
             if (!signedPDFDoc || !generatedFileName) {
                 showNotification("Achtung!", "Es liegt noch kein unterschriebener Vertrag zum Download vor.", "error");
@@ -429,7 +576,16 @@
             safeSavePDF(signedPDFDoc, generatedFileName);
         }
 
-        // Form Validation & PDF Generation Trigger
+        // Action triggered by clicking the order download button
+        function downloadGeneratedOrderPDF() {
+            if (!signedOrderPDFDoc || !generatedOrderFileName) {
+                showNotification("Achtung!", "Es liegt noch kein eingereichter Auftrag zum Download vor.", "error");
+                return;
+            }
+            safeSavePDF(signedOrderPDFDoc, generatedOrderFileName);
+        }
+
+        // Form Validation & PDF Generation Trigger for Contract
         function handleFormSubmission() {
             const name = document.getElementById('signatureInput').value.trim();
             const termsChecked = document.getElementById('termsCheck').checked;
@@ -544,25 +700,21 @@
                 const formattedName = name.replace(/\s+/g, '_');
                 const pdfBlob = doc.output('blob');
 
-                // Speichern der PDF-Daten im globalen State, statt sie direkt automatisch herunterzuladen
+                // Save PDF to state
                 signedPDFDoc = doc;
                 generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
 
-                // --- Webhook Transmission Block ---
-                const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-"; 
+                // Webhook Send out
                 const formData = new FormData();
-                
-                // 1. Die PDF-Datei anhängen
                 formData.append('file', pdfBlob, generatedFileName);
                 
-                // 2. Ein schönes Rich Embed für den Discord-Kanal als JSON mitsenden
                 const discordPayload = {
                     username: "Stadtwerke Hamburg Portal",
                     avatar_url: "https://placehold.co/150x150/075985/ffffff?text=SWHH",
                     embeds: [{
                         title: "📝 Neuer Arbeitsvertrag eingereicht!",
                         description: `Der Bürger **${name}** hat erfolgreich seinen Dienstvertrag für die **Stadtwerke Hamburg** online unterzeichnet.`,
-                        color: 144200, // swBlue hexadezimaler Farbwert
+                        color: 161840, // Accent color representation
                         fields: [
                             { name: "Mitarbeiter", value: name, inline: true },
                             { name: "Datum", value: new Date().toLocaleDateString('de-DE'), inline: true },
@@ -577,17 +729,14 @@
                 
                 formData.append('payload_json', JSON.stringify(discordPayload));
 
-                // Sende die Daten an Discord
+                // Send to Discord Hook
                 fetch(webhookUrl, {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Zeige den manuellen Download-Button in der Oberfläche an
                         document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
-                        
-                        // Erfolg anzeigen
                         showNotification(
                             "Vertrag erfolgreich übermittelt!", 
                             `Hallo ${name}, dein Arbeitsvertrag wurde an die Personalabteilung übermittelt! Du kannst deine Kopie jetzt über den Download-Button herunterladen.`, 
@@ -599,14 +748,178 @@
                 })
                 .catch(err => {
                     console.error("Discord transfer failed: ", err);
-                    
-                    // Zeige den manuellen Download-Button in der Oberfläche an
                     document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
-                    
                     showNotification(
                         "Vertrag eingereicht!", 
                         `Hallo ${name}, dein Arbeitsvertrag wurde erfasst! Klicke auf den Download-Button, um deine Kopie jetzt herunterzuladen.`, 
                         "success"
+                    );
+                });
+
+            } catch (err) {
+                console.error("PDF generation failed: ", err);
+                showNotification("Fehler", "Bei der PDF-Erstellung ist ein Fehler aufgetreten. Bitte versuche es erneut.", "error");
+            }
+        }
+
+        // Form Validation & PDF Generation Trigger for Service Order
+        function handleOrderSubmission() {
+            const clientName = document.getElementById('orderName').value.trim();
+            const clientTel = document.getElementById('orderTel').value.trim();
+            const clientType = document.getElementById('orderType').value;
+            const companyName = document.getElementById('orderCompany').value.trim();
+            const orderDesc = document.getElementById('orderDesc').value.trim();
+
+            if (!clientName || !clientTel || !orderDesc) {
+                showNotification("Achtung!", "Bitte fülle alle Pflichtfelder (*) aus.", "error");
+                return;
+            }
+
+            if (clientType === 'firma' && !companyName) {
+                showNotification("Achtung!", "Bitte trage den Namen deiner Firma oder Organisation ein.", "error");
+                return;
+            }
+
+            try {
+                // Generate Dynamic Order details
+                const randNumber = Math.floor(10000 + Math.random() * 90000);
+                const orderID = `SWHH-A-${randNumber}`;
+                const currentDateStr = new Date().toLocaleDateString('de-DE');
+                const currentTimeStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+                // Construct PDF via jsPDF
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const primaryColor = [15, 23, 42];  // Slate 900
+                const accentColor = [249, 115, 22];  // swOrange 500
+
+                // Header Rect (Orange Accent Top)
+                doc.setFillColor(...primaryColor);
+                doc.rect(0, 0, 210, 40, 'F');
+                doc.setFillColor(...accentColor);
+                doc.rect(0, 40, 210, 4, 'F');
+
+                // Header Titles
+                doc.setTextColor(255, 255, 255);
+                doc.setFont("Helvetica", "bold");
+                doc.setFontSize(22);
+                doc.text("STADTWERKE HAMBURG", 20, 25);
+                
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(10);
+                doc.setTextColor(226, 232, 240);
+                doc.text("Bürger- & Auftragsportal | Offizieller Dienstleistungs-Auftrag", 20, 33);
+
+                // Document Info Box
+                doc.setFillColor(248, 250, 252);
+                doc.setDrawColor(226, 232, 240);
+                doc.rect(20, 52, 170, 35, 'FD');
+                
+                doc.setFontSize(10);
+                doc.setTextColor(71, 85, 105);
+                doc.setFont("Helvetica", "bold");
+                doc.text("OFFIZIELLE AUFTRAGSBESTÄTIGUNG", 25, 60);
+                doc.setFont("Helvetica", "normal");
+                doc.text(`Auftrags-Nr:    ${orderID}`, 25, 67);
+                doc.text(`Einreichedatum: ${currentDateStr} um ${currentTimeStr} Uhr`, 25, 74);
+                doc.text(`Status:         Warteschlange / Offen`, 25, 81);
+
+                // Client Block Box
+                doc.setFillColor(248, 250, 252);
+                doc.rect(20, 95, 170, 35, 'FD');
+                doc.setFont("Helvetica", "bold");
+                doc.text("AUFTRAGGEBER DETAILS", 25, 103);
+                doc.setFont("Helvetica", "normal");
+                doc.text(`Ansprechpartner: ${clientName}`, 25, 110);
+                doc.text(`Telefonnummer:   ${clientTel}`, 25, 117);
+                
+                const typAusgabe = clientType === 'firma' ? `Firma / Organisation (${companyName})` : 'Privatperson';
+                doc.text(`Kunden-Typ:      ${typAusgabe}`, 25, 124);
+
+                // Description Box
+                doc.setFont("Helvetica", "bold");
+                doc.setTextColor(...primaryColor);
+                doc.setFontSize(11);
+                doc.text("Leistungsbeschreibung (Was wir tun sollen):", 20, 145);
+
+                doc.setFont("Helvetica", "normal");
+                doc.setFontSize(10);
+                doc.setTextColor(51, 65, 85);
+                
+                const wrappedDesc = doc.splitTextToSize(orderDesc, 170);
+                doc.text(wrappedDesc, 20, 153);
+
+                // Signature placeholder for confirmation
+                const footerY = 240;
+                doc.setDrawColor(203, 213, 225);
+                doc.line(20, footerY, 90, footerY);
+                doc.setFontSize(8);
+                doc.setTextColor(148, 163, 184);
+                doc.text("Eingereicht durch (Digitale ID)", 20, footerY + 5);
+                doc.text(clientName, 20, footerY - 3);
+
+                doc.line(120, footerY, 190, footerY);
+                doc.text("Freigabe Stadtwerke Hamburg", 120, footerY + 5);
+
+                // Save PDF to state
+                const pdfBlob = doc.output('blob');
+                signedOrderPDFDoc = doc;
+                generatedOrderFileName = `Auftragsbestaetigung_SWHH_${orderID}.pdf`;
+
+                // Discord payload preparation
+                const formData = new FormData();
+                formData.append('file', pdfBlob, generatedOrderFileName);
+
+                const discordPayload = {
+                    username: "Stadtwerke Hamburg Portal",
+                    avatar_url: "https://placehold.co/150x150/f97316/ffffff?text=SWHH",
+                    embeds: [{
+                        title: "🚚 Neuer Dienstleistungs-Auftrag eingegangen!",
+                        description: `Ein neuer Auftrag wurde über das Online-Portal eingereicht.`,
+                        color: 16349462, // Orange color representation
+                        fields: [
+                            { name: "Auftrags-ID", value: orderID, inline: true },
+                            { name: "Kunde/Kontakt", value: `${clientName} (${clientTel})`, inline: true },
+                            { name: "Kunden-Typ", value: typAusgabe, inline: true },
+                            { name: "Einreichedatum", value: `${currentDateStr} - ${currentTimeStr} Uhr`, inline: true },
+                            { name: "Beschreibung", value: orderDesc.length > 500 ? orderDesc.substring(0, 500) + "..." : orderDesc }
+                        ],
+                        footer: {
+                            text: "Stadtwerke Hamburg - Bürgerportal"
+                        },
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+
+                formData.append('payload_json', JSON.stringify(discordPayload));
+
+                // Send to Discord Webhook
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('downloadOrderBtn').classList.remove('hidden');
+                        showNotification(
+                            "Auftrag eingereicht!", 
+                            `Hallo ${clientName}, dein Dienstleistungsauftrag wurde erfolgreich übertragen und unter der Nummer ${orderID} registriert.`, 
+                            "success",
+                            "downloadGeneratedOrderPDF()"
+                        );
+                    } else {
+                        throw new Error("Discord Webhook meldet Fehler-Code");
+                    }
+                })
+                .catch(err => {
+                    console.error("Discord transfer failed: ", err);
+                    document.getElementById('downloadOrderBtn').classList.remove('hidden');
+                    showNotification(
+                        "Auftrag erfasst!", 
+                        `Hallo ${clientName}, dein Auftrag wurde im Portal registriert (ID: ${orderID}). Klicke auf den Button, um deine Kopie jetzt herunterzuladen.`, 
+                        "success",
+                        "downloadGeneratedOrderPDF()"
                     );
                 });
 
