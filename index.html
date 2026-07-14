@@ -67,7 +67,7 @@
                 <!-- Logo Block -->
                 <div class="flex items-center space-x-3">
                     <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-md shadow-swBlue-500/20">
-                        <i class="fa-solid fa-industry text-xl animate-pulse"></i>
+                        <i class="fa-solid fa-industry text-xl"></i>
                     </div>
                     <div>
                         <span class="text-lg font-extrabold tracking-tight text-swBlue-900 block leading-tight">STADTWERKE</span>
@@ -78,7 +78,6 @@
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex space-x-8 items-center">
                     <a href="#services" class="text-slate-600 hover:text-swBlue-800 font-medium text-sm transition-colors">Dienstleistungen</a>
-                    <a href="#fuhrpark" class="text-slate-600 hover:text-swBlue-800 font-medium text-sm transition-colors">Fuhrpark</a>
                     <a href="#vertrag-sektion" class="bg-swBlue-50 text-swBlue-800 hover:bg-swBlue-100 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 border border-swBlue-200/50">
                         <i class="fa-solid fa-file-signature mr-2"></i>Einstellungs-Portal
                     </a>
@@ -109,7 +108,7 @@
                         Werde Teil unseres Teams der <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">Stadtwerke Hamburg</span>
                     </h1>
                     <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-                        Wir halten die Metropole am Laufen! Nutze unser volldigitales Einstellungsportal, um deinen Dienstvertrag bequem online auszufüllen, digital zu signieren und sofort als PDF-Dokument herunterzuladen.
+                        Wir halten die Metropole am Laufen! Nutze unser volldigitales Einstellungsportal, um deinen Dienstvertrag bequem online auszufüllen, digital zu signieren und bei Bedarf sofort als PDF-Dokument herunterzuladen.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#vertrag-sektion" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
@@ -284,11 +283,20 @@
                                 </label>
                             </div>
 
-                            <!-- Action Button for PDF Generation -->
-                            <button type="button" onclick="handleFormSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99]">
-                                <i class="fa-solid fa-file-pdf text-lg"></i>
-                                <span>Vertrag rechtsgültig signieren & absenden</span>
-                            </button>
+                            <!-- Action Buttons Container (Dynamic secondary download button) -->
+                            <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                <!-- Main Submit Button -->
+                                <button type="button" id="submitBtn" onclick="handleFormSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
+                                    <i class="fa-solid fa-file-signature text-lg"></i>
+                                    <span>Signieren und Abschicken</span>
+                                </button>
+                                
+                                <!-- Standalone Download Button (initially hidden until signed) -->
+                                <button type="button" id="standaloneDownloadBtn" onclick="downloadGeneratedPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
+                                    <i class="fa-solid fa-download text-lg"></i>
+                                    <span>Vertrag herunterladen</span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -307,7 +315,8 @@
             <h3 id="notificationTitle" class="text-xl font-bold text-center text-slate-900 mb-2">Erfolgreich unterschrieben!</h3>
             <p id="notificationText" class="text-sm text-slate-500 text-center leading-relaxed mb-6">Dein Arbeitsvertrag wurde verarbeitet und wird jetzt als PDF heruntergeladen.</p>
             
-            <div class="flex space-x-3">
+            <!-- Dynamic Actions (Close or Download option) -->
+            <div class="flex space-x-3" id="notificationActions">
                 <button onclick="closeNotification()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
                     Schließen
                 </button>
@@ -333,6 +342,10 @@
 
     <!-- Scripts for dynamic functionality -->
     <script>
+        // Global variables to store the generated contract state for manual downloading
+        let signedPDFDoc = null;
+        let generatedFileName = "";
+
         // Update Live Signature visualization in real-time
         function updateLiveSignature() {
             const val = document.getElementById('signatureInput').value.trim();
@@ -356,14 +369,32 @@
             const header = document.getElementById('notificationHeader');
             const titleEl = document.getElementById('notificationTitle');
             const textEl = document.getElementById('notificationText');
+            const actionsEl = document.getElementById('notificationActions');
 
             // Configure Notification look based on type
             if(type === 'success') {
                 header.className = "w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4";
                 header.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                
+                // Add download option directly to modal
+                actionsEl.innerHTML = `
+                    <button onclick="downloadGeneratedPDF(); closeNotification();" class="w-2/3 bg-swOrange-500 hover:bg-swOrange-600 text-white font-semibold py-3 px-4 rounded-xl transition text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Vertrag herunterladen</span>
+                    </button>
+                    <button onclick="closeNotification()" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
+                        Schließen
+                    </button>
+                `;
             } else {
                 header.className = "w-16 h-16 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce";
                 header.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                
+                actionsEl.innerHTML = `
+                    <button onclick="closeNotification()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
+                        Schließen
+                    </button>
+                `;
             }
 
             titleEl.innerText = title;
@@ -391,6 +422,15 @@
             } catch (err) {
                 console.warn("Lokal herunterladen fehlgeschlagen (Sicherheits-Sandbox im Preview-Modus):", err);
             }
+        }
+
+        // Action triggered by clicking the download button
+        function downloadGeneratedPDF() {
+            if (!signedPDFDoc || !generatedFileName) {
+                showNotification("Achtung!", "Es liegt noch kein unterschriebener Vertrag zum Download vor.", "error");
+                return;
+            }
+            safeSavePDF(signedPDFDoc, generatedFileName);
         }
 
         // Form Validation & PDF Generation Trigger
@@ -508,14 +548,16 @@
                 const formattedName = name.replace(/\s+/g, '_');
                 const pdfBlob = doc.output('blob');
 
-                // HINWEIS: Hier ist nun deine echte Discord Webhook-URL eingetragen!
-                const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-"; 
+                // Speichern der PDF-Daten im globalen State, statt sie direkt automatisch herunterzuladen
+                signedPDFDoc = doc;
+                generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
 
-                // Wir bereiten die Formulardaten für Discord vor (Multipart-Upload)
+                // --- Webhook Transmission Block ---
+                const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-"; 
                 const formData = new FormData();
                 
                 // 1. Die PDF-Datei anhängen
-                formData.append('file', pdfBlob, `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                formData.append('file', pdfBlob, generatedFileName);
                 
                 // 2. Ein schönes Rich Embed für den Discord-Kanal als JSON mitsenden
                 const discordPayload = {
@@ -546,13 +588,13 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Lokaler Download als Komfort-Feature für den Spieler (abgesichert)
-                        safeSavePDF(doc, `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                        // Zeige den manuellen Download-Button in der Oberfläche an
+                        document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
                         
                         // Erfolg anzeigen
                         showNotification(
-                            "Vertrag unterzeichnet & gesendet!", 
-                            `Hallo ${name}, dein Arbeitsvertrag wurde erfolgreich an die Personalabteilung übermittelt und als PDF heruntergeladen!`, 
+                            "Vertrag erfolgreich übermittelt!", 
+                            `Hallo ${name}, dein Arbeitsvertrag wurde an die Personalabteilung übermittelt! Du kannst deine Kopie jetzt über den Download-Button herunterladen.`, 
                             "success"
                         );
                     } else {
@@ -562,12 +604,12 @@
                 .catch(err => {
                     console.error("Discord transfer failed: ", err);
                     
-                    // Fallback für Sandbox: Selbst wenn der Download blockiert wurde, ist das Dokument generiert
-                    safeSavePDF(doc, `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`);
+                    // Zeige den manuellen Download-Button in der Oberfläche an
+                    document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
                     
                     showNotification(
                         "Vertrag eingereicht!", 
-                        `Hallo ${name}, dein Arbeitsvertrag wurde erfasst! Falls der lokale PDF-Download im Chat-Vorschaufenster blockiert wurde: Keine Sorge! Sobald du die Datei auf deinem PC speicherst und dort öffnest, funktioniert auch der lokale PDF-Download uneingeschränkt.`, 
+                        `Hallo ${name}, dein Arbeitsvertrag wurde erfasst! Klicke auf den Download-Button, um deine Kopie jetzt herunterzuladen.`, 
                         "success"
                     );
                 });
