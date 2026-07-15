@@ -93,14 +93,21 @@
                             <i class="fa-solid fa-briefcase mr-2"></i>Mitarbeiter <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
                         </button>
                         <!-- Hover Dropdown Menu -->
-                        <div class="absolute left-0 mt-1 w-52 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all duration-300">
+                        <div class="absolute left-0 mt-1 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all duration-300">
+                            <!-- Stufe 1, 2, 3 -->
                             <button onclick="switchPage('arbeitsvertrag')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
                                 <i class="fa-solid fa-file-signature text-slate-400"></i>
                                 <span>Arbeitsvertrag</span>
                             </button>
-                            <button onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
+                            <!-- Stufe 2, 3 -->
+                            <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
                                 <i class="fa-solid fa-list-check text-slate-400"></i>
                                 <span>Meldungen verwalten</span>
+                            </button>
+                            <!-- Stufe 3 -->
+                            <button id="menu-btn-mitglieder" onclick="switchPage('mitglieder')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
+                                <i class="fa-solid fa-users-gear text-slate-400"></i>
+                                <span>Mitglieder verwalten</span>
                             </button>
                         </div>
                     </div>
@@ -120,9 +127,12 @@
                     </button>
 
                     <!-- Logged in Status Badge -->
-                    <div id="user-profile-badge" class="hidden bg-slate-100 border border-slate-200 pl-3 pr-2 py-1.5 rounded-xl flex items-center space-x-2.5 text-xs">
+                    <div id="user-profile-badge" class="hidden bg-slate-100 border border-slate-200 pl-3 pr-2 py-1.5 rounded-xl flex items-center space-x-2 text-xs">
                         <i class="fa-solid fa-circle-user text-swBlue-800 text-sm"></i>
-                        <span id="header-username" class="font-bold text-slate-800">Mitarbeiter</span>
+                        <div class="flex flex-col">
+                            <span id="header-username" class="font-bold text-slate-800 leading-tight">Mitarbeiter</span>
+                            <span id="header-userlevel" class="text-[9px] text-slate-400 font-semibold uppercase leading-none">Stufe 1</span>
+                        </div>
                         <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center" title="Abmelden">
                             <i class="fa-solid fa-power-off text-xs"></i>
                         </button>
@@ -180,7 +190,7 @@
                         </div>
 
                         <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-truck-field text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
@@ -258,6 +268,7 @@
                 </div>
             </div>
 
+            <!-- VIEW 3: ARBEITSVERTRAG -->
             <div id="view-arbeitsvertrag" class="hidden max-w-4xl mx-auto">
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
@@ -394,7 +405,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-900 mb-2">Name des Mitarbeiters</label>
-                                    <input type="text" id="signatureInput" class="w-full pl-4 pr-4 py-3 border border-slate-200 rounded-xl bg-slate-50 text-slate-500 text-sm focus:outline-none cursor-not-allowed" readonly>
+                                    <input type="text" id="signatureInput" class="w-full pl-4 pr-4 py-3 border border-slate-200 rounded-xl bg-slate-100 text-slate-500 text-sm focus:outline-none cursor-not-allowed font-semibold" readonly>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-900 mb-2">Geburtsdatum <span class="text-rose-500">*</span></label>
@@ -409,7 +420,7 @@
                             <div>
                                 <span class="block text-sm font-semibold text-slate-900 mb-2">Digitale Unterschriftsvorschau:</span>
                                 <div class="h-[60px] w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden relative">
-                                    <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase tracking-widest pointer-events-none">Echtzeit</span>
+                                    <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase tracking-widest pointer-events-none font-bold">Echtzeit</span>
                                     <div id="liveSignature" class="font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200">Unterschrift...</div>
                                 </div>
                             </div>
@@ -417,7 +428,7 @@
                             <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
                                 <label class="flex items-start cursor-pointer select-none">
                                     <input type="checkbox" id="termsCheck" class="mt-1 h-4 w-4 rounded text-swBlue-600 focus:ring-swBlue-500 border-slate-300 mr-3 cursor-pointer">
-                                    <span class="text-xs sm:text-sm text-slate-600 leading-normal">Ich bestätige die Richtigkeit aller gemachten Angaben und stimme den Dienstvereinbarungen zu.</span>
+                                    <span class="text-xs sm:text-sm text-slate-600 leading-normal font-semibold">Ich bestätige die Richtigkeit aller gemachten Angaben und stimme den Dienstvereinbarungen zu.</span>
                                 </label>
                             </div>
 
@@ -436,6 +447,7 @@
                 </div>
             </div>
 
+            <!-- VIEW 4: MELDUNGEN VERWALTEN -->
             <div id="view-meldungen" class="hidden max-w-6xl mx-auto">
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-6 text-white flex justify-between items-center">
@@ -444,17 +456,16 @@
                                 <i class="fa-solid fa-folder-open"></i>
                                 <span>Eingegangene Bürgermeldungen</span>
                             </h2>
-                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge</p>
+                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge (Stufe 2 & 3)</p>
                         </div>
                         <span id="meldungen-counter" class="bg-swOrange-500 text-white px-3 py-1 rounded-full text-xs font-bold">Lade...</span>
                     </div>
 
                     <div class="p-6">
-                        <!-- Firebase Info Banner in the employee portal -->
                         <div class="mb-6 p-4 bg-blue-50 border border-blue-200 text-blue-800 text-xs rounded-2xl flex items-center gap-3">
                             <i class="fa-solid fa-cloud text-base text-blue-600"></i>
                             <div>
-                                <strong class="font-bold">Echtzeit-Synchronisierung:</strong> Dieses System ist mit deiner Firebase-Datenbank verbunden. Jegliche Statusänderungen oder gelöschte Einträge werden sofort für alle angemeldeten Mitarbeiter aktualisiert.
+                                <strong class="font-bold">Echtzeit-Synchronisierung:</strong> Dieses System ist mit deiner Firebase-Datenbank verbunden. Statusänderungen oder gelöschte Einträge werden sofort für alle Mitarbeiter aktualisiert.
                             </div>
                         </div>
 
@@ -471,9 +482,57 @@
                 </div>
             </div>
 
+            <!-- VIEW 5: MITGLIEDER VERWALTEN (Stufe 3) -->
+            <div id="view-mitglieder" class="hidden max-w-6xl mx-auto">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-6 text-white flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-extrabold flex items-center space-x-2">
+                                <i class="fa-solid fa-users-gear"></i>
+                                <span>Mitarbeiter- & Kontenverwaltung</span>
+                            </h2>
+                            <p class="text-xs text-slate-300 mt-1">Freigabestufen verwalten, Passwörter ändern oder Konten sperren (Leitungs-Ebene)</p>
+                        </div>
+                        <span id="mitglieder-counter" class="bg-swOrange-500 text-white px-3 py-1 rounded-full text-xs font-bold">0 Konten</span>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Search Bar -->
+                        <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                            <div class="relative w-full sm:max-w-xs">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <input type="text" id="memberSearchInput" oninput="filterMemberList()" class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800" placeholder="Mitglieder suchen...">
+                            </div>
+                            <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Freigabestufen: 1 = Praktikant | 2 = Mitarbeiter | 3 = Leitung</span>
+                        </div>
+
+                        <!-- Members Table Container -->
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                            <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                                <thead class="bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                    <tr>
+                                        <th class="px-6 py-4">Benutzername</th>
+                                        <th class="px-6 py-4">Registriert am</th>
+                                        <th class="px-6 py-4">Freigabestufe</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4 text-center">Aktionen</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mitglieder-table-body" class="divide-y divide-slate-200 bg-white text-slate-700">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
+    <!-- LOGIN / REGISTER MODAL -->
     <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
         <div class="bg-white/95 backdrop-blur-md rounded-3xl w-full max-w-md p-8 shadow-2xl border border-white/20 transform scale-95 transition-all duration-300 relative">
             <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition">
@@ -481,10 +540,10 @@
             </button>
 
             <div class="text-center mb-6">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-50 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
-                    <i class="fa-solid fa-user-lock text-xl text-swBlue-800"></i>
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
+                    <i class="fa-solid fa-user-lock text-xl"></i>
                 </div>
-                <h3 class="text-xl font-extrabold text-slate-900">Mitarbeiter Login</h3>
+                <h3 class="text-xl font-extrabold text-slate-900">Mitarbeiter-Portal</h3>
                 <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold mt-0.5">Stadtwerke Hamburg</p>
             </div>
 
@@ -556,6 +615,23 @@
         </div>
     </div>
 
+    <!-- CHANGE PASSWORD MODAL (ADMIN ONLY) -->
+    <div id="changePasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative">
+            <button onclick="closeChangePasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Passwort ändern</h3>
+            <p class="text-xs text-slate-500 mb-4">Neues Passwort festlegen für Mitarbeiter: <strong id="pwModalUsername" class="text-swBlue-800"></strong></p>
+            <input type="hidden" id="pwModalUid">
+            <div class="space-y-4">
+                <input type="password" id="adminNewPassword" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 text-sm transition animate-pulse" placeholder="Neues Passwort (mind. 6 Zeichen)">
+                <button onclick="submitAdminPasswordChange()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-2.5 rounded-xl transition text-sm">Passwort speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GLOBAL DYNAMIC NOTIFICATIONS -->
     <div id="customNotification" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative overflow-hidden text-center" id="notificationCard">
             <div id="notificationHeader" class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
@@ -573,15 +649,15 @@
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
             <div class="flex justify-center items-center space-x-3 text-white mb-4">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-swOrange-600 to-swOrange-500 flex items-center justify-center">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-swOrange-600 to-swOrange-50 flex items-center justify-center">
                     <i class="fa-solid fa-industry text-sm text-white"></i>
                 </div>
                 <span class="text-base font-bold">Stadtwerke Hamburg</span>
             </div>
-            <p class="text-xs max-w-md mx-auto text-slate-500 leading-relaxed">
+            <p class="text-xs max-w-md mx-auto text-slate-500 leading-relaxed font-semibold">
                 Dies ist eine rein fiktive Präsenz für ein GTA V Roleplay-Projekt. Alle Angaben dienen ausschließlich Unterhaltungszwecken.
             </p>
-            <div class="text-xs text-slate-600 border-t border-slate-800/80 pt-6">
+            <div class="text-xs text-slate-600 border-t border-slate-800/80 pt-6 font-semibold">
                 &copy; 2026 Stadtwerke Hamburg. Alle Rechte vorbehalten.
             </div>
         </div>
@@ -590,8 +666,8 @@
     <script type="module">
         // Import Firebase App & Auth & Firestore from official gstatic CDN
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, onSnapshot, query, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         // Firebase Configuration
         const firebaseConfig = {
@@ -611,9 +687,14 @@
 
         // GLOBAL APPLICATION STATE
         let activePage = "startseite";
-        let loggedInUser = null;
+        let loggedInUser = null; // Holds the currently authenticated employee credentials profile from Firestore
         let authMode = "login";
+        
         let unsubscribeMeldungen = null;
+        let unsubscribeMitglieder = null;
+        let unsubscribeCurrentUserProfile = null;
+        
+        let globalAllMitglieder = []; // Holds all user accounts in memory for filtering
 
         // Document Storage variables
         window.signedPDFDoc = null;
@@ -623,42 +704,95 @@
 
         const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-";
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loggedInUser = {
-                    username: user.displayName || user.email.split('@')[0],
-                    email: user.email
-                };
-                localStorage.setItem("swhh_active_user", JSON.stringify(loggedInUser));
-            } else {
-                loggedInUser = null;
-                localStorage.removeItem("swhh_active_user");
-            }
-            updateAuthUI();
-            
-            // Manage real-time Firestore list based on employee authorization
-            if (loggedInUser) {
-                setupRealtimeMeldungen();
-            } else {
-                if (unsubscribeMeldungen) {
-                    unsubscribeMeldungen();
-                    unsubscribeMeldungen = null;
+        // STRICT MANDATE RULE 1 PATHS
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fivem-stadtwerke-hamburg';
+        
+        // Background Anonymous Auth on Load to satisfy Rule 3 (Auth before queries)
+        signInAnonymously(auth).then((userCredential) => {
+            console.log("Secure anonymous session established (Rule 3 compliant)");
+            // Check if there was a logged-in user in cache
+            const cachedUser = localStorage.getItem("swhh_active_user");
+            if (cachedUser) {
+                try {
+                    const parsedUser = JSON.parse(cachedUser);
+                    // Live-validate cached user document in Firestore to prevent stale clearances or blocked accounts
+                    validateAndEstablishEmployeeSession(parsedUser.uid);
+                } catch (e) {
+                    localStorage.removeItem("swhh_active_user");
                 }
             }
+        }).catch((error) => {
+            console.error("Anonymous authentication failed:", error);
         });
+
+        // Custom Employee Session establishment (Bypasses email constraints for simple RP usernames)
+        async function validateAndEstablishEmployeeSession(uid) {
+            const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', uid);
+            
+            // Unsubscribe existing real-time listener if any
+            if (unsubscribeCurrentUserProfile) {
+                unsubscribeCurrentUserProfile();
+            }
+
+            // Bind real-time listener to current user profile
+            unsubscribeCurrentUserProfile = onSnapshot(userProfileRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.data();
+                    if (data.status === "Gesperrt") {
+                        handleLogout();
+                        showNotification("Konto gesperrt", "Ihr Mitarbeiter-Konto wurde von der Leitung gesperrt.", "error");
+                        return;
+                    }
+                    
+                    loggedInUser = {
+                        uid: snapshot.id,
+                        username: data.username,
+                        level: parseInt(data.level || 1),
+                        status: data.status || "Aktiv"
+                    };
+                    
+                    localStorage.setItem("swhh_active_user", JSON.stringify(loggedInUser));
+                    updateAuthUI();
+                    
+                    // Route permissions update
+                    if (loggedInUser.level >= 2) {
+                        setupRealtimeMeldungen();
+                    }
+                    if (loggedInUser.level === 3) {
+                        setupRealtimeMitglieder();
+                    }
+                } else {
+                    // Profile deleted in directory
+                    handleLogout();
+                }
+            }, (error) => {
+                console.error("Error watching user profile:", error);
+            });
+        }
 
         // ROUTING SYSTEM
         function switchPage(pageId) {
-            if ((pageId === "arbeitsvertrag" || pageId === "meldungen") && !loggedInUser) {
+            // Guard route accesses based on dynamic Freigabestufe
+            if (pageId === "arbeitsvertrag" && !loggedInUser) {
                 showNotification("Zugriff verweigert", "Dieser Bereich ist ausschließlich angemeldeten Mitarbeitern gestattet.", "error");
                 switchPage("startseite");
                 openLoginModal();
                 return;
             }
+            if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 2)) {
+                showNotification("Zugriff verweigert", "Meldungen können erst ab Freigabestufe 2 (Mitarbeiter) eingesehen werden.", "error");
+                switchPage("startseite");
+                return;
+            }
+            if (pageId === "mitglieder" && (!loggedInUser || loggedInUser.level < 3)) {
+                showNotification("Zugriff verweigert", "Dieses Kontrollzentrum steht nur der Geschäftsleitung (Stufe 3) zur Verfügung.", "error");
+                switchPage("startseite");
+                return;
+            }
 
             activePage = pageId;
 
-            const views = ["startseite", "auftrag", "arbeitsvertrag", "meldungen"];
+            const views = ["startseite", "auftrag", "arbeitsvertrag", "meldungen", "mitglieder"];
             views.forEach(v => {
                 const element = document.getElementById(`view-${v}`);
                 if (element) {
@@ -695,22 +829,44 @@
                 return;
             }
 
-            // Virtual Email generation mapping
-            const virtualEmail = `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@sw-hh.internal`;
-
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, virtualEmail, password);
-                await updateProfile(userCredential.user, { displayName: username });
-                
-                closeLoginModal();
-                showNotification("Willkommen!", `Konto für ${username} wurde erfolgreich erstellt und angemeldet.`, "success");
-            } catch (err) {
-                console.error("Firebase Auth Error: ", err);
-                let msg = "Registrierung fehlgeschlagen.";
-                if (err.code === 'auth/email-already-in-use') {
-                    msg = "Dieser Benutzername ist bereits vergeben.";
+                // Check if username already exists in Firestore database (Rule 2: No complex query. Read collection and filter in memory)
+                const employeesCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
+                const querySnapshot = await getDocs(employeesCol);
+                let usernameTaken = false;
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.username && data.username.toLowerCase() === username.toLowerCase()) {
+                        usernameTaken = true;
+                    }
+                });
+
+                if (usernameTaken) {
+                    showNotification("Registrierung ungültig", "Dieser Benutzername ist bereits vergeben.", "error");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Konto registrieren";
+                    return;
                 }
-                showNotification("Fehler", msg, "error");
+
+                // Generate new user profile
+                const newUid = crypto.randomUUID();
+                const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', newUid);
+                
+                await setDoc(userProfileRef, {
+                    uid: newUid,
+                    username: username,
+                    password: password,
+                    level: 1, // Standardly Auto-Assigned to Level 1
+                    status: "Aktiv",
+                    createdAt: new Date().toLocaleDateString('de-DE')
+                });
+
+                closeLoginModal();
+                showNotification("Willkommen!", `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 1 zugewiesen.`, "success");
+                validateAndEstablishEmployeeSession(newUid);
+            } catch (err) {
+                console.error("Registration Error: ", err);
+                showNotification("Fehler", "Datenbankfehler bei der Erstellung des Profils.", "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Konto registrieren";
@@ -726,43 +882,96 @@
             const username = document.getElementById("loginUsername").value.trim();
             const password = document.getElementById("loginPassword").value.trim();
 
-            const virtualEmail = `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@sw-hh.internal`;
-
             try {
-                await signInWithEmailAndPassword(auth, virtualEmail, password);
+                const employeesCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
+                const querySnapshot = await getDocs(employeesCol);
+                let targetUser = null;
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.username && data.username.toLowerCase() === username.toLowerCase()) {
+                        targetUser = { uid: doc.id, ...data };
+                    }
+                });
+
+                if (!targetUser || targetUser.password !== password) {
+                    showNotification("Anmeldung ungültig", "Falscher Benutzername oder Passwort.", "error");
+                    return;
+                }
+
+                if (targetUser.status === "Gesperrt") {
+                    showNotification("Anmeldung gesperrt", "Dieses Mitarbeiterkonto wurde von der Leitung gesperrt.", "error");
+                    return;
+                }
+
                 closeLoginModal();
-                showNotification("Login erfolgreich", `Willkommen zurück, ${username}!`, "success");
+                showNotification("Login erfolgreich", `Willkommen zurück im Dienst, ${targetUser.username}!`, "success");
+                validateAndEstablishEmployeeSession(targetUser.uid);
             } catch (err) {
                 console.error(err);
-                showNotification("Anmeldung ungültig", "Falsches Passwort oder Benutzer nicht gefunden.", "error");
+                showNotification("Fehler", "Fehler beim Abruf der Profildaten.", "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Anmelden";
             }
         }
 
-        async function handleLogout() {
-            try {
-                await signOut(auth);
-                switchPage("startseite");
-                showNotification("Abgemeldet", "Sie wurden sicher aus dem Mitarbeiterbereich ausgeloggt.", "success");
-            } catch (err) {
-                console.error(err);
+        function handleLogout() {
+            if (unsubscribeCurrentUserProfile) {
+                unsubscribeCurrentUserProfile();
+                unsubscribeCurrentUserProfile = null;
             }
+            if (unsubscribeMeldungen) {
+                unsubscribeMeldungen();
+                unsubscribeMeldungen = null;
+            }
+            if (unsubscribeMitglieder) {
+                unsubscribeMitglieder();
+                unsubscribeMitglieder = null;
+            }
+
+            loggedInUser = null;
+            localStorage.removeItem("swhh_active_user");
+            updateAuthUI();
+            switchPage("startseite");
         }
 
         function updateAuthUI() {
             const loginTrigger = document.getElementById("login-trigger-btn");
             const profileBadge = document.getElementById("user-profile-badge");
             const headerUsername = document.getElementById("header-username");
+            const headerUserlevel = document.getElementById("header-userlevel");
             const employeeDropdown = document.getElementById("nav-mitarbeiter-dropdown");
             const contractSigInput = document.getElementById("signatureInput");
+            
+            // Dropdown option toggles based on clearance levels
+            const meldungenMenuBtn = document.getElementById("menu-btn-meldungen");
+            const mitgliederMenuBtn = document.getElementById("menu-btn-mitglieder");
 
             if (loggedInUser) {
                 if (loginTrigger) loginTrigger.classList.add("hidden");
                 if (profileBadge) profileBadge.classList.remove("hidden");
                 if (headerUsername) headerUsername.innerText = loggedInUser.username;
+                
+                let levelName = "Stufe 1 - Praktikant";
+                if (loggedInUser.level === 2) levelName = "Stufe 2 - Angestellter";
+                if (loggedInUser.level === 3) levelName = "Stufe 3 - Leitung";
+                if (headerUserlevel) headerUserlevel.innerText = levelName;
+                
                 if (employeeDropdown) employeeDropdown.classList.remove("hidden");
+                
+                // Show/hide menu items in dropdown based on clearance level
+                if (loggedInUser.level >= 2) {
+                    if (meldungenMenuBtn) meldungenMenuBtn.classList.remove("hidden");
+                } else {
+                    if (meldungenMenuBtn) meldungenMenuBtn.classList.add("hidden");
+                }
+
+                if (loggedInUser.level === 3) {
+                    if (mitgliederMenuBtn) mitgliederMenuBtn.classList.remove("hidden");
+                } else {
+                    if (mitgliederMenuBtn) mitgliederMenuBtn.classList.add("hidden");
+                }
                 
                 if (contractSigInput) {
                     contractSigInput.value = loggedInUser.username;
@@ -782,18 +991,24 @@
         function setupRealtimeMeldungen() {
             if (unsubscribeMeldungen) unsubscribeMeldungen();
 
-            const meldungenRef = collection(db, "meldungen");
-            const q = query(meldungenRef, orderBy("createdAt", "desc"));
-
-            unsubscribeMeldungen = onSnapshot(q, (snapshot) => {
+            // Strict compliance with Path Rule 1: /artifacts/{appId}/public/data/meldungen
+            const meldungenCol = collection(db, 'artifacts', appId, 'public', 'data', 'meldungen');
+            
+            // Rule 2 compliant: Fetch the entire collection, sort array in memory
+            unsubscribeMeldungen = onSnapshot(meldungenCol, (snapshot) => {
                 const orders = [];
                 snapshot.forEach((doc) => {
                     orders.push({ id: doc.id, ...doc.data() });
                 });
+                
+                // Perform JavaScript-side sorting to comply with Rule 2 (no complex orderBy on query)
+                orders.sort((a, b) => {
+                    return (b.date + ' ' + b.time).localeCompare(a.date + ' ' + a.time);
+                });
+
                 renderMeldungenUI(orders);
             }, (error) => {
-                console.warn("Firestore Database Permission Error: fallback on local storage", error);
-                // Firestore permission fallback to local simulation
+                console.warn("Firestore error in Meldungen", error);
                 const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
                 renderMeldungenUI(localOrders);
             });
@@ -835,14 +1050,14 @@
                                 <i class="fa-solid fa-calendar text-[10px]"></i> ${order.date} | ${order.time} Uhr
                             </p>
                             <p class="text-xs text-swOrange-600 font-bold">${typeLabel}</p>
-                            <div class="bg-white border border-slate-200 p-3 rounded-lg text-xs text-slate-600 max-h-[100px] overflow-y-auto custom-scrollbar italic leading-normal">
+                            <div class="bg-white border border-slate-200 p-3 rounded-lg text-xs text-slate-600 max-h-[100px] overflow-y-auto custom-scrollbar italic leading-normal font-semibold">
                                 "${order.description}"
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
                             <div>
-                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="w-full bg-white border border-slate-200 rounded-lg text-[11px] p-1.5 font-bold text-slate-700">
+                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="w-full bg-white border border-slate-200 rounded-lg text-[11px] p-1.5 font-bold text-slate-700 focus:outline-none">
                                     <option value="Offen" ${order.status === "Offen" ? "selected" : ""}>Offen</option>
                                     <option value="In Bearbeitung" ${order.status === "In Bearbeitung" ? "selected" : ""}>In Bearbeitung</option>
                                     <option value="Erledigt" ${order.status === "Erledigt" ? "selected" : ""}>Erledigt</option>
@@ -869,35 +1084,176 @@
 
         async function updateOrderStatus(orderId, newStatus) {
             try {
-                const orderRef = doc(db, "meldungen", orderId);
+                // Rule 1 Compliance: path matches '/artifacts/{appId}/public/data/meldungen/{id}'
+                const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'meldungen', orderId);
                 await updateDoc(orderRef, { status: newStatus });
             } catch (err) {
-                // Local Storage backup sync
-                const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
-                const found = localOrders.find(o => o.id === orderId);
-                if (found) {
-                    found.status = newStatus;
-                    localStorage.setItem("swhh_orders", JSON.stringify(localOrders));
-                    renderMeldungenUI(localOrders);
-                }
+                console.error(err);
             }
         }
 
         async function deleteMeldung(orderId) {
             showConfirmNotification("Meldung löschen?", "Möchten Sie diesen Bürgermeldungs-Auftrag unwiderruflich entfernen?", async () => {
                 try {
-                    const orderRef = doc(db, "meldungen", orderId);
+                    const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'meldungen', orderId);
                     await deleteDoc(orderRef);
                     showNotification("Gelöscht", "Der Auftrag wurde erfolgreich aus der Cloud gelöscht.", "success");
                 } catch (err) {
-                    const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
-                    const index = localOrders.findIndex(o => o.id === orderId);
-                    if (index !== -1) {
-                        localOrders.splice(index, 1);
-                        localStorage.setItem("swhh_orders", JSON.stringify(localOrders));
-                        renderMeldungenUI(localOrders);
-                        showNotification("Gelöscht", "Der Auftrag wurde lokal aus deinem Browser entfernt.", "success");
-                    }
+                    console.error(err);
+                }
+            });
+        }
+
+        // LEADERSHIP REAL-TIME ACCOUNT MANAGEMENT (Freigabestufe 3)
+        function setupRealtimeMitglieder() {
+            if (unsubscribeMitglieder) unsubscribeMitglieder();
+
+            // Rule 1 Compliance: Path /artifacts/{appId}/public/data/mitarbeiter
+            const mitarbeiterCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
+
+            unsubscribeMitglieder = onSnapshot(mitarbeiterCol, (snapshot) => {
+                const members = [];
+                snapshot.forEach((doc) => {
+                    members.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // JavaScript-side sort alphabetically
+                members.sort((a, b) => (a.username || '').localeCompare(b.username || ''));
+                
+                globalAllMitglieder = members;
+                renderMitgliederUI(members);
+            }, (error) => {
+                console.error("Firestore error watching members database:", error);
+            });
+        }
+
+        function renderMitgliederUI(members) {
+            const tableBody = document.getElementById("mitglieder-table-body");
+            const counter = document.getElementById("mitglieder-counter");
+            
+            if (counter) counter.innerText = `${members.length} Mitglied${members.length !== 1 ? 'er' : ''}`;
+            if (!tableBody) return;
+
+            tableBody.innerHTML = "";
+            members.forEach((member) => {
+                // Prevent self-modification lockout
+                const isSelf = loggedInUser && loggedInUser.uid === member.id;
+                
+                const levelSelectHTML = `
+                    <select onchange="updateMemberLevel('${member.id}', this.value)" ${isSelf ? 'disabled' : ''} class="bg-white border border-slate-200 rounded-lg text-xs p-1.5 font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-swBlue-500">
+                        <option value="1" ${member.level === 1 ? 'selected' : ''}>1 - Praktikant</option>
+                        <option value="2" ${member.level === 2 ? 'selected' : ''}>2 - Mitarbeiter</option>
+                        <option value="3" ${member.level === 3 ? 'selected' : ''}>3 - Leitung</option>
+                    </select>
+                `;
+
+                const statusSelectHTML = `
+                    <select onchange="updateMemberStatus('${member.id}', this.value)" ${isSelf ? 'disabled' : ''} class="bg-white border border-slate-200 rounded-lg text-xs p-1.5 font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-swBlue-500">
+                        <option value="Aktiv" ${member.status === 'Aktiv' ? 'selected' : ''}>Aktiv</option>
+                        <option value="Gesperrt" ${member.status === 'Gesperrt' ? 'selected' : ''}>Gesperrt</option>
+                    </select>
+                `;
+
+                const rowHTML = `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-slate-900">${member.username} ${isSelf ? '<span class="ml-1 text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-extrabold uppercase">Du</span>' : ''}</td>
+                        <td class="px-6 py-4 font-medium text-slate-500">${member.createdAt || 'Unbekannt'}</td>
+                        <td class="px-6 py-4">${levelSelectHTML}</td>
+                        <td class="px-6 py-4">${statusSelectHTML}</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center space-x-2">
+                                <button onclick="openChangePasswordModal('${member.id}', '${member.username}')" class="bg-slate-100 hover:bg-swBlue-50 hover:text-swBlue-800 text-slate-600 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs font-bold transition flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-key text-[10px]"></i>
+                                    <span>Passwort</span>
+                                </button>
+                                <button onclick="deleteMemberAccount('${member.id}', '${member.username}')" ${isSelf ? 'disabled class="opacity-30 cursor-not-allowed bg-rose-50 border border-rose-100 text-rose-600 rounded-lg px-2.5 py-1.5 text-xs font-bold flex items-center space-x-1.5"' : 'class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-lg px-2.5 py-1.5 text-xs font-bold transition flex items-center space-x-1.5"'} >
+                                    <i class="fa-solid fa-trash-can text-[10px]"></i>
+                                    <span>Löschen</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += rowHTML;
+            });
+        }
+
+        function filterMemberList() {
+            const queryVal = document.getElementById("memberSearchInput").value.toLowerCase().trim();
+            if (!queryVal) {
+                renderMitgliederUI(globalAllMitglieder);
+                return;
+            }
+            const filtered = globalAllMitglieder.filter(m => m.username.toLowerCase().includes(queryVal));
+            renderMitgliederUI(filtered);
+        }
+
+        async function updateMemberLevel(targetUid, newLevel) {
+            try {
+                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                await updateDoc(userRef, { level: parseInt(newLevel) });
+                showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success");
+            } catch (err) {
+                console.error("Error changing clearance level:", err);
+            }
+        }
+
+        async function updateMemberStatus(targetUid, newStatus) {
+            try {
+                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                await updateDoc(userRef, { status: newStatus });
+                showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success");
+            } catch (err) {
+                console.error("Error setting status:", err);
+            }
+        }
+
+        function openChangePasswordModal(targetUid, memberName) {
+            document.getElementById("pwModalUid").value = targetUid;
+            document.getElementById("pwModalUsername").innerText = memberName;
+            document.getElementById("adminNewPassword").value = "";
+            
+            const modal = document.getElementById("changePasswordModal");
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.querySelector("div").classList.remove("scale-95");
+            modal.querySelector("div").classList.add("scale-100");
+        }
+
+        function closeChangePasswordModal() {
+            const modal = document.getElementById("changePasswordModal");
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modal.querySelector("div").classList.remove("scale-100");
+            modal.querySelector("div").classList.add("scale-95");
+        }
+
+        async function submitAdminPasswordChange() {
+            const targetUid = document.getElementById("pwModalUid").value;
+            const newPassword = document.getElementById("adminNewPassword").value.trim();
+            const memberName = document.getElementById("pwModalUsername").innerText;
+
+            if (newPassword.length < 6) {
+                showNotification("Achtung!", "Das Passwort muss mindestens 6 Zeichen besitzen.", "error");
+                return;
+            }
+
+            try {
+                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                await updateDoc(userRef, { password: newPassword });
+                closeChangePasswordModal();
+                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success");
+            } catch (err) {
+                console.error("Error resetting member password:", err);
+            }
+        }
+
+        function deleteMemberAccount(targetUid, username) {
+            showConfirmNotification("Konto löschen?", `Möchten Sie das Mitarbeiter-Konto von ${username} wirklich unwiderruflich löschen?`, async () => {
+                try {
+                    const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                    await deleteDoc(userRef);
+                    showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success");
+                } catch (err) {
+                    console.error(err);
                 }
             });
         }
@@ -928,13 +1284,13 @@
                 description: orderDesc,
                 date: currentDateStr,
                 time: currentTimeStr,
-                status: "Offen",
-                createdAt: serverTimestamp()
+                status: "Offen"
             };
 
-            // 1. Save to Cloud Firestore (with local fallback logic)
+            // 1. Save to Cloud Firestore (Rule 1 Compliance)
             try {
-                await addDoc(collection(db, "meldungen"), newOrderPayload);
+                const meldungenCol = collection(db, 'artifacts', appId, 'public', 'data', 'meldungen');
+                await addDoc(meldungenCol, newOrderPayload);
             } catch (err) {
                 console.warn("Firestore write blocked. Saving locally: ", err);
                 const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
@@ -1325,7 +1681,7 @@
                 signContainer.className = "font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200";
             } else {
                 signContainer.innerText = "Unterschrift...";
-                signContainer.className = "font-sans text-sm text-slate-400 italic";
+                signContainer.className = "font-sans text-sm text-slate-400 italic font-semibold";
             }
         }
 
@@ -1384,7 +1740,6 @@
         window.addEventListener("DOMContentLoaded", () => {
             const musicActive = localStorage.getItem("swhh_music_active");
             if (musicActive === "true") {
-                // Try automatic replay, fallback if blocked by sandbox
                 document.body.addEventListener('click', function initAudio() {
                     toggleMusic();
                     document.body.removeEventListener('click', initAudio);
@@ -1447,7 +1802,7 @@
             window.activeConfirmAction = onConfirm;
 
             actionsEl.innerHTML = `
-                <button onclick="window.activeConfirmAction(); closeNotification();" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 px-4 rounded-xl transition text-sm">Löschen</button>
+                <button onclick="window.activeConfirmAction(); closeNotification();" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 px-4 rounded-xl transition text-sm">Bestätigen</button>
                 <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition text-sm">Abbrechen</button>
             `;
 
@@ -1507,6 +1862,15 @@
         window.downloadGeneratedPDF = downloadGeneratedPDF;
         window.downloadGeneratedOrderPDF = downloadGeneratedOrderPDF;
         window.closeNotification = closeNotification;
+        
+        // Members Management UI Triggers
+        window.updateMemberLevel = updateMemberLevel;
+        window.updateMemberStatus = updateMemberStatus;
+        window.openChangePasswordModal = openChangePasswordModal;
+        window.closeChangePasswordModal = closeChangePasswordModal;
+        window.submitAdminPasswordChange = submitAdminPasswordChange;
+        window.deleteMemberAccount = deleteMemberAccount;
+        window.filterMemberList = filterMemberList;
     </script>
 </body>
 </html>
