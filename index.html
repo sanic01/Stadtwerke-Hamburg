@@ -870,7 +870,11 @@
                 validateAndEstablishEmployeeSession(newUid);
             } catch (err) {
                 console.error("Registration Error: ", err);
-                showNotification("Fehler", "Datenbankfehler bei der Erstellung des Profils.", "error");
+                let msg = "Datenbankfehler bei der Erstellung des Profils.";
+                if (err.code === "permission-denied") {
+                    msg = "Datenbank-Zugriff verweigert! Bitte stelle deine Firestore-Sicherheitsregeln auf 'allow read, write: if true;' ein und aktiviere 'Anonyme Anmeldung' in Firebase.";
+                }
+                showNotification("Datenbank-Fehler", msg, "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Konto registrieren";
@@ -925,7 +929,11 @@
                 validateAndEstablishEmployeeSession(targetUser.uid);
             } catch (err) {
                 console.error(err);
-                showNotification("Fehler", "Fehler beim Abruf der Profildaten.", "error");
+                let msg = "Fehler beim Abruf der Profildaten.";
+                if (err.code === "permission-denied") {
+                    msg = "Datenbank-Zugriff verweigert! Bitte stelle deine Firestore-Sicherheitsregeln auf 'allow read, write: if true;' ein und aktiviere 'Anonyme Anmeldung' in Firebase.";
+                }
+                showNotification("Datenbank-Fehler", msg, "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Anmelden";
