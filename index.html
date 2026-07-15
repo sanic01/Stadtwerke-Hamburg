@@ -61,9 +61,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-full font-sans antialiased flex flex-col justify-between">
 
-    <!-- AUDIO PLAYER ELEMENT (BACKGROUND MUSIC) -->
-    <audio id="bg-music" loop src="background.mp3" preload="auto"></audio>
-
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -88,38 +85,35 @@
                     </button>
                     
                     <!-- Protected Employee Dropdown (Visible only when logged in) -->
-                    <div id="nav-mitarbeiter-dropdown" class="relative group hidden">
-                        <button class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
+                    <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
+                        <button class="text-slate-600 hover:text-swBlue-800 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
                             <i class="fa-solid fa-briefcase mr-2"></i>Mitarbeiter <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
                         </button>
-                        <!-- Hover Dropdown Menu -->
-                        <div class="absolute left-0 mt-1 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 hidden group-hover:block z-50 transition-all duration-300">
-                            <!-- Stufe 1, 2, 3 -->
-                            <button onclick="switchPage('arbeitsvertrag')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
-                                <i class="fa-solid fa-file-signature text-slate-400"></i>
-                                <span>Arbeitsvertrag</span>
-                            </button>
-                            <!-- Stufe 2, 3 -->
-                            <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
-                                <i class="fa-solid fa-list-check text-slate-400"></i>
-                                <span>Meldungen verwalten</span>
-                            </button>
-                            <!-- Stufe 3 -->
-                            <button id="menu-btn-mitglieder" onclick="switchPage('mitglieder')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
-                                <i class="fa-solid fa-users-gear text-slate-400"></i>
-                                <span>Mitglieder verwalten</span>
-                            </button>
+                        <!-- Hover Dropdown Menu Wrapper with seamless padding bridge -->
+                        <div class="absolute left-0 top-full w-56 pt-2 hidden group-hover:block z-50">
+                            <div class="bg-white border border-slate-200 rounded-2xl shadow-xl py-2 transition-all duration-300">
+                                <!-- Stufe 1, 2, 3 -->
+                                <button onclick="switchPage('arbeitsvertrag')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
+                                    <i class="fa-solid fa-file-signature text-slate-400"></i>
+                                    <span>Arbeitsvertrag</span>
+                                </button>
+                                <!-- Stufe 2, 3 -->
+                                <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
+                                    <i class="fa-solid fa-list-check text-slate-400"></i>
+                                    <span>Meldungen verwalten</span>
+                                </button>
+                                <!-- Stufe 3 -->
+                                <button id="menu-btn-mitglieder" onclick="switchPage('mitglieder')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
+                                    <i class="fa-solid fa-users-gear text-slate-400"></i>
+                                    <span>Mitglieder verwalten</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </nav>
                 
                 <!-- Interactive Controls & Auth Section -->
                 <div class="flex items-center space-x-3">
-                    <!-- Music Controls -->
-                    <button id="music-toggle-btn" onclick="toggleMusic()" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 hover:text-swBlue-800 hover:bg-slate-200 transition flex items-center justify-center shadow-inner" title="Hintergrundmusik">
-                        <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
-                    </button>
-
                     <!-- Login Button -->
                     <button id="login-trigger-btn" onclick="openLoginModal()" class="bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-2 px-4 rounded-xl text-xs sm:text-sm transition-all duration-200 flex items-center space-x-2 shadow-md">
                         <i class="fa-solid fa-user-tie"></i>
@@ -852,17 +846,27 @@
                 const newUid = crypto.randomUUID();
                 const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', newUid);
                 
+                // AUTOMATISCHE BEFÖRDERUNG: Falls du dich als "Manic Moon" oder "Manic_Moon" registrierst, erhältst du direkt Stufe 3!
+                let initialLevel = 1;
+                const normalizedName = username.toLowerCase().replace('_', ' ').trim();
+                if (normalizedName === "manic moon") {
+                    initialLevel = 3;
+                }
+
                 await setDoc(userProfileRef, {
                     uid: newUid,
                     username: username,
                     password: password,
-                    level: 1, // Standardly Auto-Assigned to Level 1
+                    level: initialLevel,
                     status: "Aktiv",
                     createdAt: new Date().toLocaleDateString('de-DE')
                 });
 
                 closeLoginModal();
-                showNotification("Willkommen!", `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 1 zugewiesen.`, "success");
+                const successMsg = initialLevel === 3 
+                    ? `Konto für ${username} wurde erfolgreich erstellt. Leitungs-Freigabestufe 3 wurde automatisch zugewiesen!` 
+                    : `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 1 zugewiesen.`;
+                showNotification("Willkommen!", successMsg, "success");
                 validateAndEstablishEmployeeSession(newUid);
             } catch (err) {
                 console.error("Registration Error: ", err);
@@ -902,6 +906,18 @@
                 if (targetUser.status === "Gesperrt") {
                     showNotification("Anmeldung gesperrt", "Dieses Mitarbeiterkonto wurde von der Leitung gesperrt.", "error");
                     return;
+                }
+
+                // AUTOMATISCHE BEFÖRDERUNG BEIM LOGIN: Falls "Manic Moon" existiert aber noch nicht Stufe 3 hat, jetzt upgraden!
+                const normalizedName = targetUser.username.toLowerCase().replace('_', ' ').trim();
+                if (normalizedName === "manic moon" && parseInt(targetUser.level) !== 3) {
+                    targetUser.level = 3;
+                    try {
+                        const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUser.uid);
+                        await updateDoc(userProfileRef, { level: 3 });
+                    } catch (errUpdate) {
+                        console.warn("Konnte Stufe nicht sofort in Cloud updaten, wird lokal gesetzt:", errUpdate);
+                    }
                 }
 
                 closeLoginModal();
@@ -1713,40 +1729,6 @@
             }
         }
 
-        function toggleMusic() {
-            const audio = document.getElementById("bg-music");
-            const icon = document.getElementById("music-icon");
-            const btn = document.getElementById("music-toggle-btn");
-
-            if (audio.paused) {
-                audio.play()
-                .then(() => {
-                    icon.className = "fa-solid fa-volume-high text-swBlue-500 animate-pulse";
-                    btn.classList.add("bg-sky-50", "border-swBlue-200");
-                    localStorage.setItem("swhh_music_active", "true");
-                })
-                .catch(err => {
-                    console.log("Autoplay blocked: ", err);
-                });
-            } else {
-                audio.pause();
-                icon.className = "fa-solid fa-volume-xmark text-slate-500";
-                btn.classList.remove("bg-sky-50", "border-swBlue-200");
-                localStorage.setItem("swhh_music_active", "false");
-            }
-        }
-
-        // Initialize audio preference on load
-        window.addEventListener("DOMContentLoaded", () => {
-            const musicActive = localStorage.getItem("swhh_music_active");
-            if (musicActive === "true") {
-                document.body.addEventListener('click', function initAudio() {
-                    toggleMusic();
-                    document.body.removeEventListener('click', initAudio);
-                }, { once: true });
-            }
-        });
-
         // NOTIFICATIONS SYSTEM
         function showNotification(title, text, type = 'success', downloadAction = null) {
             const overlay = document.getElementById('customNotification');
@@ -1852,7 +1834,6 @@
         window.handleRegisterSubmit = handleRegisterSubmit;
         window.handleLoginSubmit = handleLoginSubmit;
         window.handleLogout = handleLogout;
-        window.toggleMusic = toggleMusic;
         window.updateLiveSignature = updateLiveSignature;
         window.handleFormSubmission = handleFormSubmission;
         window.handleOrderSubmission = handleOrderSubmission;
