@@ -345,155 +345,205 @@
                             </div>
                         </div>
 
-                        <!-- Universal Calendar Grid (4 Weeks) -->
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-base font-bold text-slate-900 flex items-center"><i class="fa-solid fa-truck-ramp-box text-swOrange-500 mr-2"></i> Abfuhrtermine der Kalenderwochen</h3>
-                                <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Bitte Abfalltonnen am Vorabend bereitstellen</span>
+                        <!-- Universal Calendar Grid Layout with Sidebar -->
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                            <!-- Left Side: Abfuhrtermine Calendar -->
+                            <div class="lg:col-span-3 space-y-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-base font-bold text-slate-900 flex items-center"><i class="fa-solid fa-truck-ramp-box text-swOrange-500 mr-2"></i> Abfuhrtermine der Kalenderwochen</h3>
+                                    <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider hidden sm:inline">Bitte Abfalltonnen am Vorabend bereitstellen</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Week 1 -->
+                                    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                        <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                            <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 1</span>
+                                            <i class="fa-solid fa-1 text-slate-400 font-bold text-xs"></i>
+                                        </div>
+                                        <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Montag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Dienstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-semibold text-slate-400">Mittwoch</span>
+                                                <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Donnerstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Freitag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                            <button onclick="simulateReminder('Woche 1')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                                <i class="fa-solid fa-bell"></i>
+                                                <span>Erinnerung einrichten</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Week 2 -->
+                                    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                        <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                            <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 2</span>
+                                            <i class="fa-solid fa-2 text-slate-400 font-bold text-xs"></i>
+                                        </div>
+                                        <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Montag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-semibold text-slate-400">Dienstag</span>
+                                                <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Mittwoch</span>
+                                                <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Donnerstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Freitag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                            <button onclick="simulateReminder('Woche 2')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                                <i class="fa-solid fa-bell"></i>
+                                                <span>Erinnerung einrichten</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Week 3 -->
+                                    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                        <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                            <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 3</span>
+                                            <i class="fa-solid fa-3 text-slate-400 font-bold text-xs"></i>
+                                        </div>
+                                        <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-semibold text-slate-400">Montag</span>
+                                                <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Dienstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Mittwoch</span>
+                                                <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Donnerstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Freitag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                            <button onclick="simulateReminder('Woche 3')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                                <i class="fa-solid fa-bell"></i>
+                                                <span>Erinnerung einrichten</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Week 4 -->
+                                    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                        <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                            <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 4</span>
+                                            <i class="fa-solid fa-4 text-slate-400 font-bold text-xs"></i>
+                                        </div>
+                                        <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Montag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Dienstag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Mittwoch</span>
+                                                <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-semibold text-slate-400">Donnerstag</span>
+                                                <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-1">
+                                                <span class="font-bold text-slate-500">Freitag</span>
+                                                <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                            <button onclick="simulateReminder('Woche 4')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                                <i class="fa-solid fa-bell"></i>
+                                                <span>Erinnerung einrichten</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                <!-- Week 1 -->
-                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
-                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 1</span>
-                                        <i class="fa-solid fa-1 text-slate-400 font-bold text-xs"></i>
+                            <!-- Right Side: Sondermüll & Sperrmüll Sidebar (Hinweisfenster) -->
+                            <div class="lg:col-span-1 space-y-6">
+                                <div class="bg-gradient-to-br from-slate-900 to-swBlue-900 border border-slate-800 rounded-3xl p-5 text-white shadow-lg space-y-4 relative overflow-hidden">
+                                    <div class="absolute -right-8 -bottom-8 w-24 h-24 bg-swOrange-500/10 rounded-full blur-xl"></div>
+                                    <div class="flex items-center space-x-2.5 pb-2 border-b border-white/10">
+                                        <div class="w-9 h-9 rounded-xl bg-swOrange-500 text-white flex items-center justify-center shadow">
+                                            <i class="fa-solid fa-triangle-exclamation text-sm"></i>
+                                        </div>
+                                        <h4 class="font-extrabold text-sm tracking-tight leading-snug">Sonderabfall & Sperrmüll</h4>
                                     </div>
-                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Montag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Dienstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-semibold text-slate-400">Mittwoch</span>
-                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Donnerstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Freitag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
-                                        </div>
+                                    
+                                    <div class="text-xs space-y-3 leading-relaxed text-slate-300">
+                                        <p class="font-semibold text-white">Anmeldepflichtig!</p>
+                                        <p>
+                                            Sperrmüll, gefährlicher Sondermüll und Elektroschrott dürfen keinesfalls über den normalen Hausmüll entsorgt oder unangemeldet am Straßenrand abgestellt werden.
+                                        </p>
+                                        <p class="bg-white/5 border border-white/10 p-3 rounded-xl text-slate-300 text-[11px] leading-normal flex flex-col gap-1">
+                                            <span class="font-bold text-swOrange-500 flex items-center gap-1">
+                                                <i class="fa-solid fa-arrow-right text-[9px]"></i> Online-Anmeldung:
+                                            </span>
+                                            Nutzen Sie bitte vorab unser Online-Formular unter 
+                                            <button onclick="switchPage('auftrag')" class="text-swOrange-500 hover:underline font-bold text-left focus:outline-none">
+                                                "Auftrag einreichen"
+                                            </button>
+                                            für eine reibungslose Koordination der Abholung.
+                                        </p>
                                     </div>
-                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                                        <button onclick="simulateReminder('Woche 1')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
-                                            <i class="fa-solid fa-bell"></i>
-                                            <span>Erinnerung einrichten</span>
-                                        </button>
-                                    </div>
-                                </div>
 
-                                <!-- Week 2 -->
-                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
-                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 2</span>
-                                        <i class="fa-solid fa-2 text-slate-400 font-bold text-xs"></i>
-                                    </div>
-                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Montag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                    <div class="border-t border-white/10 pt-4 space-y-2.5">
+                                        <h5 class="font-bold text-xs text-swOrange-500 tracking-wide uppercase flex items-center gap-1.5">
+                                            <i class="fa-solid fa-scale-balanced text-[11px]"></i> Gesetzliche Belehrung
+                                        </h5>
+                                        <div class="text-[10px] text-slate-400 space-y-2 leading-relaxed">
+                                            <p>
+                                                Gemäß <strong>§ 28 Kreislaufwirtschaftsgesetz (KrWG)</strong> sind Abfallbesitzer verpflichtet, Abfälle den öffentlich-rechtlichen Trägern kontrolliert zu überlassen.
+                                            </p>
+                                            <p>
+                                                Das illegale Abstellen von Müll ("Wilder Müll") stellt eine schwere Ordnungswidrigkeit dar. Gemäß dem geltenden Bußgeldkatalog Umweltschutz können Bußgelder bis zu <strong>100.000 €</strong> verhängt werden.
+                                            </p>
+                                            <p>
+                                                Nach dem <strong>ElektroG</strong> müssen Altgeräte zwingend getrennt vom Hausmüll erfasst werden.
+                                            </p>
                                         </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-semibold text-slate-400">Dienstag</span>
-                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Mittwoch</span>
-                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Donnerstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Freitag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                                        <button onclick="simulateReminder('Woche 2')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
-                                            <i class="fa-solid fa-bell"></i>
-                                            <span>Erinnerung einrichten</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Week 3 -->
-                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
-                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 3</span>
-                                        <i class="fa-solid fa-3 text-slate-400 font-bold text-xs"></i>
-                                    </div>
-                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-semibold text-slate-400">Montag</span>
-                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Dienstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Mittwoch</span>
-                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Donnerstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Freitag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                                        <button onclick="simulateReminder('Woche 3')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
-                                            <i class="fa-solid fa-bell"></i>
-                                            <span>Erinnerung einrichten</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Week 4 -->
-                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
-                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 4</span>
-                                        <i class="fa-solid fa-4 text-slate-400 font-bold text-xs"></i>
-                                    </div>
-                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Montag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Dienstag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Mittwoch</span>
-                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-semibold text-slate-400">Donnerstag</span>
-                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
-                                        </div>
-                                        <div class="flex justify-between items-center py-1">
-                                            <span class="font-bold text-slate-500">Freitag</span>
-                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                                        <button onclick="simulateReminder('Woche 4')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
-                                            <i class="fa-solid fa-bell"></i>
-                                            <span>Erinnerung einrichten</span>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -719,8 +769,8 @@
                         <form id="signatureForm" class="space-y-6" onsubmit="event.preventDefault();">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Name des Mitarbeiters</label>
-                                    <input type="text" id="signatureInput" class="w-full pl-4 pr-4 py-3 border border-slate-200 rounded-xl bg-slate-100 text-slate-500 text-sm focus:outline-none cursor-not-allowed font-semibold" readonly>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Name des Mitarbeiters <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="signatureInput" oninput="updateLiveSignature()" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 text-sm transition" placeholder="z. B. Max Mustermann" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-900 mb-2">Geburtsdatum <span class="text-rose-500">*</span></label>
