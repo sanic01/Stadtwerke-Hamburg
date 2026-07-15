@@ -85,27 +85,83 @@
                     </button>
                     
                     <!-- Protected Employee Dropdown (Visible only when logged in with level >= 1) -->
-                <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
-                    <button class="text-slate-600 hover:text-swBlue-800 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
-                        <i class="fa-solid fa-briefcase mr-2"></i>Mitarbeiter <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
+                    <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
+                        <button class="text-slate-600 hover:text-swBlue-800 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
+                            <i class="fa-solid fa-briefcase mr-2"></i>Mitarbeiter <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
+                        </button>
+                        <!-- Hover Dropdown Menu Wrapper with seamless padding bridge -->
+                        <div class="absolute left-0 top-full w-56 pt-2 hidden group-hover:block z-50">
+                            <div class="bg-white border border-slate-200 rounded-2xl shadow-xl py-2 transition-all duration-300">
+                                <!-- Stufe 1, 2, 3 -->
+                                <button onclick="switchPage('arbeitsvertrag')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
+                                    <i class="fa-solid fa-file-signature text-slate-400"></i>
+                                    <span>Arbeitsvertrag</span>
+                                </button>
+                                <!-- Stufe 2, 3 -->
+                                <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
+                                    <i class="fa-solid fa-list-check text-slate-400"></i>
+                                    <span>Meldungen verwalten</span>
+                                </button>
+                                <!-- Stufe 3 -->
+                                <button id="menu-btn-mitglieder" onclick="switchPage('mitglieder')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
+                                    <i class="fa-solid fa-users-gear text-slate-400"></i>
+                                    <span>Mitglieder verwalten</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- Interactive Controls & Auth Section -->
+                <div class="flex items-center space-x-3">
+                    <!-- Login Button -->
+                    <button id="login-trigger-btn" onclick="openLoginModal()" class="bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-2 px-4 rounded-xl text-xs sm:text-sm transition-all duration-200 flex items-center space-x-2 shadow-md">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>Mitarbeiter Login</span>
                     </button>
-                    <!-- Hover Dropdown Menu Wrapper with seamless padding bridge -->
-                    <div class="absolute left-0 top-full w-56 pt-2 hidden group-hover:block z-50">
-                        <div class="bg-white border border-slate-200 rounded-2xl shadow-xl py-2 transition-all duration-300">
-                            <!-- Stufe 1, 2, 3 -->
-                            <button onclick="switchPage('arbeitsvertrag')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
-                                <i class="fa-solid fa-file-signature text-slate-400"></i>
-                                <span>Arbeitsvertrag</span>
+
+                    <!-- Logged in Status Badge -->
+                    <div id="user-profile-badge" class="hidden bg-slate-100 border border-slate-200 pl-3 pr-2 py-1.5 rounded-xl flex items-center space-x-2 text-xs">
+                        <i class="fa-solid fa-circle-user text-swBlue-800 text-sm"></i>
+                        <div class="flex flex-col">
+                            <span id="header-username" class="font-bold text-slate-800 leading-tight">Mitarbeiter</span>
+                            <span id="header-userlevel" class="text-[9px] text-slate-400 font-semibold uppercase leading-none">Stufe 0</span>
+                        </div>
+                        <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center" title="Abmelden">
+                            <i class="fa-solid fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-8 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- VIEW 1: STARTSEITE -->
+            <div id="view-startseite" class="space-y-12">
+                <!-- Welcome Hero Banner -->
+                <div class="relative overflow-hidden bg-gradient-to-r from-swBlue-900 via-swBlue-800 to-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl text-white">
+                    <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-swBlue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -left-16 -top-16 w-96 h-96 bg-swOrange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="relative z-10 max-w-3xl">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
+                            <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Bürger- & Karriereportal
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                            Wir halten Hamburg <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">am Laufen!</span>
+                        </h1>
+                        <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+                            Willkommen auf dem offiziellen Portal der Stadtwerke Hamburg. Nutzen Sie unsere digitalen Bürgerservices, um Störungen, Entsorgungen oder Straßenschäden einzureichen. Mitarbeiter können sich oben anmelden, um interne Arbeitsverträge zu verwalten.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="switchPage('auftrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
+                                Dienstleistung anfordern <i class="fa-solid fa-file-invoice ml-2"></i>
                             </button>
-                            <!-- Stufe 1, 2, 3 (Jetzt für Praktikanten freigegeben) -->
-                            <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
-                                <i class="fa-solid fa-list-check text-slate-400"></i>
-                                <span>Meldungen verwalten</span>
-                            </button>
-                            <!-- Stufe 3 -->
-                            <button id="menu-btn-mitglieder" onclick="switchPage('mitglieder')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
-                                <i class="fa-solid fa-users-gear text-slate-400"></i>
-                                <span>Mitglieder verwalten</span>
+                            <button onclick="openLoginModal()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
+                                Zum Mitarbeiterportal <i class="fa-solid fa-user-lock ml-2"></i>
                             </button>
                         </div>
                     </div>
@@ -461,7 +517,7 @@
                                 <i class="fa-solid fa-folder-open"></i>
                                 <span>Eingegangene Bürgermeldungen</span>
                             </h2>
-                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge (Stufe 1, 2 & 3)</p>
+                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge (Stufe 2 & 3)</p>
                         </div>
                         <span id="meldungen-counter" class="bg-swOrange-500 text-white px-3 py-1 rounded-full text-xs font-bold">Lade...</span>
                     </div>
@@ -706,8 +762,8 @@
                 switchPage("startseite");
                 return;
             }
-            if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 1)) {
-                showNotification("Zugriff verweigert", "Meldungen können erst ab Freigabestufe 1 (Praktikant) eingesehen werden.", "error");
+            if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 2)) {
+                showNotification("Zugriff verweigert", "Meldungen können erst ab Freigabestufe 2 (Mitarbeiter) eingesehen werden.", "error");
                 switchPage("startseite");
                 return;
             }
@@ -967,8 +1023,8 @@
                     if (employeeDropdown) employeeDropdown.classList.add("hidden");
                 }
                 
-                // Segment inside-dropdown visibility based on clearance levels (Meldungen ab Stufe 1 freigeschaltet)
-                if (loggedInUser.level >= 1) {
+                // Segment inside-dropdown visibility based on clearance levels
+                if (loggedInUser.level >= 2) {
                     if (meldungenMenuBtn) meldungenMenuBtn.classList.remove("hidden");
                 } else {
                     if (meldungenMenuBtn) meldungenMenuBtn.classList.add("hidden");
@@ -1006,8 +1062,8 @@
 
             if (!loggedInUser) return;
 
-            // Level 1, 2 & 3: Watch Bürgermeldungen Realtime Stream
-            if (loggedInUser.level >= 1) {
+            // Level 2 & 3: Watch Bürgermeldungen Realtime Stream
+            if (loggedInUser.level >= 2) {
                 unsubMeldungen = onSnapshot(collection(db, "meldungen"), (snapshot) => {
                     const meldungen = [];
                     snapshot.forEach(doc => {
