@@ -83,6 +83,9 @@
                     <button id="nav-order" onclick="switchPage('auftrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
                         <i class="fa-solid fa-file-invoice mr-2"></i>Auftrag einreichen
                     </button>
+                    <button id="nav-muell" onclick="switchPage('muell')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-calendar-days mr-2"></i>Müll Plan
+                    </button>
                     
                     <!-- Protected Employee Dropdown (Visible only when logged in with level >= 1) -->
                     <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
@@ -97,7 +100,7 @@
                                     <i class="fa-solid fa-file-signature text-slate-400"></i>
                                     <span>Arbeitsvertrag</span>
                                 </button>
-                                <!-- Stufe 2, 3 -->
+                                <!-- Stufe 1, 2, 3 -->
                                 <button id="menu-btn-meldungen" onclick="switchPage('meldungen')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2 hidden">
                                     <i class="fa-solid fa-list-check text-slate-400"></i>
                                     <span>Meldungen verwalten</span>
@@ -160,8 +163,8 @@
                             <button onclick="switchPage('auftrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
                                 Dienstleistung anfordern <i class="fa-solid fa-file-invoice ml-2"></i>
                             </button>
-                            <button onclick="openLoginModal()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
-                                Zum Mitarbeiterportal <i class="fa-solid fa-user-lock ml-2"></i>
+                            <button onclick="switchPage('muell')" class="bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all duration-200 hover:-translate-y-0.5">
+                                Müllabfuhr-Plan ansehen <i class="fa-solid fa-calendar-days ml-2"></i>
                             </button>
                         </div>
                     </div>
@@ -262,7 +265,230 @@
                 </div>
             </div>
 
-            <!-- VIEW 3: ARBEITSVERTRAG -->
+            <!-- VIEW 3: MÜLL PLAN (UNIVERSAL MONTHLY CALENDAR) -->
+            <div id="view-muell" class="hidden max-w-6xl mx-auto space-y-8">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-extrabold flex items-center space-x-2">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <span>Bürger-Abfallkalender</span>
+                                </h2>
+                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg – Abfallwirtschaft & Entsorgungsnetzwerk</p>
+                            </div>
+                            <div class="bg-swOrange-500 border border-swOrange-600 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">Universeller Monatsplan</div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 space-y-8">
+                        <!-- Legend of Trash Bins -->
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center"><i class="fa-solid fa-circle-info text-swBlue-800 mr-2"></i> Übersicht unserer Entsorgungssysteme</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-4 flex items-start space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-amber-400 border border-amber-500 shadow flex items-center justify-center text-white font-bold shrink-0">🟡</span>
+                                    <div>
+                                        <h4 class="font-bold text-amber-800 text-xs sm:text-sm">Gelbe Tonne</h4>
+                                        <p class="text-[11px] text-slate-500 leading-normal mt-1">Verpackungen aus Plastik, Metall & Verbundstoffen.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50/50 border border-blue-200 rounded-2xl p-4 flex items-start space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-blue-500 border border-blue-600 shadow flex items-center justify-center text-white font-bold shrink-0">🔵</span>
+                                    <div>
+                                        <h4 class="font-bold text-blue-800 text-xs sm:text-sm">Blaue Tonne</h4>
+                                        <p class="text-[11px] text-slate-500 leading-normal mt-1">Papier, Pappe, Kartonagen & Zeitungen.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-orange-50/50 border border-orange-200 rounded-2xl p-4 flex items-start space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-orange-700 border border-orange-800 shadow flex items-center justify-center text-white font-bold shrink-0">🟤</span>
+                                    <div>
+                                        <h4 class="font-bold text-orange-900 text-xs sm:text-sm">Braune Tonne</h4>
+                                        <p class="text-[11px] text-slate-500 leading-normal mt-1">Bioabfälle, Speisereste & Grünschnitt.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-100 border border-slate-300 rounded-2xl p-4 flex items-start space-x-3">
+                                    <span class="w-8 h-8 rounded-full bg-slate-800 border border-slate-900 shadow flex items-center justify-center text-white font-bold shrink-0">⚫</span>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-xs sm:text-sm">Schwarze Tonne</h4>
+                                        <p class="text-[11px] text-slate-500 leading-normal mt-1">Nicht verwertbarer Restmüll & Hygieneartikel.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Universal Calendar Grid (4 Weeks) -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-base font-bold text-slate-900 flex items-center"><i class="fa-solid fa-truck-ramp-box text-swOrange-500 mr-2"></i> Abfuhrtermine der Kalenderwochen</h3>
+                                <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Bitte Abfalltonnen am Vorabend bereitstellen</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <!-- Week 1 -->
+                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 1</span>
+                                        <i class="fa-solid fa-1 text-slate-400 font-bold text-xs"></i>
+                                    </div>
+                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Montag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Dienstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-semibold text-slate-400">Mittwoch</span>
+                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Donnerstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Freitag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                        <button onclick="simulateReminder('Woche 1')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                            <i class="fa-solid fa-bell"></i>
+                                            <span>Erinnerung einrichten</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Week 2 -->
+                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 2</span>
+                                        <i class="fa-solid fa-2 text-slate-400 font-bold text-xs"></i>
+                                    </div>
+                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Montag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-semibold text-slate-400">Dienstag</span>
+                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Mittwoch</span>
+                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Donnerstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Freitag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                        <button onclick="simulateReminder('Woche 2')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                            <i class="fa-solid fa-bell"></i>
+                                            <span>Erinnerung einrichten</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Week 3 -->
+                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 3</span>
+                                        <i class="fa-solid fa-3 text-slate-400 font-bold text-xs"></i>
+                                    </div>
+                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-semibold text-slate-400">Montag</span>
+                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Dienstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Mittwoch</span>
+                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Donnerstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Freitag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                        <button onclick="simulateReminder('Woche 3')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                            <i class="fa-solid fa-bell"></i>
+                                            <span>Erinnerung einrichten</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Week 4 -->
+                                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                                    <div class="bg-slate-100 border-b border-slate-200 px-4 py-3 flex justify-between items-center">
+                                        <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Kalenderwoche 4</span>
+                                        <i class="fa-solid fa-4 text-slate-400 font-bold text-xs"></i>
+                                    </div>
+                                    <div class="divide-y divide-slate-100 p-4 text-xs space-y-3 flex-grow">
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Montag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-slate-200 text-slate-800 border border-slate-300 font-bold text-[10px]">⚫ Restmüll</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Dienstag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-orange-100 text-orange-900 border border-orange-200 font-bold text-[10px]">🟤 Braune Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Mittwoch</span>
+                                            <span class="px-2 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-200 font-bold text-[10px]">🟡 Gelbe Tonne</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-semibold text-slate-400">Donnerstag</span>
+                                            <span class="text-[10px] text-slate-300 italic">Keine Abholung</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1">
+                                            <span class="font-bold text-slate-500">Freitag</span>
+                                            <span class="px-2 py-1 rounded-lg bg-blue-100 text-blue-800 border border-blue-200 font-bold text-[10px]">🔵 Blaue Tonne</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                        <button onclick="simulateReminder('Woche 4')" class="text-[10px] text-swBlue-800 hover:text-swBlue-950 font-bold flex items-center justify-center mx-auto space-x-1">
+                                            <i class="fa-solid fa-bell"></i>
+                                            <span>Erinnerung einrichten</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Banner for Citizens -->
+                        <div class="p-5 bg-blue-50 border border-blue-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 text-swBlue-800 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-hard-hat text-lg"></i>
+                            </div>
+                            <div class="text-xs space-y-1">
+                                <strong class="text-blue-900 font-bold block text-sm">Wichtige Bereitstellungshinweise für Hamburger Haushalte</strong>
+                                <p class="text-slate-600 leading-normal">
+                                    Die Mülltonnen sind am Abfuhrtag bis spätestens <span class="font-bold text-blue-900">06:00 Uhr morgens</span> gut sichtbar am Straßenrand bereitzustellen. Stellen Sie sicher, dass die Deckel der Tonnen vollständig geschlossen sind und der Durchgang auf Fußwegen für Passanten und Kinderwagen frei bleibt.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 4: ARBEITSVERTRAG -->
             <div id="view-arbeitsvertrag" class="hidden max-w-4xl mx-auto">
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
@@ -279,7 +505,7 @@
                     </div>
 
                     <div class="p-4 sm:p-8 space-y-6">
-                        <!-- REALISTIC TWO-PAGE CONTRACT VIEW (BASED ON CONTENT.JPG) -->
+                        <!-- REALISTIC TWO-PAGE CONTRACT VIEW -->
                         <div class="bg-white border border-slate-300 rounded-2xl p-4 sm:p-8 h-[550px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-700 space-y-6 shadow-inner">
                             
                             <!-- Document Header -->
@@ -359,7 +585,7 @@
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 4 SONDERZAHLUNGEN</h5>
-                                    <p class="text-slate-500 text-[11px] leading-relaxed">Urlaubsgeld (50% eines Monatsgehalts im Juni), Weihnachtsgeld (50% eines Monatsgehalts im November) und Leistungsprämien (nach betrieblicher Vereinbarung) werden gemäß der aktuellen Betriebsvereinbarung ausbezahlt.</p>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Urlaubsgeld (50% eines Monatsgehalts im Juni), Weihnachtsgeld (50% eines Monatsgehalts im November) and Leistungsprämien (nach betrieblicher Vereinbarung) werden gemäß der aktuellen Betriebsvereinbarung ausbezahlt.</p>
                                 </div>
 
                                 <div>
@@ -508,7 +734,7 @@
                 </div>
             </div>
 
-            <!-- VIEW 4: MELDUNGEN VERWALTEN -->
+            <!-- VIEW 5: MELDUNGEN VERWALTEN -->
             <div id="view-meldungen" class="hidden max-w-6xl mx-auto">
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-6 text-white flex justify-between items-center">
@@ -517,7 +743,7 @@
                                 <i class="fa-solid fa-folder-open"></i>
                                 <span>Eingegangene Bürgermeldungen</span>
                             </h2>
-                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge (Stufe 2 & 3)</p>
+                            <p class="text-xs text-slate-300 mt-1">Sichtung, Statusänderung & Cloud-Verwaltung aller Aufträge (ab Stufe 1)</p>
                         </div>
                         <span id="meldungen-counter" class="bg-swOrange-500 text-white px-3 py-1 rounded-full text-xs font-bold">Lade...</span>
                     </div>
@@ -543,7 +769,7 @@
                 </div>
             </div>
 
-            <!-- VIEW 5: MITGLIEDER VERWALTEN (Stufe 3) -->
+            <!-- VIEW 6: MITGLIEDER VERWALTEN (Stufe 3) -->
             <div id="view-mitglieder" class="hidden max-w-6xl mx-auto">
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-6 text-white flex justify-between items-center">
@@ -601,7 +827,7 @@
             </button>
 
             <div class="text-center mb-6">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-50 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-5 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
                     <i class="fa-solid fa-user-lock text-xl"></i>
                 </div>
                 <h3 class="text-xl font-extrabold text-slate-900">Mitarbeiter-Portal</h3>
@@ -776,11 +1002,14 @@
             activePage = pageId;
 
             // Update Navigation Menu Visual Classes
-            const navs = ["home", "order"];
+            const navs = ["home", "order", "muell"];
             navs.forEach(nav => {
                 const el = document.getElementById(`nav-${nav}`);
                 if (el) {
-                    if (nav === pageId) {
+                    const isActive = (nav === "home" && pageId === "startseite") ||
+                                     (nav === "order" && pageId === "auftrag") ||
+                                     (nav === "muell" && pageId === "muell");
+                    if (isActive) {
                         el.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
                     } else {
                         el.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
@@ -789,7 +1018,7 @@
             });
 
             // Toggle Page View HTML Blocks
-            const views = ["startseite", "auftrag", "arbeitsvertrag", "meldungen", "mitglieder"];
+            const views = ["startseite", "auftrag", "muell", "arbeitsvertrag", "meldungen", "mitglieder"];
             views.forEach(v => {
                 const block = document.getElementById(`view-${v}`);
                 if (block) {
@@ -1695,6 +1924,16 @@
             }
         }
 
+        // SIMULATE ERROR-FREE SMS MÜLL REMINDER FOR ROLEPLAY
+        function simulateReminder(weekName) {
+            showNotification(
+                "Erinnerung eingerichtet!",
+                `Der kostenfreie SMS-Erinnerungsservice für die Abfuhrtermine der "${weekName}" wurde erfolgreich für dich simuliert und verknüpft!`,
+                "success",
+                "false"
+            );
+        }
+
         // TRIGGER CONTROL AND ANIMATION FUNCTIONS FOR MODALS
         function openLoginModal() {
             const modal = document.getElementById("loginModal");
@@ -1737,15 +1976,20 @@
                 header.className = "w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4";
                 header.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
                 
-                const dlClickEvent = downloadAction ? downloadAction : "downloadGeneratedPDF()";
-
-                actionsEl.innerHTML = `
-                    <button onclick="${dlClickEvent}; closeNotification();" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-semibold py-2.5 px-4 rounded-xl transition text-sm flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Kopie laden</span>
-                    </button>
-                    <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition text-sm">Schließen</button>
-                `;
+                if (downloadAction === "false") {
+                    actionsEl.innerHTML = `
+                        <button onclick="closeNotification()" class="bg-swBlue-800 hover:bg-swBlue-900 text-white font-semibold py-2.5 px-6 rounded-xl transition text-sm">Verstanden</button>
+                    `;
+                } else {
+                    const dlClickEvent = downloadAction ? downloadAction : "downloadGeneratedPDF()";
+                    actionsEl.innerHTML = `
+                        <button onclick="${dlClickEvent}; closeNotification();" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-semibold py-2.5 px-4 rounded-xl transition text-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Kopie laden</span>
+                        </button>
+                        <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-xl transition text-sm">Schließen</button>
+                    `;
+                }
             } else {
                 header.className = "w-16 h-16 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto mb-4";
                 header.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
@@ -1805,6 +2049,7 @@
             }
         }
 
+        // EXPORT FILES TRIGGER PIPELINE
         function downloadGeneratedPDF() {
             if (!window.signedPDFDoc || !window.generatedFileName) {
                 showNotification("Achtung!", "Es liegt noch kein unterschriebener Vertrag vor.", "error");
@@ -1813,6 +2058,7 @@
             safeSavePDF(window.signedPDFDoc, window.generatedFileName);
         }
 
+        // CITIZEN CONFIRMATION PDF TRIGGER PIPELINE
         function downloadGeneratedOrderPDF() {
             if (!window.signedOrderPDFDoc || !window.generatedOrderFileName) {
                 showNotification("Achtung!", "Es liegt noch kein eingereichter Auftrag zum Download vor.", "error");
@@ -1821,6 +2067,7 @@
             safeSavePDF(window.signedOrderPDFDoc, window.generatedOrderFileName);
         }
 
+        // RESET PASSWORDS TRIGGER WINDOW
         function openChangePasswordModal(targetUid, memberName) {
             document.getElementById("pwModalUid").value = targetUid;
             document.getElementById("pwModalUsername").innerText = memberName;
@@ -1879,6 +2126,7 @@
         window.downloadGeneratedPDF = downloadGeneratedPDF;
         window.downloadGeneratedOrderPDF = downloadGeneratedOrderPDF;
         window.closeNotification = closeNotification;
+        window.simulateReminder = simulateReminder;
         
         // Members Management UI Triggers
         window.updateMemberLevel = updateMemberLevel;
