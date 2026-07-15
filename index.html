@@ -125,7 +125,7 @@
                         <i class="fa-solid fa-circle-user text-swBlue-800 text-sm"></i>
                         <div class="flex flex-col">
                             <span id="header-username" class="font-bold text-slate-800 leading-tight">Mitarbeiter</span>
-                            <span id="header-userlevel" class="text-[9px] text-slate-400 font-semibold uppercase leading-none">Stufe 1</span>
+                            <span id="header-userlevel" class="text-[9px] text-slate-400 font-semibold uppercase leading-none">Stufe 0</span>
                         </div>
                         <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center" title="Abmelden">
                             <i class="fa-solid fa-power-off text-xs"></i>
@@ -499,7 +499,7 @@
                                 </div>
                                 <input type="text" id="memberSearchInput" oninput="filterMemberList()" class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800" placeholder="Mitglieder suchen...">
                             </div>
-                            <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Freigabestufen: 1 = Praktikant | 2 = Mitarbeiter | 3 = Leitung</span>
+                            <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Freigabestufen: 0 = Bürger | 1 = Praktikant | 2 = Mitarbeiter | 3 = Leitung</span>
                         </div>
 
                         <!-- Members Table Container -->
@@ -659,118 +659,13 @@
 
     <script type="module">
         // Import Firebase App & Auth & Firestore from official gstatic CDN
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, onSnapshot, query, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyARrJDLOEWX3zDEbfJbxQ7hwEdPz9bvD1Q",
-            authDomain: "fivem-stadtwerke-hamburg.firebaseapp.com",
-            projectId: "fivem-stadtwerke-hamburg",
-            storageBucket: "fivem-stadtwerke-hamburg.firebasestorage.app",
-            messagingSenderId: "732232438556",
-            appId: "1:732232438556:web:b082eedc0ef164d72f60d9",
-            measurementId: "G-X4PPV74THZ"
-        };
-
-        // Initialize Firebase instances
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // GLOBAL APPLICATION STATE
-        let activePage = "startseite";
-        let loggedInUser = null; // Holds the currently authenticated employee credentials profile from Firestore
-        let authMode = "login";
-        
-        let unsubscribeMeldungen = null;
-        let unsubscribeMitglieder = null;
-        let unsubscribeCurrentUserProfile = null;
-        
-        let globalAllMitglieder = []; // Holds all user accounts in memory for filtering
-
-        // Document Storage variables
-        window.signedPDFDoc = null;
-        window.generatedFileName = "";
-        window.signedOrderPDFDoc = null;
-        window.generatedOrderFileName = "";
-
-        const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-";
-
-        // STRICT MANDATE RULE 1 PATHS
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fivem-stadtwerke-hamburg';
-        
-        // Background Anonymous Auth on Load to satisfy Rule 3 (Auth before queries)
-        signInAnonymously(auth).then((userCredential) => {
-            console.log("Secure anonymous session established (Rule 3 compliant)");
-            // Check if there was a logged-in user in cache
-            const cachedUser = localStorage.getItem("swhh_active_user");
-            if (cachedUser) {
-                try {
-                    const parsedUser = JSON.parse(cachedUser);
-                    // Live-validate cached user document in Firestore to prevent stale clearances or blocked accounts
-                    validateAndEstablishEmployeeSession(parsedUser.uid);
-                } catch (e) {
-                    localStorage.removeItem("swhh_active_user");
-                }
-            }
-        }).catch((error) => {
-            console.error("Anonymous authentication failed:", error);
-        });
-
-        // Custom Employee Session establishment (Bypasses email constraints for simple RP usernames)
-        async function validateAndEstablishEmployeeSession(uid) {
-            const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', uid);
-            
-            // Unsubscribe existing real-time listener if any
-            if (unsubscribeCurrentUserProfile) {
-                unsubscribeCurrentUserProfile();
-            }
-
-            // Bind real-time listener to current user profile
-            unsubscribeCurrentUserProfile = onSnapshot(userProfileRef, (snapshot) => {
-                if (snapshot.exists()) {
-                    const data = snapshot.data();
-                    if (data.status === "Gesperrt") {
-                        handleLogout();
-                        showNotification("Konto gesperrt", "Ihr Mitarbeiter-Konto wurde von der Leitung gesperrt.", "error");
-                        return;
-                    }
-                    
-                    loggedInUser = {
-                        uid: snapshot.id,
-                        username: data.username,
-                        level: parseInt(data.level || 1),
-                        status: data.status || "Aktiv"
-                    };
-                    
-                    localStorage.setItem("swhh_active_user", JSON.stringify(loggedInUser));
-                    updateAuthUI();
-                    
-                    // Route permissions update
-                    if (loggedInUser.level >= 2) {
-                        setupRealtimeMeldungen();
-                    }
-                    if (loggedInUser.level === 3) {
-                        setupRealtimeMitglieder();
-                    }
-                } else {
-                    // Profile deleted in directory
-                    handleLogout();
-                }
-            }, (error) => {
-                console.error("Error watching user profile:", error);
-            });
-        }
-
+// ... existing code ... -->
         // ROUTING SYSTEM
         function switchPage(pageId) {
             // Guard route accesses based on dynamic Freigabestufe
-            if (pageId === "arbeitsvertrag" && !loggedInUser) {
-                showNotification("Zugriff verweigert", "Dieser Bereich ist ausschließlich angemeldeten Mitarbeitern gestattet.", "error");
+            if (pageId === "arbeitsvertrag" && (!loggedInUser || loggedInUser.level < 1)) {
+                showNotification("Zugriff verweigert", "Dieser Bereich ist ausschließlich Angestellten (ab Stufe 1) gestattet.", "error");
                 switchPage("startseite");
-                openLoginModal();
                 return;
             }
             if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 2)) {
@@ -785,28 +680,7 @@
             }
 
             activePage = pageId;
-
-            const views = ["startseite", "auftrag", "arbeitsvertrag", "meldungen", "mitglieder"];
-            views.forEach(v => {
-                const element = document.getElementById(`view-${v}`);
-                if (element) {
-                    if (v === pageId) element.classList.remove("hidden");
-                    else element.classList.add("hidden");
-                }
-            });
-
-            const navHome = document.getElementById("nav-home");
-            const navOrder = document.getElementById("nav-order");
-
-            const defaultNav = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
-            const activeNav = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
-
-            if (navHome) navHome.className = (pageId === "startseite" ? activeNav : defaultNav);
-            if (navOrder) navOrder.className = (pageId === "auftrag" ? activeNav : defaultNav);
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
+// ... existing code ... -->
         async function handleRegisterSubmit(e) {
             e.preventDefault();
             const submitBtn = document.getElementById("registerSubmitBtn");
@@ -847,7 +721,7 @@
                 const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', newUid);
                 
                 // AUTOMATISCHE BEFÖRDERUNG: Falls du dich als "Manic Moon" oder "Manic_Moon" registrierst, erhältst du direkt Stufe 3!
-                let initialLevel = 1;
+                let initialLevel = 0;
                 const normalizedName = username.toLowerCase().replace('_', ' ').trim();
                 if (normalizedName === "manic moon") {
                     initialLevel = 3;
@@ -865,101 +739,11 @@
                 closeLoginModal();
                 const successMsg = initialLevel === 3 
                     ? `Konto für ${username} wurde erfolgreich erstellt. Leitungs-Freigabestufe 3 wurde automatisch zugewiesen!` 
-                    : `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 1 zugewiesen.`;
+                    : `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 0 (Bürger) zugewiesen. Du kannst nun von der Leitung befördert werden.`;
                 showNotification("Willkommen!", successMsg, "success");
                 validateAndEstablishEmployeeSession(newUid);
             } catch (err) {
-                console.error("Registration Error: ", err);
-                let msg = "Datenbankfehler bei der Erstellung des Profils.";
-                if (err.code === "permission-denied") {
-                    msg = "Datenbank-Zugriff verweigert! Bitte stelle deine Firestore-Sicherheitsregeln auf 'allow read, write: if true;' ein und aktiviere 'Anonyme Anmeldung' in Firebase.";
-                }
-                showNotification("Datenbank-Fehler", msg, "error");
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Konto registrieren";
-            }
-        }
-
-        async function handleLoginSubmit(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById("loginSubmitBtn");
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Melde an...";
-
-            const username = document.getElementById("loginUsername").value.trim();
-            const password = document.getElementById("loginPassword").value.trim();
-
-            try {
-                const employeesCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
-                const querySnapshot = await getDocs(employeesCol);
-                let targetUser = null;
-
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    if (data.username && data.username.toLowerCase() === username.toLowerCase()) {
-                        targetUser = { uid: doc.id, ...data };
-                    }
-                });
-
-                if (!targetUser || targetUser.password !== password) {
-                    showNotification("Anmeldung ungültig", "Falscher Benutzername oder Passwort.", "error");
-                    return;
-                }
-
-                if (targetUser.status === "Gesperrt") {
-                    showNotification("Anmeldung gesperrt", "Dieses Mitarbeiterkonto wurde von der Leitung gesperrt.", "error");
-                    return;
-                }
-
-                // AUTOMATISCHE BEFÖRDERUNG BEIM LOGIN: Falls "Manic Moon" existiert aber noch nicht Stufe 3 hat, jetzt upgraden!
-                const normalizedName = targetUser.username.toLowerCase().replace('_', ' ').trim();
-                if (normalizedName === "manic moon" && parseInt(targetUser.level) !== 3) {
-                    targetUser.level = 3;
-                    try {
-                        const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUser.uid);
-                        await updateDoc(userProfileRef, { level: 3 });
-                    } catch (errUpdate) {
-                        console.warn("Konnte Stufe nicht sofort in Cloud updaten, wird lokal gesetzt:", errUpdate);
-                    }
-                }
-
-                closeLoginModal();
-                showNotification("Login erfolgreich", `Willkommen zurück im Dienst, ${targetUser.username}!`, "success");
-                validateAndEstablishEmployeeSession(targetUser.uid);
-            } catch (err) {
-                console.error(err);
-                let msg = "Fehler beim Abruf der Profildaten.";
-                if (err.code === "permission-denied") {
-                    msg = "Datenbank-Zugriff verweigert! Bitte stelle deine Firestore-Sicherheitsregeln auf 'allow read, write: if true;' ein und aktiviere 'Anonyme Anmeldung' in Firebase.";
-                }
-                showNotification("Datenbank-Fehler", msg, "error");
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Anmelden";
-            }
-        }
-
-        function handleLogout() {
-            if (unsubscribeCurrentUserProfile) {
-                unsubscribeCurrentUserProfile();
-                unsubscribeCurrentUserProfile = null;
-            }
-            if (unsubscribeMeldungen) {
-                unsubscribeMeldungen();
-                unsubscribeMeldungen = null;
-            }
-            if (unsubscribeMitglieder) {
-                unsubscribeMitglieder();
-                unsubscribeMitglieder = null;
-            }
-
-            loggedInUser = null;
-            localStorage.removeItem("swhh_active_user");
-            updateAuthUI();
-            switchPage("startseite");
-        }
-
+// ... existing code ... -->
         function updateAuthUI() {
             const loginTrigger = document.getElementById("login-trigger-btn");
             const profileBadge = document.getElementById("user-profile-badge");
@@ -977,12 +761,18 @@
                 if (profileBadge) profileBadge.classList.remove("hidden");
                 if (headerUsername) headerUsername.innerText = loggedInUser.username;
                 
-                let levelName = "Stufe 1 - Praktikant";
+                let levelName = "Stufe 0 - Bürger";
+                if (loggedInUser.level === 1) levelName = "Stufe 1 - Praktikant";
                 if (loggedInUser.level === 2) levelName = "Stufe 2 - Angestellter";
                 if (loggedInUser.level === 3) levelName = "Stufe 3 - Leitung";
                 if (headerUserlevel) headerUserlevel.innerText = levelName;
                 
-                if (employeeDropdown) employeeDropdown.classList.remove("hidden");
+                // Show employee dropdown only if Level >= 1
+                if (loggedInUser.level >= 1) {
+                    if (employeeDropdown) employeeDropdown.classList.remove("hidden");
+                } else {
+                    if (employeeDropdown) employeeDropdown.classList.add("hidden");
+                }
                 
                 // Show/hide menu items in dropdown based on clearance level
                 if (loggedInUser.level >= 2) {
@@ -1011,146 +801,7 @@
                 }
             }
         }
-
-        function setupRealtimeMeldungen() {
-            if (unsubscribeMeldungen) unsubscribeMeldungen();
-
-            // Strict compliance with Path Rule 1: /artifacts/{appId}/public/data/meldungen
-            const meldungenCol = collection(db, 'artifacts', appId, 'public', 'data', 'meldungen');
-            
-            // Rule 2 compliant: Fetch the entire collection, sort array in memory
-            unsubscribeMeldungen = onSnapshot(meldungenCol, (snapshot) => {
-                const orders = [];
-                snapshot.forEach((doc) => {
-                    orders.push({ id: doc.id, ...doc.data() });
-                });
-                
-                // Perform JavaScript-side sorting to comply with Rule 2 (no complex orderBy on query)
-                orders.sort((a, b) => {
-                    return (b.date + ' ' + b.time).localeCompare(a.date + ' ' + a.time);
-                });
-
-                renderMeldungenUI(orders);
-            }, (error) => {
-                console.warn("Firestore error in Meldungen", error);
-                const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
-                renderMeldungenUI(localOrders);
-            });
-        }
-
-        function renderMeldungenUI(orders) {
-            const emptyState = document.getElementById("meldungen-list-empty");
-            const grid = document.getElementById("meldungen-grid");
-            const counter = document.getElementById("meldungen-counter");
-
-            if (counter) counter.innerText = `${orders.length} Meldung${orders.length !== 1 ? 'en' : ''}`;
-
-            if (orders.length === 0) {
-                if (emptyState) emptyState.classList.remove("hidden");
-                if (grid) grid.classList.add("hidden");
-                return;
-            }
-
-            if (emptyState) emptyState.classList.add("hidden");
-            if (grid) grid.classList.remove("hidden");
-
-            grid.innerHTML = "";
-            orders.forEach((order) => {
-                const typeLabel = order.type === "firma" ? `Firma (${order.company})` : "Privatperson";
-                const badgeColor = getStatusBadgeClass(order.status);
-
-                const cardHTML = `
-                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-swBlue-500 transition-all duration-300 relative flex flex-col justify-between space-y-4">
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-start">
-                                <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">${order.orderID}</span>
-                                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${badgeColor}">${order.status || 'Offen'}</span>
-                            </div>
-                            <h4 class="font-extrabold text-slate-900">${order.name}</h4>
-                            <p class="text-xs text-slate-500 font-medium flex items-center gap-1.5">
-                                <i class="fa-solid fa-phone text-[10px]"></i> ${order.phone}
-                            </p>
-                            <p class="text-xs text-slate-500 font-medium flex items-center gap-1.5">
-                                <i class="fa-solid fa-calendar text-[10px]"></i> ${order.date} | ${order.time} Uhr
-                            </p>
-                            <p class="text-xs text-swOrange-600 font-bold">${typeLabel}</p>
-                            <div class="bg-white border border-slate-200 p-3 rounded-lg text-xs text-slate-600 max-h-[100px] overflow-y-auto custom-scrollbar italic leading-normal font-semibold">
-                                "${order.description}"
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
-                            <div>
-                                <select onchange="updateOrderStatus('${order.id}', this.value)" class="w-full bg-white border border-slate-200 rounded-lg text-[11px] p-1.5 font-bold text-slate-700 focus:outline-none">
-                                    <option value="Offen" ${order.status === "Offen" ? "selected" : ""}>Offen</option>
-                                    <option value="In Bearbeitung" ${order.status === "In Bearbeitung" ? "selected" : ""}>In Bearbeitung</option>
-                                    <option value="Erledigt" ${order.status === "Erledigt" ? "selected" : ""}>Erledigt</option>
-                                </select>
-                            </div>
-                            <button onclick="deleteMeldung('${order.id}')" class="bg-rose-50 border border-rose-100 text-rose-600 hover:bg-rose-100 transition rounded-lg text-[11px] font-bold p-1.5 flex items-center justify-center space-x-1">
-                                <i class="fa-solid fa-trash"></i>
-                                <span>Löschen</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += cardHTML;
-            });
-        }
-
-        function getStatusBadgeClass(status) {
-            switch (status) {
-                case "In Bearbeitung": return "bg-amber-50 text-amber-600 border border-amber-200";
-                case "Erledigt": return "bg-emerald-50 text-emerald-600 border border-emerald-200";
-                default: return "bg-rose-50 text-rose-500 border border-rose-200";
-            }
-        }
-
-        async function updateOrderStatus(orderId, newStatus) {
-            try {
-                // Rule 1 Compliance: path matches '/artifacts/{appId}/public/data/meldungen/{id}'
-                const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'meldungen', orderId);
-                await updateDoc(orderRef, { status: newStatus });
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
-        async function deleteMeldung(orderId) {
-            showConfirmNotification("Meldung löschen?", "Möchten Sie diesen Bürgermeldungs-Auftrag unwiderruflich entfernen?", async () => {
-                try {
-                    const orderRef = doc(db, 'artifacts', appId, 'public', 'data', 'meldungen', orderId);
-                    await deleteDoc(orderRef);
-                    showNotification("Gelöscht", "Der Auftrag wurde erfolgreich aus der Cloud gelöscht.", "success");
-                } catch (err) {
-                    console.error(err);
-                }
-            });
-        }
-
-        // LEADERSHIP REAL-TIME ACCOUNT MANAGEMENT (Freigabestufe 3)
-        function setupRealtimeMitglieder() {
-            if (unsubscribeMitglieder) unsubscribeMitglieder();
-
-            // Rule 1 Compliance: Path /artifacts/{appId}/public/data/mitarbeiter
-            const mitarbeiterCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
-
-            unsubscribeMitglieder = onSnapshot(mitarbeiterCol, (snapshot) => {
-                const members = [];
-                snapshot.forEach((doc) => {
-                    members.push({ id: doc.id, ...doc.data() });
-                });
-                
-                // JavaScript-side sort alphabetically
-                members.sort((a, b) => (a.username || '').localeCompare(b.username || ''));
-                
-                globalAllMitglieder = members;
-                renderMitgliederUI(members);
-            }, (error) => {
-                console.error("Firestore error watching members database:", error);
-            });
-        }
-
+// ... existing code ... -->
         function renderMitgliederUI(members) {
             const tableBody = document.getElementById("mitglieder-table-body");
             const counter = document.getElementById("mitglieder-counter");
@@ -1165,6 +816,7 @@
                 
                 const levelSelectHTML = `
                     <select onchange="updateMemberLevel('${member.id}', this.value)" ${isSelf ? 'disabled' : ''} class="bg-white border border-slate-200 rounded-lg text-xs p-1.5 font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-swBlue-500">
+                        <option value="0" ${member.level === 0 ? 'selected' : ''}>0 - Bürger</option>
                         <option value="1" ${member.level === 1 ? 'selected' : ''}>1 - Praktikant</option>
                         <option value="2" ${member.level === 2 ? 'selected' : ''}>2 - Mitarbeiter</option>
                         <option value="3" ${member.level === 3 ? 'selected' : ''}>3 - Leitung</option>
