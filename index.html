@@ -1797,31 +1797,14 @@
                 }
 
                 // 3. Dispatch to Discord
-                const discordPayload = {
-                    username: "Stadtwerke Hamburg Portal",
-                    embeds: [{
-                        title: `📢 Neue Bürgerinformation: ${title}`,
-                        description: `**Kategorie:** ${categoryLabel}\n\n${content}`,
-                        color: categoryColor,
-                        fields: [
-                            { name: "Veröffentlicht von", value: author, inline: true },
-                            { name: "Datum / Uhrzeit", value: `${currentDateStr} um ${currentTimeStr} Uhr`, inline: true }
-                        ],
-                        timestamp: new Date().toISOString()
-                    }]
-                };
-
-                await fetch(discordWebhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(discordPayload)
-                });
+                // Hinweis: Statusmeldungen werden bewusst NICHT mehr an Discord gesendet.
+                // Discord-Benachrichtigungen erfolgen nur noch beim Arbeitsvertrag und beim Einreichen eines Auftrags.
 
                 // Reset forms
                 document.getElementById("statusTitle").value = "";
                 document.getElementById("statusContent").value = "";
 
-                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht und an den Discord gesendet.", "success", "false");
+                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht.", "success", "false");
             } catch (err) {
                 console.error("Fehler beim Speichern der Statusmeldung: ", err);
                 showNotification("Fehler", "Datenbankverbindung gescheitert.", "error");
