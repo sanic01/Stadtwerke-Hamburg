@@ -86,6 +86,22 @@
                     <button id="nav-muell" onclick="switchPage('muell')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
                         <i class="fa-solid fa-calendar-days mr-2"></i>Müll Plan
                     </button>
+
+                    <!-- Karriere Dropdown (öffentlich, für alle Besucher sichtbar) -->
+                    <div class="relative group py-2">
+                        <button class="text-slate-600 hover:text-swBlue-800 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
+                            <i class="fa-solid fa-user-tie mr-2"></i>Karriere <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
+                        </button>
+                        <!-- Hover Dropdown Menu Wrapper with seamless padding bridge -->
+                        <div class="absolute left-0 top-full w-56 pt-2 hidden group-hover:block z-50">
+                            <div class="bg-white border border-slate-200 rounded-2xl shadow-xl py-2 transition-all duration-300">
+                                <button onclick="switchPage('karriere')" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-swBlue-800 font-semibold flex items-center space-x-2">
+                                    <i class="fa-solid fa-paper-plane text-slate-400"></i>
+                                    <span>Online Bewerben</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- Protected Employee Dropdown (Visible only when logged in with level >= 1) -->
                     <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
@@ -286,6 +302,87 @@
                                 <button type="button" id="downloadOrderBtn" onclick="downloadGeneratedOrderPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap">
                                     <i class="fa-solid fa-download text-lg"></i>
                                     <span>Auftragsbestätigung laden</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: KARRIERE / ONLINE BEWERBEN -->
+            <div id="view-karriere" class="hidden max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-extrabold flex items-center space-x-2">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                    <span>Online Bewerben</span>
+                                </h2>
+                                <p class="text-sm text-slate-300 mt-1">Werde Teil des Teams der Stadtwerke Hamburg – unkompliziert und digital.</p>
+                            </div>
+                            <div class="bg-swOrange-500 border border-swOrange-600 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">Karriere</div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8">
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-6 flex items-start gap-3">
+                            <i class="fa-solid fa-circle-info text-swBlue-500 mt-0.5"></i>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Alle Angaben in diesem Formular sind freiwillig. Fülle einfach das aus, was du mit uns teilen möchtest – jede Angabe hilft uns, dich besser kennenzulernen.</p>
+                        </div>
+
+                        <form id="applicationForm" class="space-y-6" onsubmit="event.preventDefault();">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Vorname</label>
+                                    <input type="text" id="appFirstName" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. Max">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Nachname</label>
+                                    <input type="text" id="appLastName" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. Mustermann">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Telefonnummer</label>
+                                    <input type="tel" id="appTel" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. 555-0199">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">E-Mail-Adresse</label>
+                                    <input type="email" id="appEmail" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. max.mustermann@email.de">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Alter</label>
+                                    <input type="number" id="appAge" min="14" max="99" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. 27">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Wunschbereich</label>
+                                    <input type="text" id="appDesiredArea" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. Tiefbau, Verwaltung, IT ...">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-900 mb-2">Über mich</label>
+                                <textarea id="appAbout" rows="4" class="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition custom-scrollbar" placeholder="Erzähl uns etwas über dich..."></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-900 mb-2">Berufliche Erfahrungen</label>
+                                <textarea id="appExperience" rows="4" class="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition custom-scrollbar" placeholder="Bisherige Tätigkeiten, Ausbildung, Qualifikationen ..."></textarea>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                <button type="button" id="submitApplicationBtn" onclick="handleApplicationSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 transition-all duration-300 flex items-center justify-center space-x-2 flex-1">
+                                    <i class="fa-solid fa-paper-plane text-lg"></i>
+                                    <span>Bewerbung absenden</span>
+                                </button>
+                                <button type="button" id="downloadApplicationBtn" onclick="downloadGeneratedApplicationPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap">
+                                    <i class="fa-solid fa-download text-lg"></i>
+                                    <span>Bewerbung laden</span>
                                 </button>
                             </div>
                         </form>
@@ -1164,7 +1261,7 @@
             });
 
             // Toggle Page View HTML Blocks
-            const views = ["startseite", "auftrag", "muell", "arbeitsvertrag", "meldungen", "mitglieder", "statusmeldungen"];
+            const views = ["startseite", "auftrag", "muell", "karriere", "arbeitsvertrag", "meldungen", "mitglieder", "statusmeldungen"];
             views.forEach(v => {
                 const block = document.getElementById(`view-${v}`);
                 if (block) {
@@ -1988,6 +2085,182 @@
             }
         }
 
+        // ONLINE-BEWERBUNG: PDF-ERSTELLUNG + DISCORD-VERSAND (ALLE FELDER FREIWILLIG)
+        async function handleApplicationSubmission() {
+            const firstName = document.getElementById('appFirstName').value.trim();
+            const lastName = document.getElementById('appLastName').value.trim();
+            const tel = document.getElementById('appTel').value.trim();
+            const email = document.getElementById('appEmail').value.trim();
+            const age = document.getElementById('appAge').value.trim();
+            const desiredArea = document.getElementById('appDesiredArea').value.trim();
+            const about = document.getElementById('appAbout').value.trim();
+            const experience = document.getElementById('appExperience').value.trim();
+
+            const fullName = `${firstName} ${lastName}`.trim();
+            const displayName = fullName || "Bewerber(in)";
+
+            const currentDateStr = new Date().toLocaleDateString('de-DE');
+            const currentTimeStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+
+            const randNumber = Math.floor(10000 + Math.random() * 90000);
+            const applicationID = `SWHH-B-${randNumber}`;
+
+            const newApplicationPayload = {
+                applicationID: applicationID,
+                firstName: firstName,
+                lastName: lastName,
+                phone: tel,
+                email: email,
+                age: age,
+                desiredArea: desiredArea,
+                about: about,
+                experience: experience,
+                date: currentDateStr,
+                time: currentTimeStr
+            };
+
+            // 1. Save directly into Cloud Firestore (best effort)
+            try {
+                const bewerbungenCol = collection(db, "bewerbungen");
+                await addDoc(bewerbungenCol, newApplicationPayload);
+            } catch (err) {
+                console.error("Firestore write blocked. Saving locally: ", err);
+            }
+
+            // 2. Generate PDF using jsPDF
+            try {
+                const { jsPDF } = window.jspdf;
+                const docPdf = new jsPDF();
+
+                const primaryColor = [15, 23, 42];
+                const accentColor = [249, 115, 22];
+
+                docPdf.setFillColor(...primaryColor);
+                docPdf.rect(0, 0, 210, 40, 'F');
+                docPdf.setFillColor(...accentColor);
+                docPdf.rect(0, 40, 210, 4, 'F');
+
+                docPdf.setTextColor(255, 255, 255);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setFontSize(22);
+                docPdf.text("STADTWERKE HAMBURG", 20, 25);
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(226, 232, 240);
+                docPdf.text("Karriereportal | Online-Bewerbung", 20, 33);
+
+                docPdf.setFillColor(248, 250, 252);
+                docPdf.setDrawColor(226, 232, 240);
+                docPdf.rect(20, 52, 170, 28, 'FD');
+
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(71, 85, 105);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.text("EINGEGANGENE BEWERBUNG", 25, 60);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text(`Bewerbungs-Nr: ${applicationID}`, 25, 67);
+                docPdf.text(`Eingereicht am: ${currentDateStr} - ${currentTimeStr} Uhr`, 25, 74);
+
+                docPdf.setFillColor(248, 250, 252);
+                docPdf.rect(20, 88, 170, 42, 'FD');
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("KONTAKTDATEN", 25, 96);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text(`Name:           ${fullName || 'Nicht angegeben'}`, 25, 103);
+                docPdf.text(`Telefonnummer:  ${tel || 'Nicht angegeben'}`, 25, 110);
+                docPdf.text(`E-Mail:         ${email || 'Nicht angegeben'}`, 25, 117);
+                docPdf.text(`Alter:          ${age || 'Nicht angegeben'}`, 25, 124);
+
+                let currentY = 143;
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setFontSize(11);
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Wunschbereich:", 20, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(51, 65, 85);
+                currentY += 6;
+                const wrappedArea = docPdf.splitTextToSize(desiredArea || "Nicht angegeben", 170);
+                docPdf.text(wrappedArea, 20, currentY);
+                currentY += wrappedArea.length * 5 + 8;
+
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setFontSize(11);
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Über mich:", 20, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(51, 65, 85);
+                currentY += 6;
+                const wrappedAbout = docPdf.splitTextToSize(about || "Nicht angegeben", 170);
+                docPdf.text(wrappedAbout, 20, currentY);
+                currentY += wrappedAbout.length * 5 + 8;
+
+                if (currentY > 250) {
+                    docPdf.addPage();
+                    currentY = 20;
+                }
+
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setFontSize(11);
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Berufliche Erfahrungen:", 20, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(51, 65, 85);
+                currentY += 6;
+                const wrappedExperience = docPdf.splitTextToSize(experience || "Nicht angegeben", 170);
+                docPdf.text(wrappedExperience, 20, currentY);
+
+                const pdfBlob = docPdf.output('blob');
+                window.signedApplicationPDFDoc = docPdf;
+                window.generatedApplicationFileName = `Bewerbung_SWHH_${applicationID}.pdf`;
+
+                // 3. Send to Discord Webhook
+                const formData = new FormData();
+                formData.append('file', pdfBlob, window.generatedApplicationFileName);
+
+                const discordPayload = {
+                    username: "Stadtwerke Hamburg Portal",
+                    embeds: [{
+                        title: "🧑‍💼 Neue Online-Bewerbung eingegangen!",
+                        description: `Eine neue Bewerbung wurde über das Karriereportal eingereicht.`,
+                        color: 2201331,
+                        fields: [
+                            { name: "Bewerbungs-ID", value: applicationID, inline: true },
+                            { name: "Name", value: fullName || "Nicht angegeben", inline: true },
+                            { name: "Telefonnummer", value: tel || "Nicht angegeben", inline: true },
+                            { name: "E-Mail", value: email || "Nicht angegeben", inline: true },
+                            { name: "Alter", value: age || "Nicht angegeben", inline: true },
+                            { name: "Wunschbereich", value: desiredArea || "Nicht angegeben", inline: true },
+                            { name: "Zeitstempel", value: `${currentDateStr} um ${currentTimeStr} Uhr`, inline: true }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+
+                formData.append('payload_json', JSON.stringify(discordPayload));
+
+                await fetch(discordWebhookUrl, { method: 'POST', body: formData });
+                document.getElementById('downloadApplicationBtn').classList.remove('hidden');
+                showNotification(
+                    "Bewerbung übermittelt!",
+                    `Vielen Dank, ${displayName}! Deine Bewerbung ist bei uns eingegangen.`,
+                    "success",
+                    "downloadGeneratedApplicationPDF()"
+                );
+            } catch (err) {
+                console.error(err);
+                document.getElementById('downloadApplicationBtn').classList.remove('hidden');
+                showNotification(
+                    "Bewerbung erfasst!",
+                    `Deine Bewerbung wurde lokal erfasst. Du kannst deine Kopie jetzt herunterladen.`,
+                    "success",
+                    "downloadGeneratedApplicationPDF()"
+                );
+            }
+        }
+
         // DIGITAL CONTRACT RECOGNITION AND TWO-PAGE PDF EXPORT PIPELINE
         function handleFormSubmission() {
             const name = document.getElementById('signatureInput').value.trim();
@@ -2417,6 +2690,14 @@
             safeSavePDF(window.signedOrderPDFDoc, window.generatedOrderFileName);
         }
 
+        function downloadGeneratedApplicationPDF() {
+            if (!window.signedApplicationPDFDoc || !window.generatedApplicationFileName) {
+                showNotification("Achtung!", "Es liegt noch keine eingereichte Bewerbung zum Download vor.", "error");
+                return;
+            }
+            safeSavePDF(window.signedApplicationPDFDoc, window.generatedApplicationFileName);
+        }
+
         // RESET PASSWORDS TRIGGER WINDOW
         function openChangePasswordModal(targetUid, memberName) {
             document.getElementById("pwModalUid").value = targetUid;
@@ -2470,11 +2751,13 @@
         window.updateLiveSignature = updateLiveSignature;
         window.handleFormSubmission = handleFormSubmission;
         window.handleOrderSubmission = handleOrderSubmission;
+        window.handleApplicationSubmission = handleApplicationSubmission;
         window.updateOrderStatus = updateOrderStatus;
         window.deleteMeldung = deleteMeldung;
         window.toggleCompanyField = toggleCompanyField;
         window.downloadGeneratedPDF = downloadGeneratedPDF;
         window.downloadGeneratedOrderPDF = downloadGeneratedOrderPDF;
+        window.downloadGeneratedApplicationPDF = downloadGeneratedApplicationPDF;
         window.closeNotification = closeNotification;
         window.simulateReminder = simulateReminder;
         
