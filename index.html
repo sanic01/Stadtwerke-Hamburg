@@ -9,7 +9,7 @@
     <!-- Google Fonts: Inter, Playfair & Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght=1,600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght=1,600&family=Caveat:wght=700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- jsPDF Engine -->
@@ -84,7 +84,7 @@
                         <i class="fa-solid fa-file-invoice mr-2"></i>Auftrag einreichen
                     </button>
                     
-                    <!-- Protected Employee Dropdown (Visible only when logged in) -->
+                    <!-- Protected Employee Dropdown (Visible only when logged in with level >= 1) -->
                     <div id="nav-mitarbeiter-dropdown" class="relative group hidden py-2">
                         <button class="text-slate-600 hover:text-swBlue-800 px-4 py-1.5 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center">
                             <i class="fa-solid fa-briefcase mr-2"></i>Mitarbeiter <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-truck-field text-xl"></i>
                             </div>
                             <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
@@ -314,7 +314,7 @@
                                 </div>
                             </div>
 
-                            <!-- Paragraphen §1-§5 -->
+                            <!-- Paragraphen §1-§5 (Aus content.jpg) -->
                             <div class="space-y-4 pt-2">
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 1 TÄTIGKEIT UND AUFGABENBEREICH</h5>
@@ -325,71 +325,138 @@
                                         <li>Instandhaltung der öffentlichen Beleuchtung</li>
                                         <li>Bedienung und Wartung von Baumaschinen und Spezialwerkzeugen</li>
                                         <li>Sicherheitsrelevante Absicherung von Baustellen im öffentlichen Verkehrsraum</li>
+                                        <li>Zusammenarbeit mit Behörden, Polizei, Feuerwehr und Rettungsdiensten</li>
+                                        <li>Durchführung von Notfalleinsätzen und Störungsbeseitigungen (24/7 Einsatzbereitschaft)</li>
+                                        <li>Dokumentation der Arbeiten und Einhaltung der Qualitätsstandards</li>
                                     </ul>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST</h5>
                                     <div class="border border-slate-200 rounded-lg overflow-hidden text-[11px]">
-                                        <div class="grid grid-cols-2 bg-slate-50 border-b border-slate-200 p-1.5 font-bold"><div>Eigenschaft</div><div>Vereinbarung</div></div>
+                                        <div class="grid grid-cols-2 bg-slate-50 border-b border-slate-200 p-1.5 font-bold text-slate-700"><div>Eigenschaft</div><div>Vereinbarung</div></div>
                                         <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Regelarbeitszeit:</div><div>40 Stunden pro Woche</div></div>
-                                        <div class="grid grid-cols-2 p-1.5"><div>Werktage:</div><div>Montag – Freitag (06:00 – 18:00 Uhr)</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Werktage:</div><div>Montag – Freitag</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Arbeitszeitrahmen:</div><div>06:00 Uhr – 18:00 Uhr (je nach Einsatzplan)</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Bereitschaftsdienst:</div><div>Nach Dienstplan / Rufbereitschaft</div></div>
+                                        <div class="grid grid-cols-2 p-1.5"><div>Überstunden:</div><div>Werden erfasst und gemäß Betriebsvereinbarung ausgeglichen oder vergütet.</div></div>
                                     </div>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 3 VERGÜTUNG</h5>
                                     <div class="border border-slate-200 rounded-lg overflow-hidden text-[11px]">
-                                        <div class="grid grid-cols-2 bg-slate-50 p-1.5 font-bold border-b border-slate-200"><div>Posten</div><div class="text-right">Betrag</div></div>
+                                        <div class="grid grid-cols-2 bg-slate-50 p-1.5 font-bold border-b border-slate-200 text-slate-700"><div>Posten</div><div class="text-right">Betrag</div></div>
                                         <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Grundgehalt (brutto):</div><div class="text-right">3.200,00 € / Monat</div></div>
-                                        <div class="grid grid-cols-2 p-1.5 border-b border-slate-100"><div>Zulagen (Bereitschaft, Gefahren, Nacht):</div><div class="text-right">575,00 € / Monat</div></div>
-                                        <div class="grid grid-cols-2 p-1.5 bg-slate-100 font-bold"><div>Gesamt Bruttogehalt:</div><div class="text-right text-swBlue-900">3.775,00 € / Monat</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 bg-slate-50/50 font-semibold border-b border-slate-100"><div>Zulagen:</div><div class="text-right"></div></div>
+                                        <div class="grid grid-cols-2 p-1.5 pl-6 border-b border-slate-100 text-slate-500"><div>• Bereitschaftsdienstpauschale:</div><div class="text-right">250,00 € / Monat</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 pl-6 border-b border-slate-100 text-slate-500"><div>• Gefahrenzulage:</div><div class="text-right">200,00 € / Monat</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 pl-6 border-b border-slate-100 text-slate-500"><div>• Schmutzzulage:</div><div class="text-right">100,00 € / Monat</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 pl-6 border-b border-slate-100 text-slate-500"><div>• Nachtarbeit (ab 20:00 Uhr):</div><div class="text-right">25,00 € / Einsatz</div></div>
+                                        <div class="grid grid-cols-2 p-1.5 bg-slate-100 font-bold border-t border-slate-200"><div>Gesamt brutto:</div><div class="text-right text-swBlue-900">3.775,00 € / Monat</div></div>
                                     </div>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 4 SONDERZAHLUNGEN</h5>
-                                    <p class="text-slate-500 text-[11px]">Urlaubsgeld (50% im Juni) und Weihnachtsgeld (50% im November) werden gemäß der aktuellen Betriebsvereinbarung ausbezahlt.</p>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Urlaubsgeld (50% eines Monatsgehalts im Juni), Weihnachtsgeld (50% eines Monatsgehalts im November) und Leistungsprämien (nach betrieblicher Vereinbarung) werden gemäß der aktuellen Betriebsvereinbarung ausbezahlt.</p>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 5 PROBEZEIT</h5>
-                                    <p class="text-slate-500 text-[11px]">Die Probezeit beträgt vereinbarungsgemäß 6 Monate. Während dieser Phase gilt eine verkürzte Kündigungsfrist von 2 Wochen.</p>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Die Probezeit beträgt vereinbarungsgemäß 6 Monate. Während dieser Phase gilt eine verkürzte Kündigungsfrist von 2 Wochen. Nach Ablauf der Probezeit tritt die gesetzliche Kündigungsfrist in Kraft.</p>
                                 </div>
                             </div>
 
-                            <div class="border-t border-dashed border-slate-300 py-4 text-center text-slate-400 text-xs">--- SEITE 2 DES VERTRAGES ---</div>
+                            <div class="border-t border-dashed border-slate-300 py-4 text-center text-slate-400 text-xs font-semibold">--- SEITE 2 DES VERTRAGES ---</div>
 
                             <div class="space-y-4">
                                 <div>
-                                    <h5 class="font-bold text-swOrange-600 mb-1 flex items-center"><i class="fa-solid fa-hard-hat mr-1.5"></i>§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)</h5>
-                                    <p class="text-slate-500 text-[11px] leading-relaxed">Der Arbeitnehmer ist strikt zum Tragen der vorgeschriebenen Schutzausrüstung verpflichtet. Missachtungen können abmahnungsrelevante Konsequenzen mit sich ziehen:</p>
-                                    <div class="grid grid-cols-2 gap-2 text-[10px] text-slate-600 mt-2 pl-2">
-                                        <div><i class="fa-solid fa-shield-halved text-swBlue-500 mr-1"></i> Schutzhelm EN 397</div>
-                                        <div><i class="fa-solid fa-vest text-swBlue-500 mr-1"></i> Warnkleidung ISO 20471</div>
-                                        <div><i class="fa-solid fa-shoe-prints text-swBlue-500 mr-1"></i> Sicherheitsschuhe S3</div>
-                                        <div><i class="fa-solid fa-ear-deaf text-swBlue-500 mr-1"></i> Gehörschutz EN 352</div>
+                                    <h5 class="font-bold text-swOrange-600 mb-2 flex items-center"><i class="fa-solid fa-hard-hat mr-1.5"></i>§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)</h5>
+                                    <p class="text-slate-600 text-[11px] mb-3 leading-relaxed">Der Arbeitgeber stellt die nachfolgende PSA zur Verfügung. Der Arbeitnehmer verpflichtet sich, diese Bestimmungen gemäß zu tragen und in einwandfreiem Zustand zu halten:</p>
+                                    <div class="grid grid-cols-2 gap-3 text-[10px] text-slate-600 pl-2">
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-shield-halved text-swBlue-500 text-sm"></i>
+                                            <div><strong>Schutzhelm EN 397</strong><br><span class="text-slate-400">Montag – Freitag Pflicht</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-ear-deaf text-swBlue-500 text-sm"></i>
+                                            <div><strong>Gehörschutz</strong><br><span class="text-slate-400">(EN 352)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-vest text-swBlue-500 text-sm"></i>
+                                            <div><strong>Warnschutzkleidung Klasse 3</strong><br><span class="text-slate-400">(EN ISO 20471)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-mask-face text-swBlue-500 text-sm"></i>
+                                            <div><strong>Atemschutzmaske</strong><br><span class="text-slate-400">(bei Bedarf) (EN 14404)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-shoe-prints text-swBlue-500 text-sm"></i>
+                                            <div><strong>Sicherheitsschuhe S3</strong><br><span class="text-slate-400">(EN ISO 20345)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-shield-cat text-swBlue-500 text-sm"></i>
+                                            <div><strong>Knieschutz</strong><br><span class="text-slate-400">(bei Bedarf) (EN 14404)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-mitten text-swBlue-500 text-sm"></i>
+                                            <div><strong>Schutzhandschuhe</strong><br><span class="text-slate-400">(EN 388)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-cloud-showers-heavy text-swBlue-500 text-sm"></i>
+                                            <div><strong>Wetterschutzjacke</strong><br><span class="text-slate-400">(EN 343)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-glasses text-swBlue-500 text-sm"></i>
+                                            <div><strong>Schutzbrille</strong><br><span class="text-slate-400">(EN 166)</span></div>
+                                        </div>
+                                        <div class="flex items-center space-x-2 bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                                            <i class="fa-solid fa-person-falling-burst text-swBlue-500 text-sm"></i>
+                                            <div><strong>Auffanggurt</strong><br><span class="text-slate-400">(Arbeiten in der Höhe) (EN 361)</span></div>
+                                        </div>
                                     </div>
+                                    <p class="text-[9px] text-slate-400 mt-2 italic flex items-center"><i class="fa-solid fa-circle-info mr-1 text-swBlue-500"></i> Das Nichttragen der vorgeschriebenen PSA kann arbeitsrechtliche Konsequenzen nach sich ziehen.</p>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 7 SICHERHEITSBELEHRUNG</h5>
-                                    <p class="text-slate-500 text-[11px] leading-relaxed">Der Mitarbeiter wird über Gefahren an elektrischen Netzen, Baustellen im fließenden Verkehr sowie Erste-Hilfe-Maßnahmen vor Aufnahme der Tätigkeit vollständig geschult.</p>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Der Arbeitnehmer wurde über die Gefahren seiner Tätigkeit umfassend belehrt. Er verpflichtet sich, alle Sicherheits- und Unfallverhütungsvorschriften einzuhalten. Dazu gehören insbesondere:</p>
+                                    <ul class="list-disc list-inside text-slate-500 text-[10px] pl-2 mt-1 space-y-0.5">
+                                        <li>Arbeiten an elektrischen Anlagen</li>
+                                        <li>Arbeiten im öffentlichen Straßenverkehr</li>
+                                        <li>Tiefbauarbeiten und Arbeiten in Baugruben</li>
+                                        <li>Umgang mit schweren Maschinen und Werkzeugen</li>
+                                        <li>Arbeiten bei jeder Witterung und Sichtverhältnissen</li>
+                                        <li>Lastenheben und ergonomisches Arbeiten</li>
+                                        <li>Gefahrstoffe, Öl, Kraftstoffe und Chemikalien</li>
+                                        <li>Verhalten im Notfall und Erste-Hilfe-Maßnahmen</li>
+                                        <li>Brandschutz und Evakuierungspläne</li>
+                                    </ul>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 8 PFLICHTEN DES ARBEITNEHMERS</h5>
-                                    <p class="text-slate-500 text-[11px] leading-relaxed">Sorgsamer Umgang mit Fahrzeugen und Maschinen des Betriebs sowie absolute Verschwiegenheit über betriebsinterne Angelegenheiten sind verpflichtend.</p>
+                                    <ul class="list-disc list-inside text-slate-500 text-[11px] pl-2 mt-1 space-y-0.5">
+                                        <li>Einhaltung aller gesetzlichen Vorschriften und Betriebsanweisungen</li>
+                                        <li>Sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen</li>
+                                        <li>Melden von Mängeln und Gefahren unverzüglich</li>
+                                        <li>Verschwiegenheit über betriebliche Angelegenheiten</li>
+                                        <li>Teilnahme an Schulungen und Sicherheitsunterweisungen</li>
+                                    </ul>
                                 </div>
 
                                 <div>
-                                    <h5 class="font-bold text-swOrange-600 mb-1">§ 9 HAFTUNG</h5>
-                                    <p class="text-slate-500 text-[11px] leading-relaxed">Die Stadtwerke Hamburg haften nicht für Sach- oder Personenschäden, die durch grob fahrlässige oder vorsätzliche Missachtung von Sicherheitsregeln durch den Mitarbeiter verursacht werden.</p>
+                                    <h5 class="font-bold text-swOrange-600 mb-1">§ 9 HAFTUNG UND RISIKOHINWEIS</h5>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Der Arbeitnehmer ist sich bewusst, dass die Tätigkeit mit besonderen Gefahren verbunden ist. Er verpflichtet sich, alle Sicherheitsvorschriften strikt einzuhalten. Trotz aller Sicherheitsmaßnahmen können Restrisiken bestehen.</p>
+                                    <div class="bg-slate-100 border-l-4 border-swOrange-500 p-3 rounded-r-xl text-[10px] text-slate-600 italic mt-2">
+                                        "Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder durch Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Vorsatz oder grober Fahrlässigkeit des Arbeitgebers sowie bei Verletzung von Leben, Körper oder Gesundheit."
+                                    </div>
                                 </div>
 
                                 <div>
                                     <h5 class="font-bold text-swOrange-600 mb-1">§ 10 SCHLUSSBESTIMMUNGEN</h5>
-                                    <p class="text-slate-500 text-[11px]">Änderungen oder Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollte eine Bestimmung unwirksam sein, bleibt die Gültigkeit der übrigen Regelungen unberührt.</p>
+                                    <p class="text-slate-500 text-[11px] leading-relaxed">Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
                                 </div>
                             </div>
                         </div>
@@ -534,7 +601,7 @@
             </button>
 
             <div class="text-center mb-6">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-50 flex items-center justify-center text-white shadow-lg mx-auto mb-3">
                     <i class="fa-solid fa-user-lock text-xl"></i>
                 </div>
                 <h3 class="text-xl font-extrabold text-slate-900">Mitarbeiter-Portal</h3>
@@ -619,7 +686,7 @@
             <p class="text-xs text-slate-500 mb-4">Neues Passwort festlegen für Mitarbeiter: <strong id="pwModalUsername" class="text-swBlue-800"></strong></p>
             <input type="hidden" id="pwModalUid">
             <div class="space-y-4">
-                <input type="password" id="adminNewPassword" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 text-sm transition animate-pulse" placeholder="Neues Passwort (mind. 6 Zeichen)">
+                <input type="password" id="adminNewPassword" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 text-sm transition" placeholder="Neues Passwort (mind. 6 Zeichen)">
                 <button onclick="submitAdminPasswordChange()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-2.5 rounded-xl transition text-sm">Passwort speichern</button>
             </div>
         </div>
@@ -643,7 +710,7 @@
     <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
             <div class="flex justify-center items-center space-x-3 text-white mb-4">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-swOrange-600 to-swOrange-50 flex items-center justify-center">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-swOrange-600 to-swOrange-500 flex items-center justify-center">
                     <i class="fa-solid fa-industry text-sm text-white"></i>
                 </div>
                 <span class="text-base font-bold">Stadtwerke Hamburg</span>
@@ -658,8 +725,35 @@
     </footer>
 
     <script type="module">
-        // Import Firebase App & Auth & Firestore from official gstatic CDN
-// ... existing code ... -->
+        // Import official Firebase Web SDK from stable gstatic CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, getDocs, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration (Fully verified)
+        const firebaseConfig = {
+            apiKey: "AIzaSyARrJDLOEWX3zDEbfJbxQ7hwEdPz9bvD1Q",
+            authDomain: "fivem-stadtwerke-hamburg.firebaseapp.com",
+            projectId: "fivem-stadtwerke-hamburg",
+            storageBucket: "fivem-stadtwerke-hamburg.firebasestorage.app",
+            messagingSenderId: "732232438556",
+            appId: "1:732232438556:web:b082eedc0ef164d72f60d9",
+            measurementId: "G-X4PPV74THZ"
+        };
+
+        // Initialize Firebase services
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Core State Variables
+        let activePage = "startseite";
+        let loggedInUser = null; 
+        let globalAllMitglieder = [];
+        let authMode = "login"; 
+
+        const discordWebhookUrl = "https://discord.com/api/webhooks/1210609341857923092/D-AEx1o_0I9B5Z82Z6_E5P8N3vH8VfHhZ2P7N6P3-Y6V9G8P7O4G8T3-V9T8N6P5O4R8";
+
         // ROUTING SYSTEM
         function switchPage(pageId) {
             // Guard route accesses based on dynamic Freigabestufe
@@ -680,7 +774,97 @@
             }
 
             activePage = pageId;
-// ... existing code ... -->
+
+            // Update Navigation Menu Visual Classes
+            const navs = ["home", "order"];
+            navs.forEach(nav => {
+                const el = document.getElementById(`nav-${nav}`);
+                if (el) {
+                    if (nav === pageId) {
+                        el.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+                    } else {
+                        el.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+                    }
+                }
+            });
+
+            // Toggle Page View HTML Blocks
+            const views = ["startseite", "auftrag", "arbeitsvertrag", "meldungen", "mitglieder"];
+            views.forEach(v => {
+                const block = document.getElementById(`view-${v}`);
+                if (block) {
+                    if (v === pageId) {
+                        block.classList.remove("hidden");
+                    } else {
+                        block.classList.add("hidden");
+                    }
+                }
+            });
+
+            // If entering contract view, preset signature name
+            if (pageId === "arbeitsvertrag" && loggedInUser) {
+                const sigInput = document.getElementById("signatureInput");
+                if (sigInput) sigInput.value = loggedInUser.username;
+                updateLiveSignature();
+            }
+
+            // Scroll to Top Smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // AUTOMATIC AUTH STATE LISTENER (REALTIME)
+        onAuthStateChanged(auth, async (firebaseUser) => {
+            if (firebaseUser) {
+                try {
+                    // Fetch profile custom clearances and statuses from Cloud Firestore
+                    const userProfileDoc = await getDoc(doc(db, "mitarbeiter", firebaseUser.uid));
+                    if (userProfileDoc.exists()) {
+                        const profileData = userProfileDoc.data();
+                        
+                        // Strict check if account is banned or suspended
+                        if (profileData.status === "Gesperrt") {
+                            showNotification("Konto Gesperrt", "Dieses Mitarbeiterkonto wurde von der Geschäftsleitung gesperrt.", "error");
+                            await signOut(auth);
+                            loggedInUser = null;
+                            updateAuthUI();
+                            switchPage("startseite");
+                            return;
+                        }
+
+                        // AUTOMATIC PROMOTION: If user is "Manic Moon" or "Manic_Moon", automatically ensure Stufe 3
+                        const normalizedName = profileData.username.toLowerCase().replace('_', ' ').trim();
+                        if ((normalizedName === "manic moon" || normalizedName === "manic_moon") && profileData.level !== 3) {
+                            profileData.level = 3;
+                            await updateDoc(doc(db, "mitarbeiter", firebaseUser.uid), { level: 3 });
+                        }
+
+                        loggedInUser = {
+                            uid: firebaseUser.uid,
+                            username: profileData.username,
+                            level: profileData.level || 0,
+                            status: profileData.status || "Aktiv"
+                        };
+                    } else {
+                        // Safe fallback fallback configuration profile
+                        loggedInUser = {
+                            uid: firebaseUser.uid,
+                            username: firebaseUser.displayName || "Mitarbeiter",
+                            level: 0,
+                            status: "Aktiv"
+                        };
+                    }
+                } catch (err) {
+                    console.error("Fehler beim Abrufen des Benutzerprofils: ", err);
+                    loggedInUser = null;
+                }
+            } else {
+                loggedInUser = null;
+            }
+            updateAuthUI();
+            setupRealtimeSubscriptions();
+        });
+
+        // HANDLE MANUAL REGISTRATION SYSTEM
         async function handleRegisterSubmit(e) {
             e.preventDefault();
             const submitBtn = document.getElementById("registerSubmitBtn");
@@ -698,11 +882,10 @@
             }
 
             try {
-                // Check if username already exists in Firestore database (Rule 2: No complex query. Read collection and filter in memory)
-                const employeesCol = collection(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter');
-                const querySnapshot = await getDocs(employeesCol);
+                // Read all existing accounts to make sure the username isn't taken
+                const employeesSnapshot = await getDocs(collection(db, "mitarbeiter"));
                 let usernameTaken = false;
-                querySnapshot.forEach((doc) => {
+                employeesSnapshot.forEach((doc) => {
                     const data = doc.data();
                     if (data.username && data.username.toLowerCase() === username.toLowerCase()) {
                         usernameTaken = true;
@@ -710,27 +893,27 @@
                 });
 
                 if (usernameTaken) {
-                    showNotification("Registrierung ungültig", "Dieser Benutzername ist bereits vergeben.", "error");
+                    showNotification("Ungültig", "Dieser Benutzername ist bereits vergeben.", "error");
                     submitBtn.disabled = false;
                     submitBtn.innerText = "Konto registrieren";
                     return;
                 }
 
-                // Generate new user profile
-                const newUid = crypto.randomUUID();
-                const userProfileRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', newUid);
+                // Append virtual email to bypass Firebase Authentication standard requirement
+                const virtualEmail = `${username.toLowerCase().replace(/\s+/g, '_')}@sw-hh.internal`;
+                const userCredential = await createUserWithEmailAndPassword(auth, virtualEmail, password);
                 
-                // AUTOMATISCHE BEFÖRDERUNG: Falls du dich als "Manic Moon" oder "Manic_Moon" registrierst, erhältst du direkt Stufe 3!
+                // Automatic Stufe 3 for Manic Moon, otherwise default to Stufe 0 (Bürger)
                 let initialLevel = 0;
                 const normalizedName = username.toLowerCase().replace('_', ' ').trim();
-                if (normalizedName === "manic moon") {
+                if (normalizedName === "manic moon" || normalizedName === "manic_moon") {
                     initialLevel = 3;
                 }
 
+                const userProfileRef = doc(db, "mitarbeiter", userCredential.user.uid);
                 await setDoc(userProfileRef, {
-                    uid: newUid,
+                    uid: userCredential.user.uid,
                     username: username,
-                    password: password,
                     level: initialLevel,
                     status: "Aktiv",
                     createdAt: new Date().toLocaleDateString('de-DE')
@@ -738,12 +921,57 @@
 
                 closeLoginModal();
                 const successMsg = initialLevel === 3 
-                    ? `Konto für ${username} wurde erfolgreich erstellt. Leitungs-Freigabestufe 3 wurde automatisch zugewiesen!` 
-                    : `Konto für ${username} wurde erfolgreich erstellt. Standard-Freigabestufe 0 (Bürger) zugewiesen. Du kannst nun von der Leitung befördert werden.`;
-                showNotification("Willkommen!", successMsg, "success");
-                validateAndEstablishEmployeeSession(newUid);
+                    ? `Konto für ${username} erstellt. Leitungs-Freigabestufe 3 wurde zugewiesen!` 
+                    : `Konto für ${username} erfolgreich erstellt. Freigabestufe 0 (Bürger) zugewiesen.`;
+                showNotification("Registrierung abgeschlossen", successMsg, "success");
             } catch (err) {
-// ... existing code ... -->
+                console.error(err);
+                showNotification("Datenbank-Fehler", "Verbindung fehlgeschlagen. Überprüfe deine Internetverbindung oder Firewall-Sicherheitsregeln.", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Konto registrieren";
+            }
+        }
+
+        // HANDLE MANUAL SIGN IN SYSTEM
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById("loginSubmitBtn");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Einloggen...";
+
+            const username = document.getElementById("loginUsername").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            try {
+                // Find virtual account translation
+                const virtualEmail = `${username.toLowerCase().replace(/\s+/g, '_')}@sw-hh.internal`;
+                await signInWithEmailAndPassword(auth, virtualEmail, password);
+                closeLoginModal();
+                showNotification("Willkommen!", `Erfolgreich als ${username} angemeldet!`, "success");
+            } catch (err) {
+                console.error(err);
+                showNotification("Anmeldefehler", "Ungültiger Benutzername oder Passwort. Bitte versuche es erneut.", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Anmelden";
+            }
+        }
+
+        // LOGOUT SESSION TRIGGER
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                loggedInUser = null;
+                updateAuthUI();
+                switchPage("startseite");
+                showNotification("Abgemeldet", "Sitzung erfolgreich beendet.", "success");
+            } catch (err) {
+                console.error("Fehler beim Abmelden: ", err);
+            }
+        }
+
+        // SYNCHRONIZE AUTHENTICATION USER INTERFACE ELEMENTS
         function updateAuthUI() {
             const loginTrigger = document.getElementById("login-trigger-btn");
             const profileBadge = document.getElementById("user-profile-badge");
@@ -752,7 +980,6 @@
             const employeeDropdown = document.getElementById("nav-mitarbeiter-dropdown");
             const contractSigInput = document.getElementById("signatureInput");
             
-            // Dropdown option toggles based on clearance levels
             const meldungenMenuBtn = document.getElementById("menu-btn-meldungen");
             const mitgliederMenuBtn = document.getElementById("menu-btn-mitglieder");
 
@@ -767,14 +994,14 @@
                 if (loggedInUser.level === 3) levelName = "Stufe 3 - Leitung";
                 if (headerUserlevel) headerUserlevel.innerText = levelName;
                 
-                // Show employee dropdown only if Level >= 1
+                // Only level >= 1 employees see the Mitarbeiter main menu
                 if (loggedInUser.level >= 1) {
                     if (employeeDropdown) employeeDropdown.classList.remove("hidden");
                 } else {
                     if (employeeDropdown) employeeDropdown.classList.add("hidden");
                 }
                 
-                // Show/hide menu items in dropdown based on clearance level
+                // Segment inside-dropdown visibility based on clearance levels
                 if (loggedInUser.level >= 2) {
                     if (meldungenMenuBtn) meldungenMenuBtn.classList.remove("hidden");
                 } else {
@@ -801,7 +1028,124 @@
                 }
             }
         }
-// ... existing code ... -->
+
+        // REALTIME CLOUD SYNCHRONIZATION FOR TEAMS (FIRESTORE EVENT DRIVEN)
+        let unsubMeldungen = null;
+        let unsubMitglieder = null;
+
+        function setupRealtimeSubscriptions() {
+            // Teardown pre-existing listeners
+            if (unsubMeldungen) unsubMeldungen();
+            if (unsubMitglieder) unsubMitglieder();
+
+            if (!loggedInUser) return;
+
+            // Level 2 & 3: Watch Bürgermeldungen Realtime Stream
+            if (loggedInUser.level >= 2) {
+                unsubMeldungen = onSnapshot(collection(db, "meldungen"), (snapshot) => {
+                    const meldungen = [];
+                    snapshot.forEach(doc => {
+                        meldungen.push({ id: doc.id, ...doc.data() });
+                    });
+                    renderMeldungenUI(meldungen);
+                });
+            }
+
+            // Level 3: Watch Mitarbeiter Profile Database Stream
+            if (loggedInUser.level === 3) {
+                unsubMitglieder = onSnapshot(collection(db, "mitarbeiter"), (snapshot) => {
+                    const mitglieder = [];
+                    snapshot.forEach(doc => {
+                        mitglieder.push({ id: doc.id, ...doc.data() });
+                    });
+                    globalAllMitglieder = mitglieder;
+                    renderMitgliederUI(mitglieder);
+                });
+            }
+        }
+
+        // RENDERING THE INCIDENT REPORT GRID (MELDUNGEN)
+        function renderMeldungenUI(meldungen) {
+            const grid = document.getElementById("meldungen-grid");
+            const emptyState = document.getElementById("meldungen-list-empty");
+            const counter = document.getElementById("meldungen-counter");
+
+            if (counter) counter.innerText = `${meldungen.length} Meldung${meldungen.length !== 1 ? 'en' : ''}`;
+            if (!grid || !emptyState) return;
+
+            if (meldungen.length === 0) {
+                grid.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            grid.classList.remove("hidden");
+            emptyState.classList.add("hidden");
+
+            grid.innerHTML = "";
+            meldungen.forEach(item => {
+                let badgeColor = "bg-amber-100 text-amber-700 border-amber-200";
+                if (item.status === "In Arbeit") badgeColor = "bg-sky-100 text-sky-700 border-sky-200";
+                if (item.status === "Erledigt") badgeColor = "bg-emerald-100 text-emerald-700 border-emerald-200";
+
+                const cardHTML = `
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-start gap-2">
+                                <span class="text-xs font-extrabold text-swBlue-800 tracking-wider font-mono">${item.orderID || 'SWHH-A-UNBEKANNT'}</span>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${badgeColor}">${item.status || 'Offen'}</span>
+                            </div>
+                            <h4 class="font-extrabold text-slate-900 leading-snug">${item.name}</h4>
+                            <p class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-phone text-[10px]"></i> ${item.phone}</p>
+                            <p class="text-slate-500 text-xs flex items-center gap-1.5"><i class="fa-solid fa-calendar-day text-[10px]"></i> ${item.date || ''} um ${item.time || ''} Uhr</p>
+                            <div class="border-t border-slate-100 pt-3 mt-1">
+                                <p class="text-slate-600 text-xs leading-relaxed italic line-clamp-3">"${item.description}"</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 flex items-center justify-between gap-2">
+                            <select onchange="updateOrderStatus('${item.id}', this.value)" class="bg-white border border-slate-200 rounded-lg text-[11px] px-2 py-1.5 font-bold text-slate-700 focus:outline-none focus:ring-1 focus:ring-swBlue-500">
+                                <option value="Offen" ${item.status === 'Offen' ? 'selected' : ''}>Offen</option>
+                                <option value="In Arbeit" ${item.status === 'In Arbeit' ? 'selected' : ''}>In Arbeit</option>
+                                <option value="Erledigt" ${item.status === 'Erledigt' ? 'selected' : ''}>Erledigt</option>
+                            </select>
+                            
+                            <button onclick="deleteMeldung('${item.id}')" class="bg-rose-50 hover:bg-rose-100 border border-rose-100 text-rose-600 rounded-lg px-2.5 py-1.5 text-xs font-bold transition flex items-center space-x-1">
+                                <i class="fa-solid fa-trash-can text-[10px]"></i>
+                                <span>Löschen</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        // UPDATE AN ALERTS PROCESSING STATUS ON FIRESTORE
+        async function updateOrderStatus(docId, newStatus) {
+            try {
+                await updateDoc(doc(db, "meldungen", docId), { status: newStatus });
+                showNotification("Status geändert", `Der Auftrag wurde erfolgreich in den Status '${newStatus}' überführt.`, "success");
+            } catch (err) {
+                console.error("Fehler beim Status-Update: ", err);
+                showNotification("Fehler", "Statusänderung konnte nicht übertragen werden.", "error");
+            }
+        }
+
+        // DESTRUCTION TRIGGER FOR ALERT TICKETS
+        function deleteMeldung(docId) {
+            showConfirmNotification("Meldung löschen?", "Möchtest du diese Meldung wirklich dauerhaft aus der Datenbank entfernen?", async () => {
+                try {
+                    await deleteDoc(doc(db, "meldungen", docId));
+                    showNotification("Gelöscht", "Der Auftrag wurde restlos entfernt.", "success");
+                } catch (err) {
+                    console.error("Fehler beim Löschen der Meldung: ", err);
+                    showNotification("Fehler", "Der Auftrag konnte nicht gelöscht werden.", "error");
+                }
+            });
+        }
+
+        // RENDERING THE ADMINISTRATIVE STAFF LISTING (MITGLIEDER)
         function renderMitgliederUI(members) {
             const tableBody = document.getElementById("mitglieder-table-body");
             const counter = document.getElementById("mitglieder-counter");
@@ -811,7 +1155,6 @@
 
             tableBody.innerHTML = "";
             members.forEach((member) => {
-                // Prevent self-modification lockout
                 const isSelf = loggedInUser && loggedInUser.uid === member.id;
                 
                 const levelSelectHTML = `
@@ -854,6 +1197,7 @@
             });
         }
 
+        // FILTER LOGIC FOR TEAM VIEW
         function filterMemberList() {
             const queryVal = document.getElementById("memberSearchInput").value.toLowerCase().trim();
             if (!queryVal) {
@@ -864,76 +1208,45 @@
             renderMitgliederUI(filtered);
         }
 
+        // UPDATE CLEARANCE LEVELS
         async function updateMemberLevel(targetUid, newLevel) {
             try {
-                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { level: parseInt(newLevel) });
                 showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success");
             } catch (err) {
                 console.error("Error changing clearance level:", err);
+                showNotification("Fehler", "Stufe konnte nicht geändert werden.", "error");
             }
         }
 
+        // SUSPEND OR RESTORE ACCOUNT STATUSES
         async function updateMemberStatus(targetUid, newStatus) {
             try {
-                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { status: newStatus });
                 showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success");
             } catch (err) {
                 console.error("Error setting status:", err);
+                showNotification("Fehler", "Status konnte nicht geändert werden.", "error");
             }
         }
 
-        function openChangePasswordModal(targetUid, memberName) {
-            document.getElementById("pwModalUid").value = targetUid;
-            document.getElementById("pwModalUsername").innerText = memberName;
-            document.getElementById("adminNewPassword").value = "";
-            
-            const modal = document.getElementById("changePasswordModal");
-            modal.classList.remove("opacity-0", "pointer-events-none");
-            modal.querySelector("div").classList.remove("scale-95");
-            modal.querySelector("div").classList.add("scale-100");
-        }
-
-        function closeChangePasswordModal() {
-            const modal = document.getElementById("changePasswordModal");
-            modal.classList.add("opacity-0", "pointer-events-none");
-            modal.querySelector("div").classList.remove("scale-100");
-            modal.querySelector("div").classList.add("scale-95");
-        }
-
-        async function submitAdminPasswordChange() {
-            const targetUid = document.getElementById("pwModalUid").value;
-            const newPassword = document.getElementById("adminNewPassword").value.trim();
-            const memberName = document.getElementById("pwModalUsername").innerText;
-
-            if (newPassword.length < 6) {
-                showNotification("Achtung!", "Das Passwort muss mindestens 6 Zeichen besitzen.", "error");
-                return;
-            }
-
-            try {
-                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
-                await updateDoc(userRef, { password: newPassword });
-                closeChangePasswordModal();
-                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success");
-            } catch (err) {
-                console.error("Error resetting member password:", err);
-            }
-        }
-
+        // ACCOUNT ADMINISTRATIVE DELETION
         function deleteMemberAccount(targetUid, username) {
             showConfirmNotification("Konto löschen?", `Möchten Sie das Mitarbeiter-Konto von ${username} wirklich unwiderruflich löschen?`, async () => {
                 try {
-                    const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'mitarbeiter', targetUid);
+                    const userRef = doc(db, "mitarbeiter", targetUid);
                     await deleteDoc(userRef);
                     showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success");
                 } catch (err) {
                     console.error(err);
+                    showNotification("Fehler", "Das Konto konnte nicht gelöscht werden.", "error");
                 }
             });
         }
 
+        // CITIZENS INTAKE SUBMISSION PROCESS (SAVES IN FIRESTORE AND EMITS DISCORD WEBHOOK)
         async function handleOrderSubmission() {
             const clientName = document.getElementById('orderName').value.trim();
             const clientTel = document.getElementById('orderTel').value.trim();
@@ -941,7 +1254,7 @@
             const companyName = document.getElementById('orderCompany').value.trim();
             const orderDesc = document.getElementById('orderDesc').value.trim();
 
-            if (!clientName || !clientTel || !orderDesc) {
+            if (!clientName || !clientTel || orderDesc.length < 5) {
                 showNotification("Achtung!", "Bitte alle Pflichtfelder (*) ausfüllen.", "error");
                 return;
             }
@@ -963,75 +1276,71 @@
                 status: "Offen"
             };
 
-            // 1. Save to Cloud Firestore (Rule 1 Compliance)
+            // 1. Save directly into Cloud Firestore
             try {
-                const meldungenCol = collection(db, 'artifacts', appId, 'public', 'data', 'meldungen');
+                const meldungenCol = collection(db, "meldungen");
                 await addDoc(meldungenCol, newOrderPayload);
             } catch (err) {
-                console.warn("Firestore write blocked. Saving locally: ", err);
-                const localOrders = JSON.parse(localStorage.getItem("swhh_orders") || "[]");
-                newOrderPayload.id = orderID; // Generate simulated id
-                localOrders.push(newOrderPayload);
-                localStorage.setItem("swhh_orders", JSON.stringify(localOrders));
+                console.error("Firestore write blocked. Saving locally: ", err);
             }
 
             // 2. Generate PDF using jsPDF
             try {
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
+                const docPdf = new jsPDF();
 
                 const primaryColor = [15, 23, 42];  
                 const accentColor = [249, 115, 22];  
 
-                doc.setFillColor(...primaryColor);
-                doc.rect(0, 0, 210, 40, 'F');
-                doc.setFillColor(...accentColor);
-                doc.rect(0, 40, 210, 4, 'F');
+                docPdf.setFillColor(...primaryColor);
+                docPdf.rect(0, 0, 210, 40, 'F');
+                docPdf.setFillColor(...accentColor);
+                docPdf.rect(0, 40, 210, 4, 'F');
 
-                doc.setTextColor(255, 255, 255);
-                doc.setFont("Helvetica", "bold");
-                doc.setFontSize(22);
-                doc.text("STADTWERKE HAMBURG", 20, 25);
-                doc.setFontSize(10);
-                doc.setTextColor(226, 232, 240);
-                doc.text("Bürger- & Auftragsportal | Offizieller Dienstleistungs-Auftrag", 20, 33);
+                docPdf.setTextColor(255, 255, 255);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setFontSize(22);
+                docPdf.text("STADTWERKE HAMBURG", 20, 25);
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(226, 232, 240);
+                docPdf.text("Bürger- & Auftragsportal | Offizieller Dienstleistungs-Auftrag", 20, 33);
 
-                doc.setFillColor(248, 250, 252);
-                doc.setDrawColor(226, 232, 240);
-                doc.rect(20, 52, 170, 35, 'FD');
+                docPdf.setFillColor(248, 250, 252);
+                docPdf.setDrawColor(226, 232, 240);
+                docPdf.rect(20, 52, 170, 35, 'FD');
                 
-                doc.setFontSize(10);
-                doc.setTextColor(71, 85, 105);
-                doc.setFont("Helvetica", "bold");
-                doc.text("OFFIZIELLE AUFTRAGSBESTÄTIGUNG", 25, 60);
-                doc.setFont("Helvetica", "normal");
-                doc.text(`Auftrags-Nr:    ${orderID}`, 25, 67);
-                doc.text(`Einreichedatum: ${currentDateStr} - ${currentTimeStr} Uhr`, 25, 74);
-                doc.text(`Status:         Warteschlange / Offen`, 25, 81);
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(71, 85, 105);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.text("OFFIZIELLE AUFTRAGSBESTÄTIGUNG", 25, 60);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text(`Auftrags-Nr:    ${orderID}`, 25, 67);
+                docPdf.text(`Einreichedatum: ${currentDateStr} - ${currentTimeStr} Uhr`, 25, 74);
+                docPdf.text(`Status:         Warteschlange / Offen`, 25, 81);
 
-                doc.setFillColor(248, 250, 252);
-                doc.rect(20, 95, 170, 35, 'FD');
-                doc.setFont("Helvetica", "bold");
-                doc.text("AUFTRAGGEBER DETAILS", 25, 103);
-                doc.setFont("Helvetica", "normal");
-                doc.text(`Ansprechpartner: ${clientName}`, 25, 110);
-                doc.text(`Telefonnummer:   ${clientTel}`, 25, 117);
+                docPdf.setFillColor(248, 250, 252);
+                docPdf.rect(20, 95, 170, 35, 'FD');
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.text("AUFTRAGGEBER DETAILS", 25, 103);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text(`Ansprechpartner: ${clientName}`, 25, 110);
+                docPdf.text(`Telefonnummer:   ${clientTel}`, 25, 117);
                 const typAusgabe = clientType === 'firma' ? `Firma (${companyName})` : 'Privatperson';
-                doc.text(`Kunden-Typ:      ${typAusgabe}`, 25, 124);
+                docPdf.text(`Kunden-Typ:      ${typAusgabe}`, 25, 124);
 
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...primaryColor);
-                doc.setFontSize(11);
-                doc.text("Leistungsbeschreibung (Was wir tun sollen):", 20, 145);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...primaryColor);
+                docPdf.setFontSize(11);
+                docPdf.text("Leistungsbeschreibung (Was wir tun sollen):", 20, 145);
 
-                doc.setFont("Helvetica", "normal");
-                doc.setFontSize(10);
-                doc.setTextColor(51, 65, 85);
-                const wrappedDesc = doc.splitTextToSize(orderDesc, 170);
-                doc.text(wrappedDesc, 20, 153);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setFontSize(10);
+                docPdf.setTextColor(51, 65, 85);
+                const wrappedDesc = docPdf.splitTextToSize(orderDesc, 170);
+                docPdf.text(wrappedDesc, 20, 153);
 
-                const pdfBlob = doc.output('blob');
-                window.signedOrderPDFDoc = doc;
+                const pdfBlob = docPdf.output('blob');
+                window.signedOrderPDFDoc = docPdf;
                 window.generatedOrderFileName = `Auftragsbestaetigung_SWHH_${orderID}.pdf`;
 
                 // 3. Send to Discord Webhook
@@ -1057,7 +1366,7 @@
 
                 formData.append('payload_json', JSON.stringify(discordPayload));
 
-                await fetch(webhookUrl, { method: 'POST', body: formData });
+                await fetch(discordWebhookUrl, { method: 'POST', body: formData });
                 document.getElementById('downloadOrderBtn').classList.remove('hidden');
                 showNotification(
                     "Auftrag übermittelt!", 
@@ -1069,14 +1378,15 @@
                 console.error(err);
                 document.getElementById('downloadOrderBtn').classList.remove('hidden');
                 showNotification(
-                    "Auftrag lokal erfasst!", 
-                    `Hallo ${clientName}, Ihr Auftrag wurde lokal gesichert (ID: ${orderID}).`, 
-                    "success",
+                    "Einreichung fehlgeschlagen", 
+                    `Konnte den Auftrag nicht an Discord übermitteln. Die Kopie kann lokal gesichert werden.`, 
+                    "error",
                     "downloadGeneratedOrderPDF()"
                 );
             }
         }
 
+        // DIGITAL CONTRACT RECOGNITION AND TWO-PAGE PDF EXPORT PIPELINE
         function handleFormSubmission() {
             const name = document.getElementById('signatureInput').value.trim();
             const birthdate = document.getElementById('birthdateInput').value.trim();
@@ -1095,7 +1405,7 @@
 
             try {
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
+                const docPdf = new jsPDF();
                 
                 const primaryColor = [15, 23, 42];  
                 const orangeAccent = [234, 88, 12];  
@@ -1103,72 +1413,72 @@
                 const borderGrey = [203, 213, 225]; 
 
                 function renderPageHeader(pageNum) {
-                    doc.setFillColor(...primaryColor);
-                    doc.rect(0, 0, 210, 32, 'F');
+                    docPdf.setFillColor(...primaryColor);
+                    docPdf.rect(0, 0, 210, 32, 'F');
                     
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFont("Helvetica", "bold");
-                    doc.setFontSize(16);
-                    doc.text("STADTWERKE HAMBURG", 15, 15);
+                    docPdf.setTextColor(255, 255, 255);
+                    docPdf.setFont("Helvetica", "bold");
+                    docPdf.setFontSize(16);
+                    docPdf.text("STADTWERKE HAMBURG", 15, 15);
                     
-                    doc.setFont("Helvetica", "normal");
-                    doc.setFontSize(8);
-                    doc.setTextColor(203, 213, 225);
-                    doc.text("Tiefbau – Infrastruktur – Netzbetrieb | Ausschläger Weg 67, Hamburg", 15, 22);
+                    docPdf.setFont("Helvetica", "normal");
+                    docPdf.setFontSize(8);
+                    docPdf.setTextColor(203, 213, 225);
+                    docPdf.text("Tiefbau – Infrastruktur – Netzbetrieb | Ausschläger Weg 67, Hamburg", 15, 22);
 
-                    doc.setFontSize(9);
-                    doc.setFont("Helvetica", "bold");
-                    doc.setTextColor(249, 115, 22);
-                    doc.text("VERTRAGSNUMMER: SW-HH-2025-0427", 130, 15);
+                    docPdf.setFontSize(9);
+                    docPdf.setFont("Helvetica", "bold");
+                    docPdf.setTextColor(249, 115, 22);
+                    docPdf.text("VERTRAGSNUMMER: SW-HH-2025-0427", 130, 15);
                     
-                    doc.setFont("Helvetica", "normal");
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFontSize(8);
-                    doc.text(`SEITE ${pageNum} VON 2`, 180, 26);
+                    docPdf.setFont("Helvetica", "normal");
+                    docPdf.setTextColor(255, 255, 255);
+                    docPdf.setFontSize(8);
+                    docPdf.text(`SEITE ${pageNum} VON 2`, 180, 26);
                 }
 
                 // PAGE 1
                 renderPageHeader(1);
 
-                doc.setFillColor(...lightSlate);
-                doc.setDrawColor(...borderGrey);
-                doc.rect(15, 40, 180, 30, 'FD');
+                docPdf.setFillColor(...lightSlate);
+                docPdf.setDrawColor(...borderGrey);
+                docPdf.rect(15, 40, 180, 30, 'FD');
 
-                doc.setFontSize(8);
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(71, 85, 105);
-                doc.text("Vertragsnummer: SW-HH-2025-0427", 20, 47);
-                doc.text("Personalnummer: SW-EMP-0587", 20, 54);
-                doc.text("Abteilung: Infrastruktur & Netzbetrieb", 110, 47);
-                doc.text("Standort: Ausschläger Weg 67, HH", 110, 54);
+                docPdf.setFontSize(8);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(71, 85, 105);
+                docPdf.text("Vertragsnummer: SW-HH-2025-0427", 20, 47);
+                docPdf.text("Personalnummer: SW-EMP-0587", 20, 54);
+                docPdf.text("Abteilung: Infrastruktur & Netzbetrieb", 110, 47);
+                docPdf.text("Standort: Ausschläger Weg 67, HH", 110, 54);
 
-                doc.setFontSize(14);
-                doc.setTextColor(...primaryColor);
-                doc.text("ARBEITSVERTRAG", 15, 82);
-                doc.setFontSize(8);
-                doc.setFont("Helvetica", "normal");
-                doc.text("Zwischen der Stadtwerke Hamburg (Arbeitgeber) und dem Arbeitnehmer:", 15, 87);
+                docPdf.setFontSize(14);
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("ARBEITSVERTRAG", 15, 82);
+                docPdf.setFontSize(8);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text("Zwischen der Stadtwerke Hamburg (Arbeitgeber) und dem Arbeitnehmer:", 15, 87);
 
-                doc.setFillColor(...lightSlate);
-                doc.rect(15, 92, 180, 22, 'FD');
-                doc.setTextColor(...primaryColor);
-                doc.setFont("Helvetica", "bold");
-                doc.text(`Name: ${name}`, 20, 98);
-                doc.setFont("Helvetica", "normal");
-                doc.text(`Geburtsdatum: ${birthdate}`, 20, 104);
-                doc.text(`Anschrift: ${address}`, 20, 110);
+                docPdf.setFillColor(...lightSlate);
+                docPdf.rect(15, 92, 180, 22, 'FD');
+                docPdf.setTextColor(...primaryColor);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.text(`Name: ${name}`, 20, 98);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.text(`Geburtsdatum: ${birthdate}`, 20, 104);
+                docPdf.text(`Anschrift: ${address}`, 20, 110);
 
                 let currentY = 122;
 
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.setFontSize(10);
-                doc.text("§ 1 TÄTIGKEIT UND AUFGABENBEREICH", 15, currentY);
-                doc.setFont("Helvetica", "normal");
-                doc.setFontSize(8);
-                doc.setTextColor(...primaryColor);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.setFontSize(10);
+                docPdf.text("§ 1 TÄTIGKEIT UND AUFGABENBEREICH", 15, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setFontSize(8);
+                docPdf.setTextColor(...primaryColor);
                 currentY += 5;
-                doc.text("Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Netzbetrieb eingestellt. Aufgaben:", 15, currentY);
+                docPdf.text("Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Netzbetrieb eingestellt. Aufgaben:", 15, currentY);
                 currentY += 5;
 
                 const tasks = [
@@ -1179,14 +1489,14 @@
                     "- Zusammenarbeit mit Behörden, Polizei und Rettungsdiensten"
                 ];
                 tasks.forEach(task => {
-                    doc.text(task, 20, currentY);
+                    docPdf.text(task, 20, currentY);
                     currentY += 4.5;
                 });
 
                 currentY += 5;
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.text("§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST", 15, currentY);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.text("§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST", 15, currentY);
                 currentY += 5;
 
                 const scheduleData = [
@@ -1194,17 +1504,17 @@
                     ["Werktage:", "Montag – Freitag"],
                     ["Arbeitszeitrahmen:", "06:00 Uhr – 18:00 Uhr"]
                 ];
-                doc.setFont("Helvetica", "normal");
+                docPdf.setFont("Helvetica", "normal");
                 scheduleData.forEach(row => {
-                    doc.text(row[0], 20, currentY);
-                    doc.text(row[1], 100, currentY);
+                    docPdf.text(row[0], 20, currentY);
+                    docPdf.text(row[1], 100, currentY);
                     currentY += 5;
                 });
 
                 currentY += 5;
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.text("§ 3 VERGÜTUNG & § 4 SONDERZAHLUNGEN", 15, currentY);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.text("§ 3 VERGÜTUNG & § 4 SONDERZAHLUNGEN", 15, currentY);
                 currentY += 5;
 
                 const salaryRows = [
@@ -1212,26 +1522,26 @@
                     ["Zulagen gesamt:", "575,00 € / Monat"],
                     ["Gesamt brutto:", "3.775,00 € / Monat"]
                 ];
-                doc.setFont("Helvetica", "normal");
+                docPdf.setFont("Helvetica", "normal");
                 salaryRows.forEach(row => {
-                    doc.text(row[0], 20, currentY);
-                    doc.text(row[1], 100, currentY);
+                    docPdf.text(row[0], 20, currentY);
+                    docPdf.text(row[1], 100, currentY);
                     currentY += 5;
                 });
 
                 // PAGE 2
-                doc.addPage();
+                docPdf.addPage();
                 renderPageHeader(2);
 
                 currentY = 42;
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.text("§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)", 15, currentY);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.text("§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)", 15, currentY);
                 currentY += 5;
 
-                doc.setFont("Helvetica", "normal");
-                doc.setTextColor(...primaryColor);
-                doc.text("Der Arbeitnehmer verpflichtet sich, die bereitgestellte PSA vorschriftsmäßig zu nutzen:", 15, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Der Arbeitnehmer verpflichtet sich, die bereitgestellte PSA vorschriftsmäßig zu nutzen:", 15, currentY);
                 currentY += 5;
 
                 const psaList = [
@@ -1239,47 +1549,47 @@
                     "- Warnschutzkleidung Klasse 3", "- Sicherheitsschuhe S3"
                 ];
                 psaList.forEach(p => {
-                    doc.text(p, 20, currentY);
+                    docPdf.text(p, 20, currentY);
                     currentY += 4.5;
                 });
 
                 currentY += 5;
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.text("§ 7 SICHERHEITSBELEHRUNG", 15, currentY);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.text("§ 7 SICHERHEITSBELEHRUNG", 15, currentY);
                 currentY += 5;
-                doc.setFont("Helvetica", "normal");
-                doc.setTextColor(...primaryColor);
-                doc.text("Der Mitarbeiter ist belehrt über: Baustellenabsicherung, Gefahrstoffe, Erste-Hilfe.", 15, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Der Mitarbeiter ist belehrt über: Baustellenabsicherung, Gefahrstoffe, Erste-Hilfe.", 15, currentY);
 
                 currentY += 15;
-                doc.setFont("Helvetica", "bold");
-                doc.setTextColor(...orangeAccent);
-                doc.text("§ 8 PFLICHTEN, § 9 HAFTUNG & § 10 BESTIMMUNGEN", 15, currentY);
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.setTextColor(...orangeAccent);
+                docPdf.text("§ 8 PFLICHTEN, § 9 HAFTUNG & § 10 BESTIMMUNGEN", 15, currentY);
                 currentY += 5;
-                doc.setFont("Helvetica", "normal");
-                doc.setTextColor(...primaryColor);
-                doc.text("Sorgfaltspflichten für Werkzeuge und Fahrzeuge sind einzuhalten. Haftungsausschluss bei grobem Vorsatz.", 15, currentY);
+                docPdf.setFont("Helvetica", "normal");
+                docPdf.setTextColor(...primaryColor);
+                docPdf.text("Sorgfaltspflichten für Werkzeuge und Fahrzeuge sind einzuhalten. Haftungsausschluss bei grobem Vorsatz.", 15, currentY);
 
                 // SIGNATURES
                 currentY = 230;
-                doc.setDrawColor(...borderGrey);
-                doc.line(15, currentY, 85, currentY);
-                doc.setFontSize(8);
-                doc.text("Für die Stadtwerke Hamburg (Leitung)", 15, currentY + 4);
-                doc.text("Markus Helbing", 15, currentY - 3);
+                docPdf.setDrawColor(...borderGrey);
+                docPdf.line(15, currentY, 85, currentY);
+                docPdf.setFontSize(8);
+                docPdf.text("Für die Stadtwerke Hamburg (Leitung)", 15, currentY + 4);
+                docPdf.text("Markus Helbing", 15, currentY - 3);
 
-                doc.line(110, currentY, 185, currentY);
-                doc.text("Unterschrift Arbeitnehmer", 110, currentY + 4);
-                doc.setFont("times", "italic");
-                doc.setFontSize(14);
-                doc.setTextColor(2, 132, 199);
-                doc.text(name, 115, currentY - 3);
+                docPdf.line(110, currentY, 185, currentY);
+                docPdf.text("Unterschrift Arbeitnehmer", 110, currentY + 4);
+                docPdf.setFont("times", "italic");
+                docPdf.setFontSize(14);
+                docPdf.setTextColor(2, 132, 199);
+                docPdf.text(name, 115, currentY - 3);
 
                 const formattedName = name.replace(/\s+/g, '_');
-                const pdfBlob = doc.output('blob');
+                const pdfBlob = docPdf.output('blob');
 
-                window.signedPDFDoc = doc;
+                window.signedPDFDoc = docPdf;
                 window.generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
 
                 // Discord transmission
@@ -1303,7 +1613,7 @@
                 
                 formData.append('payload_json', JSON.stringify(discordPayload));
 
-                fetch(webhookUrl, { method: 'POST', body: formData })
+                fetch(discordWebhookUrl, { method: 'POST', body: formData })
                 .then(response => {
                     document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
                     showNotification(
@@ -1327,6 +1637,7 @@
             }
         }
 
+        // HELPER LOGIC FOR COMPANY NAMES IN BÜRGER FORM
         function toggleCompanyField() {
             const orderType = document.getElementById('orderType').value;
             const companyWrapper = document.getElementById('companyFieldWrapper');
@@ -1342,6 +1653,7 @@
             }
         }
 
+        // SIGNATURE CANVAS LIVE SYNCHRONIZER
         function updateLiveSignature() {
             const name = document.getElementById('signatureInput').value.trim();
             const birth = document.getElementById('birthdateInput').value.trim();
@@ -1361,6 +1673,7 @@
             }
         }
 
+        // TRIGGER CONTROL AND ANIMATION FUNCTIONS FOR MODALS
         function openLoginModal() {
             const modal = document.getElementById("loginModal");
             modal.classList.remove("opacity-0", "pointer-events-none");
@@ -1389,7 +1702,7 @@
             }
         }
 
-        // NOTIFICATIONS SYSTEM
+        // CUSTOM NOTIFICATIONS AND ALERT POPUPS
         function showNotification(title, text, type = 'success', downloadAction = null) {
             const overlay = document.getElementById('customNotification');
             const card = document.getElementById('notificationCard');
@@ -1462,9 +1775,9 @@
             card.classList.add('scale-95');
         }
 
-        function safeSavePDF(doc, filename) {
+        function safeSavePDF(docObj, filename) {
             try {
-                doc.save(filename);
+                docObj.save(filename);
             } catch (err) {
                 console.warn("Sandbox execution detected: Auto download paused.", err);
             }
@@ -1486,7 +1799,49 @@
             safeSavePDF(window.signedOrderPDFDoc, window.generatedOrderFileName);
         }
 
-        // Mount module functions on the global window scope to ensure inline onclick handlers work
+        // STEAMING_CHUNK: Managing administrative passwords and model setups...
+        function openChangePasswordModal(targetUid, memberName) {
+            document.getElementById("pwModalUid").value = targetUid;
+            document.getElementById("pwModalUsername").innerText = memberName;
+            document.getElementById("adminNewPassword").value = "";
+            
+            const modal = document.getElementById("changePasswordModal");
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            modal.querySelector("div").classList.remove("scale-95");
+            modal.querySelector("div").classList.add("scale-100");
+        }
+
+        function closeChangePasswordModal() {
+            const modal = document.getElementById("changePasswordModal");
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modal.querySelector("div").classList.remove("scale-100");
+            modal.querySelector("div").classList.add("scale-95");
+        }
+
+        async function submitAdminPasswordChange() {
+            const targetUid = document.getElementById("pwModalUid").value;
+            const newPassword = document.getElementById("adminNewPassword").value.trim();
+            const memberName = document.getElementById("pwModalUsername").innerText;
+
+            if (newPassword.length < 6) {
+                showNotification("Achtung!", "Das Passwort muss mindestens 6 Zeichen besitzen.", "error");
+                return;
+            }
+
+            try {
+                const userRef = doc(db, "mitarbeiter", targetUid);
+                
+                // Direct modification within firestore
+                await updateDoc(userRef, { password: newPassword });
+                closeChangePasswordModal();
+                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success");
+            } catch (err) {
+                console.error("Error resetting member password:", err);
+                showNotification("Fehler", "Passwort konnte nicht geändert werden.", "error");
+            }
+        }
+
+        // MOUNT ALL FUNCTIONS TO THE WINDOW OBJECT (ESSENTIAL FOR ES6 COMPATIBILITY)
         window.switchPage = switchPage;
         window.openLoginModal = openLoginModal;
         window.closeLoginModal = closeLoginModal;
