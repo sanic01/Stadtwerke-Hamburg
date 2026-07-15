@@ -1176,12 +1176,7 @@
                 }
             });
 
-            // If entering contract view, preset signature name
-            if (pageId === "arbeitsvertrag" && loggedInUser) {
-                const sigInput = document.getElementById("signatureInput");
-                if (sigInput) sigInput.value = loggedInUser.username;
-                updateLiveSignature();
-            }
+            // Signature name is entered manually by the user, no longer preset automatically
 
             // Scroll to Top Smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1414,10 +1409,6 @@
                     if (mitgliederMenuBtn) mitgliederMenuBtn.classList.add("hidden");
                 }
                 
-                if (contractSigInput) {
-                    contractSigInput.value = loggedInUser.username;
-                    updateLiveSignature();
-                }
             } else {
                 if (loginTrigger) loginTrigger.classList.remove("hidden");
                 if (profileBadge) profileBadge.classList.add("hidden");
