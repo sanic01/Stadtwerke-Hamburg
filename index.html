@@ -1315,7 +1315,7 @@
                 const successMsg = initialLevel === 3 
                     ? `Konto für ${username} erstellt. Leitungs-Freigabestufe 3 wurde zugewiesen!` 
                     : `Konto für ${username} erfolgreich erstellt. Freigabestufe 0 (Bürger) zugewiesen.`;
-                showNotification("Registrierung abgeschlossen", successMsg, "success");
+                showNotification("Registrierung abgeschlossen", successMsg, "success", "false");
             } catch (err) {
                 console.error(err);
                 showNotification("Datenbank-Fehler", "Verbindung fehlgeschlagen oder Berechtigung verweigert. Bitte wende dich an den Support.", "error");
@@ -1340,7 +1340,7 @@
                 const virtualEmail = `${username.toLowerCase().replace(/\s+/g, '_')}@sw-hh.internal`;
                 await signInWithEmailAndPassword(auth, virtualEmail, password);
                 closeLoginModal();
-                showNotification("Willkommen!", `Erfolgreich als ${username} angemeldet!`, "success");
+                showNotification("Willkommen!", `Erfolgreich als ${username} angemeldet!`, "success", "false");
             } catch (err) {
                 console.error(err);
                 showNotification("Anmeldefehler", "Ungültiger Benutzername oder Passwort. Bitte versuche es erneut.", "error");
@@ -1357,7 +1357,7 @@
                 loggedInUser = null;
                 updateAuthUI();
                 switchPage("startseite");
-                showNotification("Abgemeldet", "Sitzung erfolgreich beendet.", "success");
+                showNotification("Abgemeldet", "Sitzung erfolgreich beendet.", "success", "false");
             } catch (err) {
                 console.error("Fehler beim Abmelden: ", err);
             }
@@ -1516,7 +1516,7 @@
         async function updateOrderStatus(docId, newStatus) {
             try {
                 await updateDoc(doc(db, "meldungen", docId), { status: newStatus });
-                showNotification("Status geändert", `Der Auftrag wurde erfolgreich in den Status '${newStatus}' überführt.`, "success");
+                showNotification("Status geändert", `Der Auftrag wurde erfolgreich in den Status '${newStatus}' überführt.`, "success", "false");
             } catch (err) {
                 console.error("Fehler beim Status-Update: ", err);
                 showNotification("Fehler", "Statusänderung konnte nicht übertragen werden.", "error");
@@ -1528,7 +1528,7 @@
             showConfirmNotification("Meldung löschen?", "Möchtest du diese Meldung wirklich dauerhaft aus der Datenbank entfernen?", async () => {
                 try {
                     await deleteDoc(doc(db, "meldungen", docId));
-                    showNotification("Gelöscht", "Der Auftrag wurde restlos entfernt.", "success");
+                    showNotification("Gelöscht", "Der Auftrag wurde restlos entfernt.", "success", "false");
                 } catch (err) {
                     console.error("Fehler beim Löschen der Meldung: ", err);
                     showNotification("Fehler", "Der Auftrag konnte nicht gelöscht werden.", "error");
@@ -1604,7 +1604,7 @@
             try {
                 const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { level: parseInt(newLevel) });
-                showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success");
+                showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success", "false");
             } catch (err) {
                 console.error("Error changing clearance level:", err);
                 showNotification("Fehler", "Stufe konnte nicht geändert werden.", "error");
@@ -1616,7 +1616,7 @@
             try {
                 const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { status: newStatus });
-                showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success");
+                showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success", "false");
             } catch (err) {
                 console.error("Error setting status:", err);
                 showNotification("Fehler", "Status konnte nicht geändert werden.", "error");
@@ -1629,7 +1629,7 @@
                 try {
                     const userRef = doc(db, "mitarbeiter", targetUid);
                     await deleteDoc(userRef);
-                    showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success");
+                    showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success", "false");
                 } catch (err) {
                     console.error(err);
                     showNotification("Fehler", "Das Konto konnte nicht gelöscht werden.", "error");
@@ -1821,7 +1821,7 @@
                 document.getElementById("statusTitle").value = "";
                 document.getElementById("statusContent").value = "";
 
-                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht und an den Discord gesendet.", "success");
+                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht und an den Discord gesendet.", "success", "false");
             } catch (err) {
                 console.error("Fehler beim Speichern der Statusmeldung: ", err);
                 showNotification("Fehler", "Datenbankverbindung gescheitert.", "error");
@@ -1833,7 +1833,7 @@
             showConfirmNotification("Meldung löschen?", `Möchten Sie den Beitrag "${title}" wirklich löschen und vom Ticker entfernen?`, async () => {
                 try {
                     await deleteDoc(doc(db, "statusmeldungen", docId));
-                    showNotification("Gelöscht", "Die Bürgerinformation wurde gelöscht.", "success");
+                    showNotification("Gelöscht", "Die Bürgerinformation wurde gelöscht.", "success", "false");
                 } catch (err) {
                     console.error("Fehler beim Löschen: ", err);
                     showNotification("Fehler", "Löschvorgang abgebrochen.", "error");
@@ -2445,7 +2445,7 @@
                 // Direct modification within firestore
                 await updateDoc(userRef, { password: newPassword });
                 closeChangePasswordModal();
-                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success");
+                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success", "false");
             } catch (err) {
                 console.error("Error resetting member password:", err);
                 showNotification("Fehler", "Passwort konnte nicht geändert werden.", "error");
