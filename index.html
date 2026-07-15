@@ -762,8 +762,8 @@
                 switchPage("startseite");
                 return;
             }
-            if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 2)) {
-                showNotification("Zugriff verweigert", "Meldungen können erst ab Freigabestufe 2 (Mitarbeiter) eingesehen werden.", "error");
+            if (pageId === "meldungen" && (!loggedInUser || loggedInUser.level < 1)) {
+                showNotification("Zugriff verweigert", "Meldungen können erst ab Freigabestufe 1 (Praktikant) eingesehen werden.", "error");
                 switchPage("startseite");
                 return;
             }
@@ -1024,7 +1024,7 @@
                 }
                 
                 // Segment inside-dropdown visibility based on clearance levels
-                if (loggedInUser.level >= 2) {
+                if (loggedInUser.level >= 1) {
                     if (meldungenMenuBtn) meldungenMenuBtn.classList.remove("hidden");
                 } else {
                     if (meldungenMenuBtn) meldungenMenuBtn.classList.add("hidden");
@@ -1062,8 +1062,8 @@
 
             if (!loggedInUser) return;
 
-            // Level 2 & 3: Watch Bürgermeldungen Realtime Stream
-            if (loggedInUser.level >= 2) {
+            // Level 1, 2 & 3: Watch Bürgermeldungen Realtime Stream
+            if (loggedInUser.level >= 1) {
                 unsubMeldungen = onSnapshot(collection(db, "meldungen"), (snapshot) => {
                     const meldungen = [];
                     snapshot.forEach(doc => {
