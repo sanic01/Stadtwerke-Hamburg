@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de" class="scroll-smooth h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,597 +58,927 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 min-h-full font-sans antialiased flex flex-col justify-between">
 
-    <!-- Modern Header & Navigation -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo Block -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('startseite')">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-swBlue-800 to-swBlue-50 flex items-center justify-center text-white shadow-md shadow-swBlue-500/20">
-                        <i class="fa-solid fa-industry text-xl text-swBlue-800"></i>
-                    </div>
-                    <div>
-                        <span class="text-lg font-extrabold tracking-tight text-swBlue-900 block leading-tight">STADTWERKE</span>
-                        <span class="text-xs font-semibold uppercase tracking-widest text-swOrange-600 block leading-none">HAMBURG</span>
-                    </div>
+    <!-- AUTHENTICATION VIEW (Ganzseitiger Login/Registrierungs-Screen) -->
+    <div id="view-auth" class="flex-grow flex items-center justify-center p-4 sm:p-8 bg-gradient-to-tr from-swBlue-900 via-slate-900 to-swOrange-700 relative overflow-hidden min-h-screen">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.15),transparent_45%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(2,132,199,0.15),transparent_45%)]"></div>
+        
+        <div class="relative z-10 w-full max-w-md bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/20 transition-all duration-300">
+            <!-- Portal Logo -->
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-lg mx-auto mb-4">
+                    <i class="fa-solid fa-industry text-2xl"></i>
                 </div>
+                <h2 class="text-2xl font-extrabold text-slate-900">Mitarbeiter-Portal</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase tracking-widest font-semibold">Stadtwerke Hamburg</p>
                 
-                <!-- Desktop Navigation Links (Tab-Switcher) -->
-                <nav class="hidden md:flex space-x-2 items-center">
-                    <button id="nav-home" onclick="switchPage('startseite')" class="text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent">
-                        <i class="fa-solid fa-house mr-2"></i>Startseite
-                    </button>
-                    <button id="nav-contract" onclick="switchPage('arbeitsvertrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
-                        <i class="fa-solid fa-file-signature mr-2"></i>Arbeitsvertrag
-                    </button>
-                    <button id="nav-order" onclick="switchPage('auftrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
-                        <i class="fa-solid fa-file-invoice mr-2"></i>Auftrag einreichen
-                    </button>
-                </nav>
-                
-                <!-- Indicator badge -->
-                <div class="flex items-center space-x-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-200 text-xs font-semibold">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>System Online</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="py-8 flex-grow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- SECTION 1: STARTSEITE (HOME VIEW) -->
-            <div id="view-startseite" class="space-y-12">
-                <!-- Welcome Banner -->
-                <div class="relative overflow-hidden bg-gradient-to-r from-swBlue-900 via-swBlue-800 to-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl text-white">
-                    <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-swBlue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                    <div class="absolute -left-16 -top-16 w-96 h-96 bg-swOrange-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                    
-                    <div class="relative z-10 max-w-3xl">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
-                            <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Bürger- & Karriereportal
-                        </span>
-                        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-                            Werde Teil unseres Teams oder <span class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">reiche Aufträge ein</span>
-                        </h1>
-                        <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-                            Wir halten die Metropole am Laufen! Nutze unser volldigitales Portal, um deinen Arbeitsvertrag bequem online auszufüllen oder einen Dienstleistungsauftrag einzureichen, falls unser Team gerade im Außendienst ist.
-                        </p>
-                        <div class="flex flex-wrap gap-4">
-                            <button onclick="switchPage('arbeitsvertrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
-                                Jetzt Vertrag unterzeichnen <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </button>
-                            <button onclick="switchPage('auftrag')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
-                                Dienstleistung anfordern <i class="fa-solid fa-file-invoice ml-2"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Departments / Services Info Section -->
-                <section id="services-anchor" class="scroll-mt-24">
-                    <div class="text-center max-w-3xl mx-auto mb-12">
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Unsere Kerndienstleistungen</h2>
-                        <p class="text-slate-600 mt-2">Ein reibungsloser Betrieb ist nur durch das Zusammenspiel aller Abteilungen möglich.</p>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Service Card 1 -->
-                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-orange-100 text-swOrange-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-trash-can text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">Abfallwirtschaft & Entsorgung</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">
-                                Verantwortlich für die pünktliche und fachgerechte Leerung aller Müll- und Recyclingbehälter im gesamten Hamburger Stadtgebiet.
-                            </p>
-                        </div>
-
-                        <!-- Service Card 2 -->
-                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-truck-field text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">
-                                Erhaltung der Verkehrssicherheit und Sauberkeit auf allen öffentlichen Verkehrsflächen sowie Koordination bei Extremwetterlagen.
-                            </p>
-                        </div>
-
-                        <!-- Service Card 3 -->
-                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
-                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-bolt text-xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-slate-900 mb-2">Infrastruktur & Instandsetzung</h3>
-                            <p class="text-slate-600 text-sm leading-relaxed">
-                                Wartung der Leitungsnetze, Beleuchtungsanlagen und Ampelsysteme sowie rasche Behebung von Störungen im städtischen Netzgebiet.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- SECTION 2: ARBEITSVERTRAG (CONTRACT VIEW - MINIMALIST) -->
-            <div id="view-arbeitsvertrag" class="hidden max-w-4xl mx-auto">
-                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div>
-                                <h2 class="text-xl sm:text-2xl font-extrabold">Anstellungs- & Arbeitsvertrag</h2>
-                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg (Tiefbau – Infrastruktur – Netzbetrieb)</p>
-                            </div>
-                            <div class="bg-white/10 border border-white/20 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
-                                Dokumenten-ID: SW-HH-2025-0427
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-4 sm:p-8 space-y-6">
-                        <!-- REALISTIC CONTRACT VIEW PANEL (Based on content.jpg) -->
-                        <div class="bg-white border border-slate-300 rounded-2xl p-4 sm:p-8 h-[550px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-700 space-y-6 shadow-inner">
-                            
-                            <!-- PDF Top Metadata Bar -->
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 border border-slate-300 rounded-lg p-3 bg-slate-50 text-[11px] sm:text-xs">
-                                <div><span class="text-slate-400 font-medium">Vertragsnummer:</span> <strong class="text-slate-800">SW-HH-2025-0427</strong></div>
-                                <div><span class="text-slate-400 font-medium">Personalnummer:</span> <strong class="text-slate-800">SW-EMP-0587</strong></div>
-                                <div><span class="text-slate-400 font-medium">Einstellungsdatum:</span> <strong class="text-slate-800">01.06.2025</strong></div>
-                                <div><span class="text-slate-400 font-medium">Vertragsbeginn:</span> <strong class="text-slate-800">01.06.2025</strong></div>
-                                <div><span class="text-slate-400 font-medium">Abteilung / Bereich:</span> <strong class="text-slate-800">Infrastruktur & Netzbetrieb</strong></div>
-                                <div><span class="text-slate-400 font-medium">Standort:</span> <strong class="text-slate-800">Ausschläger Weg 67, 20537 HH</strong></div>
-                            </div>
-
-                            <!-- Header Section representing content.jpg -->
-                            <div class="text-center py-2 border-b border-slate-200">
-                                <h3 class="text-base sm:text-lg font-black uppercase text-slate-900 tracking-wider">Arbeitsvertrag</h3>
-                                <p class="text-xs text-slate-500 mt-0.5">Zwischen der Stadtwerke Hamburg und dem Arbeitnehmer</p>
-                            </div>
-
-                            <!-- Parties Section -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs border-b border-slate-200 pb-4">
-                                <div>
-                                    <p class="font-bold text-slate-800">Arbeitgeber:</p>
-                                    <p class="text-slate-600">Stadtwerke Hamburg</p>
-                                    <p class="text-slate-600">Tiefbau – Infrastruktur – Netzbetrieb</p>
-                                    <p class="text-slate-600">Ausschläger Weg 67, 20537 Hamburg</p>
-                                </div>
-                                <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                                    <p class="font-bold text-slate-800">Arbeitnehmer (Echtzeit-Daten):</p>
-                                    <p class="text-slate-600">Name: <span id="prevName" class="font-semibold text-swBlue-800 italic">___________</span></p>
-                                    <p class="text-slate-600">Geburtsdatum: <span id="prevBirth" class="font-semibold text-slate-800">___________</span></p>
-                                    <p class="text-slate-600">Anschrift: <span id="prevAddr" class="font-semibold text-slate-800">___________</span></p>
-                                </div>
-                            </div>
-
-                            <!-- §1 -->
-                            <div class="space-y-2">
-                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 1 TÄTIGKEIT UND AUFGABENBEREICH</h4>
-                                <p class="leading-relaxed">Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Bereich <strong>Infrastruktur & Netzbetrieb</strong> eingestellt.</p>
-                                <p class="text-slate-600">Zu den Aufgaben gehören insbesondere:</p>
-                                <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600 text-[11px] sm:text-xs">
-                                    <li>Wartung, Reparatur und Neubau von Strom-, Wasser-, Fernwärme- und Kommunikationsnetzen</li>
-                                    <li>Tiefbauarbeiten, Verlegung und Sicherung von Kabel- und Rohrtrassen</li>
-                                    <li>Instandhaltung der öffentlichen Beleuchtung</li>
-                                    <li>Bedienung und Wartung von Baumaschinen und Spezialwerkzeugen</li>
-                                    <li>Absicherung von Baustellen und Verkehrswegen</li>
-                                    <li>Zusammenarbeit mit Behörden, Polizei, Feuerwehr und Rettungsdiensten</li>
-                                    <li>Durchführung von Notfalleinsätzen und Störungsbeseitigungen (24/7 Einsatzbereitschaft)</li>
-                                    <li>Dokumentation der Arbeiten und Einhaltung der Qualitätsstandards</li>
-                                </ul>
-                            </div>
-
-                            <!-- §2 -->
-                            <div class="space-y-2">
-                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST</h4>
-                                <div class="overflow-x-auto">
-                                    <table class="min-w-full text-[11px] sm:text-xs border border-slate-200">
-                                        <thead>
-                                            <tr class="bg-slate-50 border-b border-slate-200">
-                                                <th class="px-3 py-1 text-left font-bold text-slate-700">Regelung</th>
-                                                <th class="px-3 py-1 text-left font-bold text-slate-700">Inhalt</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-slate-100 text-slate-600">
-                                            <tr>
-                                                <td class="px-3 py-1 font-semibold text-slate-800">Regelarbeitszeit:</td>
-                                                <td class="px-3 py-1">40 Stunden pro Woche</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-3 py-1 font-semibold text-slate-800">Werktage:</td>
-                                                <td class="px-3 py-1">Montag – Freitag</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-3 py-1 font-semibold text-slate-800">Arbeitszeitrahmen:</td>
-                                                <td class="px-3 py-1">06:00 Uhr – 18:00 Uhr (je nach Einsatzplan)</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-3 py-1 font-semibold text-slate-800">Bereitschaftsdienst:</td>
-                                                <td class="px-3 py-1">Nach Dienstplan / Rufbereitschaft</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-3 py-1 font-semibold text-slate-800">Überstunden:</td>
-                                                <td class="px-3 py-1">Werden erfasst und gemäß Betriebsvereinbarung ausgeglichen oder vergütet.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <!-- §3 & §4 -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                                <div class="space-y-2">
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 3 VERGÜTUNG</h4>
-                                    <table class="min-w-full text-[11px] border border-slate-200">
-                                        <tbody class="divide-y divide-slate-100 text-slate-600">
-                                            <tr class="bg-slate-50">
-                                                <td class="px-2 py-1 font-bold text-slate-800">Grundgehalt (brutto):</td>
-                                                <td class="px-2 py-1 text-right font-semibold">3.200,00 € / Monat</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-1 font-semibold">Bereitschaftsdienstpauschale:</td>
-                                                <td class="px-2 py-1 text-right">250,00 € / Monat</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-1 font-semibold">Gefahrenzulage:</td>
-                                                <td class="px-2 py-1 text-right">200,00 € / Monat</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-1 font-semibold">Schmutzzulage:</td>
-                                                <td class="px-2 py-1 text-right">100,00 € / Monat</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-2 py-1 font-semibold">Nachtarbeit (ab 20:00 Uhr):</td>
-                                                <td class="px-2 py-1 text-right">25,00 € / Einsatz</td>
-                                            </tr>
-                                            <tr class="bg-slate-100 border-t-2 border-slate-300 font-bold">
-                                                <td class="px-2 py-1 text-slate-800">Gesamt brutto:</td>
-                                                <td class="px-2 py-1 text-right text-swBlue-900">3.775,00 € / Monat</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="space-y-2">
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 4 SONDERZAHLUNGEN</h4>
-                                    <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px] sm:text-xs">
-                                        <li><strong>Urlaubsgeld:</strong> 50 % eines Monatsgehalts (im Juni)</li>
-                                        <li><strong>Weihnachtsgeld:</strong> 50 % eines Monatsgehalts (im November)</li>
-                                        <li><strong>Leistungsprämien:</strong> Nach betrieblicher Vereinbarung</li>
-                                    </ul>
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pt-2 pb-1">§ 5 PROBEZEIT</h4>
-                                    <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed">
-                                        Die Probezeit beträgt <strong>6 Monate</strong>. Während der Probezeit kann das Arbeitsverhältnis mit einer Frist von 2 Wochen gekündigt werden. Nach der Probezeit gilt die gesetzliche Kündigungsfrist.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="border-t border-dashed border-slate-300 my-8 pt-4 text-center text-slate-400 text-xs">
-                                --- ENDE SEITE 1 / BEGINN SEITE 2 ---
-                            </div>
-
-                            <!-- §6 PSA -->
-                            <div class="space-y-2">
-                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
-                                    <i class="fa-solid fa-hard-hat mr-2"></i>§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)
-                                </h4>
-                                <p class="text-[11px] sm:text-xs">Der Arbeitgeber stellt die nachfolgende PSA zur Verfügung. Der Arbeitnehmer verpflichtet sich, diese bestimmungsgemäß zu tragen und in einwandfreiem Zustand zu halten:</p>
-                                <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-slate-600 pl-2">
-                                    <div><i class="fa-solid fa-shield-halved text-swBlue-500 mr-1.5"></i>Schutzhelm (EN 397)</div>
-                                    <div><i class="fa-solid fa-ear-deaf text-swBlue-500 mr-1.5"></i>Gehörschutz (EN 352)</div>
-                                    <div><i class="fa-solid fa-vest text-swBlue-500 mr-1.5"></i>Warnschutzkleidung Kl. 3 (EN ISO 20471)</div>
-                                    <div><i class="fa-solid fa-mask text-swBlue-500 mr-1.5"></i>Atemschutzmaske (bei Bedarf)</div>
-                                    <div><i class="fa-solid fa-socks text-swBlue-500 mr-1.5"></i>Sicherheitsschuhe S3 (EN ISO 20345)</div>
-                                    <div><i class="fa-solid fa-band-aid text-swBlue-500 mr-1.5"></i>Knieschutz (bei Bedarf) (EN 14404)</div>
-                                    <div><i class="fa-solid fa-hands text-swBlue-500 mr-1.5"></i>Schutzhandschuhe (EN 388)</div>
-                                    <div><i class="fa-solid fa-cloud-showers-heavy text-swBlue-500 mr-1.5"></i>Wetterschutzjacke (EN 343)</div>
-                                    <div><i class="fa-solid fa-glasses text-swBlue-500 mr-1.5"></i>Schutzbrille (EN 166)</div>
-                                    <div><i class="fa-solid fa-link text-swBlue-500 mr-1.5"></i>Auffanggurt (EN 361)</div>
-                                </div>
-                                <div class="p-2 bg-amber-50 rounded text-[11px] text-amber-800 italic border-l-2 border-amber-500 mt-2">
-                                    Das Nichttragen der vorgeschriebenen PSA kann arbeitsrechtliche Konsequenzen nach sich ziehen.
-                                </div>
-                            </div>
-
-                            <!-- §7 -->
-                            <div class="space-y-2">
-                                <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
-                                    <i class="fa-solid fa-triangle-exclamation mr-2"></i>§ 7 SICHERHEITSBELEHRUNG
-                                </h4>
-                                <p class="text-[11px] sm:text-xs">Der Arbeitnehmer wurde über die Gefahren seiner Tätigkeit umfassend belehrt. Er verpflichtet sich, alle Sicherheits- und Unfallverhütungsvorschriften einzuhalten. Dazu gehören insbesondere:</p>
-                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-1 list-disc list-inside text-slate-600 text-[11px] pl-2">
-                                    <li>Arbeiten an elektrischen Anlagen</li>
-                                    <li>Arbeiten im öffentlichen Straßenverkehr</li>
-                                    <li>Tiefbauarbeiten und Arbeiten in Baugruben</li>
-                                    <li>Umgang mit schweren Maschinen und Werkzeugen</li>
-                                    <li>Arbeiten bei jeder Witterung und Sicht</li>
-                                    <li>Lastenheben und ergonomisches Arbeiten</li>
-                                    <li>Gefahrstoffe, Öl, Kraftstoffe und Chemikalien</li>
-                                    <li>Verhalten im Notfall und Erste-Hilfe-Maßnahmen</li>
-                                    <li>Brandschutz und Evakuierungspläne</li>
-                                </ul>
-                            </div>
-
-                            <!-- §8, §9 & §10 -->
-                            <div class="space-y-4 pt-2">
-                                <div class="space-y-1">
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 8 PFLICHTEN DES ARBEITNEHMERS</h4>
-                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                                        Einhaltung aller gesetzlichen Vorschriften, sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen, unverzügliche Meldung von Mängeln, absolute Verschwiegenheit über interne Betriebsabläufe sowie die verpflichtende Teilnahme an Schulungen.
-                                    </p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 9 HAFTUNG UND RISIKOHINWEIS</h4>
-                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                                        Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder durch Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Vorsatz oder grober Fahrlässigkeit des Arbeitgebers sowie bei Verletzung von Leben, Körper oder Gesundheit.
-                                    </p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 10 SCHLUSSBESTIMMUNGEN</h4>
-                                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                                        Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="pt-4 border-t border-slate-200 text-[10px] text-slate-400 italic text-center">
-                                * Stadtwerke Hamburg - Wir halten Hamburg am Laufen - SAUBER. SICHER. ZUVERLÄSSIG. *
-                            </div>
-                        </div>
-
-                        <!-- Input and Signature Form -->
-                        <form id="signatureForm" class="space-y-6" onsubmit="event.preventDefault();">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <!-- Signature Name Input -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Vor- und Nachname <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-user-tie"></i>
-                                        </div>
-                                        <input type="text" id="signatureInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. Markus Helbing" required>
-                                    </div>
-                                </div>
-
-                                <!-- Birthdate Input -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Geburtsdatum <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                        </div>
-                                        <input type="text" id="birthdateInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. 14.10.1998" required>
-                                    </div>
-                                </div>
-
-                                <!-- Address Input -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Anschrift <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-location-dot"></i>
-                                        </div>
-                                        <input type="text" id="addressInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. Hauptstraße 12, Hamburg" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Interactive Signature Visual -->
-                            <div>
-                                <span class="block text-sm font-semibold text-slate-900 mb-2">Deine handschriftliche Signatur (Echtzeit):</span>
-                                <div class="h-[60px] w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden relative group">
-                                    <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase tracking-widest pointer-events-none">Echtzeit Vorschau</span>
-                                    <div id="liveSignature" class="font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200">
-                                        Unterschrift vorschau...
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Terms and Agreement Checkbox -->
-                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-                                <label class="flex items-start cursor-pointer select-none">
-                                    <input type="checkbox" id="termsCheck" class="mt-1 h-4 w-4 rounded text-swBlue-600 focus:ring-swBlue-500 border-slate-300 mr-3 cursor-pointer">
-                                    <span class="text-xs sm:text-sm text-slate-600 leading-normal">
-                                        Ich erkläre mich mit meiner Unterschrift mit allen oben aufgeführten Paragraphen (§ 1 bis § 10) des Arbeitsvertrags der Stadtwerke Hamburg vollumfänglich und rechtsverbindlich einverstanden.
-                                    </span>
-                                </label>
-                            </div>
-
-                            <!-- Action Buttons Container (Dynamic secondary download button) -->
-                            <div class="flex flex-col sm:flex-row gap-4 items-center">
-                                <!-- Main Submit Button -->
-                                <button type="button" id="submitBtn" onclick="handleFormSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
-                                    <i class="fa-solid fa-file-signature text-lg"></i>
-                                    <span>Signieren und Abschicken</span>
-                                </button>
-                                
-                                <!-- Standalone Download Button (initially hidden until signed) -->
-                                <button type="button" id="standaloneDownloadBtn" onclick="downloadGeneratedPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
-                                    <i class="fa-solid fa-download text-lg"></i>
-                                    <span>Vertrag herunterladen</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <!-- Connection State Badge -->
+                <div id="auth-state-badge" class="inline-flex items-center mt-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                    <span class="h-1.5 w-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+                    <span id="auth-state-text">Verbindungsmodus prüfen...</span>
                 </div>
             </div>
 
-            <!-- SECTION 3: AUFTRAG EINREICHEN (ORDER COMMISSION VIEW) -->
-            <div id="view-auftrag" class="hidden max-w-4xl mx-auto">
-                <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div>
-                                <h2 class="text-xl sm:text-2xl font-extrabold">Dienstleistungs-Auftrag einreichen</h2>
-                                <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg - Bürger-Service & Schadensmeldungen</p>
-                            </div>
-                            <div class="bg-swOrange-500 border border-swOrange-600 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
-                                Außendienst-Modus aktiv
-                            </div>
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-5" onsubmit="handleLoginSubmit(event)">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Benutzername</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-user"></i>
                         </div>
-                    </div>
-
-                    <div class="p-6 sm:p-8">
-                        <div class="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 text-xs sm:text-sm rounded-2xl flex items-start space-x-3">
-                            <i class="fa-solid fa-circle-exclamation text-base mt-0.5"></i>
-                            <div>
-                                <strong class="font-bold">Kein Mitarbeiter im Dienst?</strong> Du kannst hier unkompliziert deinen Auftrag zur Entsorgung, Straßenreinigung oder Infrastrukturwartung einreichen. Unser System erfasst deine Daten und alarmiert unsere Trupps vollautomatisch.
-                            </div>
-                        </div>
-
-                        <!-- Order Form -->
-                        <form id="orderForm" class="space-y-6" onsubmit="event.preventDefault();">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Client Name -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Dein Vor- und Nachname <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-user"></i>
-                                        </div>
-                                        <input type="text" id="orderName" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. Max Mustermann" required>
-                                    </div>
-                                </div>
-
-                                <!-- Client Phone -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Telefonnummer <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-phone"></i>
-                                        </div>
-                                        <input type="tel" id="orderTel" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. 555-4819" required>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Dropdown Client Type -->
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Auftraggeber-Typ <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-building-user"></i>
-                                        </div>
-                                        <select id="orderType" onchange="toggleCompanyField()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition bg-white appearance-none">
-                                            <option value="privat">Privatperson</option>
-                                            <option value="firma">Firma / Organisation</option>
-                                        </select>
-                                        <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Conditional Company Name Input -->
-                                <div id="companyFieldWrapper" class="hidden transition-all duration-300">
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                        Name der Firma / Organisation <span class="text-rose-500">*</span>
-                                    </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                            <i class="fa-solid fa-building"></i>
-                                        </div>
-                                        <input type="text" id="orderCompany" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. LSPD, LSMD, Hansa AG">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Description Textarea -->
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-900 mb-2">
-                                    Auftragsbeschreibung <span class="text-rose-500">*</span>
-                                </label>
-                                <div class="relative">
-                                    <textarea id="orderDesc" rows="5" class="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition custom-scrollbar" placeholder="Beschreibe bitte möglichst genau, was wir tun sollen (z.B. Müllentsorgung an Baustelle, Straßenreinigung nach Event, Reparatur einer Laterne etc.)." required></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Action Buttons Container -->
-                            <div class="flex flex-col sm:flex-row gap-4 items-center">
-                                <!-- Main Submit Button -->
-                                <button type="button" id="submitOrderBtn" onclick="handleOrderSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
-                                    <i class="fa-solid fa-paper-plane text-lg"></i>
-                                    <span>Auftrag abschicken</span>
-                                </button>
-                                
-                                <!-- Order Download Button (hidden until submitted) -->
-                                <button type="button" id="downloadOrderBtn" onclick="downloadGeneratedOrderPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
-                                    <i class="fa-solid fa-download text-lg"></i>
-                                    <span>Auftragsbestätigung herunterladen</span>
-                                </button>
-                            </div>
-                        </form>
+                        <input type="text" id="loginUsername" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 text-sm transition" placeholder="z. B. Max_Mustermann" required autocomplete="username">
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </main>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Passwort</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <input type="password" id="loginPassword" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 text-sm transition" placeholder="••••••••" required autocomplete="current-password">
+                    </div>
+                </div>
 
-    <!-- Custom Modal/Toast Notification (Replaces the forbidden window.alert()) -->
-    <div id="customNotification" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative overflow-hidden" id="notificationCard">
-            <!-- Icon Background Circle -->
-            <div id="notificationHeader" class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            
-            <h3 id="notificationTitle" class="text-xl font-bold text-center text-slate-900 mb-2">Erfolgreich unterschrieben!</h3>
-            <p id="notificationText" class="text-sm text-slate-500 text-center leading-relaxed mb-6">Dein Arbeitsvertrag wurde verarbeitet und wird jetzt als PDF heruntergeladen.</p>
-            
-            <!-- Dynamic Actions (Close or Download option) -->
-            <div class="flex space-x-3" id="notificationActions">
-                <button onclick="closeNotification()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
-                    Schließen
+                <button type="submit" id="loginSubmitBtn" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all duration-300 transform active:scale-[0.99] flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Anmelden</span>
                 </button>
-            </div>
+
+                <p class="text-center text-xs text-slate-500 mt-4">
+                    Noch kein Profil? 
+                    <button type="button" onclick="toggleAuthMode('register')" class="text-swOrange-600 hover:text-swOrange-700 font-bold underline ml-1">Jetzt registrieren</button>
+                </p>
+            </form>
+
+            <!-- Register Form (Hidden by default) -->
+            <form id="registerForm" class="space-y-5 hidden" onsubmit="handleRegisterSubmit(event)">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Gewünschter Benutzername</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <input type="text" id="registerUsername" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 text-sm transition" placeholder="z. B. Max_Mustermann" required autocomplete="username">
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1">Dieser Name wird automatisch für deine Dokumente übernommen.</p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Passwort festlegen</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <input type="password" id="registerPassword" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 text-sm transition" placeholder="Mindestens 6 Zeichen" required autocomplete="new-password">
+                    </div>
+                </div>
+
+                <button type="submit" id="registerSubmitBtn" class="w-full bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all duration-300 transform active:scale-[0.99] flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Konto erstellen</span>
+                </button>
+
+                <p class="text-center text-xs text-slate-500 mt-4">
+                    Bereits registriert? 
+                    <button type="button" onclick="toggleAuthMode('login')" class="text-swBlue-800 hover:text-swBlue-900 font-bold underline ml-1">Hier anmelden</button>
+                </p>
+            </form>
         </div>
     </div>
 
-    <!-- Footer Component -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <div class="flex justify-center items-center space-x-3 text-white mb-4">
-                <i class="fa-solid fa-industry text-2xl text-swOrange-500"></i>
-                <span class="text-lg font-bold">Stadtwerke Hamburg</span>
+    <!-- MAIN APPLICATION CONTAINER (Hidden until successfully logged in) -->
+    <div id="main-app" class="hidden flex-col justify-between min-h-screen">
+        <!-- Modern Header & Navigation -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo Block -->
+                    <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('startseite')">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-swBlue-800 to-swBlue-500 flex items-center justify-center text-white shadow-md">
+                            <i class="fa-solid fa-industry text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-base font-extrabold tracking-tight text-swBlue-900 block leading-tight">STADTWERKE</span>
+                            <span class="text-[10px] font-semibold uppercase tracking-widest text-swOrange-600 block leading-none">HAMBURG</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Navigation Links -->
+                    <nav class="hidden md:flex space-x-2 items-center">
+                        <button id="nav-home" onclick="switchPage('startseite')" class="text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent">
+                            <i class="fa-solid fa-house mr-2"></i>Startseite
+                        </button>
+                        <button id="nav-contract" onclick="switchPage('arbeitsvertrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
+                            <i class="fa-solid fa-file-signature mr-2"></i>Arbeitsvertrag
+                        </button>
+                        <button id="nav-order" onclick="switchPage('auftrag')" class="text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent">
+                            <i class="fa-solid fa-file-invoice mr-2"></i>Auftrag einreichen
+                        </button>
+                    </nav>
+                    
+                    <!-- User Account / Logged in Status Badge -->
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-slate-100 border border-slate-200 pl-3 pr-2 py-1.5 rounded-xl flex items-center space-x-2.5 text-xs">
+                            <i class="fa-solid fa-circle-user text-swBlue-800 text-sm"></i>
+                            <span id="header-username" class="font-bold text-slate-800">Mitarbeiter</span>
+                            <button onclick="handleLogout()" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center" title="Abmelden">
+                                <i class="fa-solid fa-power-off text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="text-xs max-w-md mx-auto text-slate-500">
-                Dies ist eine fiktive Präsenz für ein Roleplay-Projekt (z.B. FiveM). Alle Angaben dienen ausschließlich Unterhaltungszwecken.
-            </p>
-            <div class="text-xs text-slate-600 border-t border-slate-800/80 pt-6">
-                &copy; 2026 Stadtwerke Hamburg. Alle Rechte vorbehalten.
+        </header>
+
+        <main class="py-8 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- SECTION 1: STARTSEITE (HOME VIEW) -->
+                <div id="view-startseite" class="space-y-12">
+                    <!-- Welcome Banner -->
+                    <div class="relative overflow-hidden bg-gradient-to-r from-swBlue-900 via-swBlue-800 to-slate-900 rounded-3xl p-8 sm:p-12 shadow-2xl text-white">
+                        <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-swBlue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute -left-16 -top-16 w-96 h-96 bg-swOrange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <div class="relative z-10 max-w-3xl">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-swOrange-500 text-white uppercase tracking-wider mb-6">
+                                <i class="fa-solid fa-circle-info mr-1.5 text-[10px]"></i>Offizielles Bürger- & Karriereportal
+                            </span>
+                            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+                                Willkommen zurück, <span id="welcome-username" class="text-transparent bg-clip-text bg-gradient-to-r from-swOrange-500 to-amber-400">Kollege</span>!
+                            </h1>
+                            <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+                                Wir halten die Metropole am Laufen! Nutze unser volldigitales Portal, um deinen Arbeitsvertrag bequem online auszufüllen oder einen Dienstleistungsauftrag einzureichen, falls unser Team gerade im Außendienst ist.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <button onclick="switchPage('arbeitsvertrag')" class="bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-swOrange-500/30 transition-all duration-200 hover:-translate-y-0.5">
+                                    Jetzt Vertrag unterzeichnen <i class="fa-solid fa-arrow-right ml-2"></i>
+                                </button>
+                                <button onclick="switchPage('auftrag')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-sm transition-all duration-200 border border-white/10 flex items-center">
+                                    Dienstleistung anfordern <i class="fa-solid fa-file-invoice ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Departments / Services Info Section -->
+                    <section id="services-anchor" class="scroll-mt-24">
+                        <div class="text-center max-w-3xl mx-auto mb-12">
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Unsere Kerndienstleistungen</h2>
+                            <p class="text-slate-600 mt-2">Ein reibungsloser Betrieb ist nur durch das Zusammenspiel aller Abteilungen möglich.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <!-- Service Card 1 -->
+                            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                                <div class="w-12 h-12 rounded-xl bg-orange-100 text-swOrange-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-trash-can text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">Abfallwirtschaft & Entsorgung</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Verantwortlich für die pünktliche und fachgerechte Leerung aller Müll- und Recyclingbehälter im gesamten Hamburger Stadtgebiet.
+                                </p>
+                            </div>
+
+                            <!-- Service Card 2 -->
+                            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                                <div class="w-12 h-12 rounded-xl bg-sky-100 text-swBlue-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-truck-field text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">Straßenreinigung & Winterdienst</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Erhaltung der Verkehrssicherheit und Sauberkeit auf allen öffentlichen Verkehrsflächen sowie Koordination bei Extremwetterlagen.
+                                </p>
+                            </div>
+
+                            <!-- Service Card 3 -->
+                            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-bolt text-xl"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2">Infrastruktur & Instandsetzung</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Wartung der Leitungsnetze, Beleuchtungsanlagen und Ampelsysteme sowie rasche Behebung von Störungen im städtischen Netzgebiet.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- SECTION 2: ARBEITSVERTRAG (CONTRACT VIEW - MINIMALIST) -->
+                <div id="view-arbeitsvertrag" class="hidden max-w-4xl mx-auto">
+                    <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div>
+                                    <h2 class="text-xl sm:text-2xl font-extrabold">Anstellungs- & Arbeitsvertrag</h2>
+                                    <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg (Tiefbau – Infrastruktur – Netzbetrieb)</p>
+                                </div>
+                                <div class="bg-white/10 border border-white/20 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
+                                    Dokumenten-ID: SW-HH-2025-0427
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 sm:p-8 space-y-6">
+                            <!-- REALISTIC CONTRACT VIEW PANEL -->
+                            <div class="bg-white border border-slate-300 rounded-2xl p-4 sm:p-8 h-[550px] overflow-y-auto custom-scrollbar text-xs sm:text-sm text-slate-700 space-y-6 shadow-inner">
+                                
+                                <!-- PDF Top Metadata Bar -->
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 border border-slate-300 rounded-lg p-3 bg-slate-50 text-[11px] sm:text-xs">
+                                    <div><span class="text-slate-400 font-medium">Vertragsnummer:</span> <strong class="text-slate-800">SW-HH-2025-0427</strong></div>
+                                    <div><span class="text-slate-400 font-medium">Personalnummer:</span> <strong class="text-slate-800">SW-EMP-0587</strong></div>
+                                    <div><span class="text-slate-400 font-medium">Einstellungsdatum:</span> <strong class="text-slate-800">01.06.2025</strong></div>
+                                    <div><span class="text-slate-400 font-medium">Vertragsbeginn:</span> <strong class="text-slate-800">01.06.2025</strong></div>
+                                    <div><span class="text-slate-400 font-medium">Abteilung / Bereich:</span> <strong class="text-slate-800">Infrastruktur & Netzbetrieb</strong></div>
+                                    <div><span class="text-slate-400 font-medium">Standort:</span> <strong class="text-slate-800">Ausschläger Weg 67, 20537 HH</strong></div>
+                                </div>
+
+                                <!-- Header Section -->
+                                <div class="text-center py-2 border-b border-slate-200">
+                                    <h3 class="text-base sm:text-lg font-black uppercase text-slate-900 tracking-wider">Arbeitsvertrag</h3>
+                                    <p class="text-xs text-slate-500 mt-0.5">Zwischen der Stadtwerke Hamburg und dem Arbeitnehmer</p>
+                                </div>
+
+                                <!-- Parties Section -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs border-b border-slate-200 pb-4">
+                                    <div>
+                                        <p class="font-bold text-slate-800">Arbeitgeber:</p>
+                                        <p class="text-slate-600">Stadtwerke Hamburg</p>
+                                        <p class="text-slate-600">Tiefbau – Infrastruktur – Netzbetrieb</p>
+                                        <p class="text-slate-600">Ausschläger Weg 67, 20537 Hamburg</p>
+                                    </div>
+                                    <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                                        <p class="font-bold text-slate-800">Arbeitnehmer (Echtzeit-Daten):</p>
+                                        <p class="text-slate-600">Name: <span id="prevName" class="font-semibold text-swBlue-800 italic">___________</span></p>
+                                        <p class="text-slate-600">Geburtsdatum: <span id="prevBirth" class="font-semibold text-slate-800">___________</span></p>
+                                        <p class="text-slate-600">Anschrift: <span id="prevAddr" class="font-semibold text-slate-800">___________</span></p>
+                                    </div>
+                                </div>
+
+                                <!-- §1 -->
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 1 TÄTIGKEIT UND AUFGABENBEREICH</h4>
+                                    <p class="leading-relaxed">Der Arbeitnehmer wird als Mitarbeiter (m/w/d) im Bereich <strong>Infrastruktur & Netzbetrieb</strong> eingestellt.</p>
+                                    <p class="text-slate-600">Zu den Aufgaben gehören insbesondere:</p>
+                                    <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600 text-[11px] sm:text-xs">
+                                        <li>Wartung, Reparatur und Neubau von Strom-, Wasser-, Fernwärme- und Kommunikationsnetzen</li>
+                                        <li>Tiefbauarbeiten, Verlegung und Sicherung von Kabel- und Rohrtrassen</li>
+                                        <li>Instandhaltung der öffentlichen Beleuchtung</li>
+                                        <li>Bedienung und Wartung von Baumaschinen und Spezialwerkzeugen</li>
+                                        <li>Absicherung von Baustellen und Verkehrswegen</li>
+                                        <li>Zusammenarbeit mit Behörden, Polizei, Feuerwehr und Rettungsdiensten</li>
+                                        <li>Durchführung von Notfalleinsätzen und Störungsbeseitigungen (24/7 Einsatzbereitschaft)</li>
+                                        <li>Dokumentation der Arbeiten und Einhaltung der Qualitätsstandards</li>
+                                    </ul>
+                                </div>
+
+                                <!-- §2 -->
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 2 ARBEITSZEIT UND BEREITSCHAFTSDIENST</h4>
+                                    <div class="overflow-x-auto">
+                                        <table class="min-w-full text-[11px] sm:text-xs border border-slate-200">
+                                            <thead>
+                                                <tr class="bg-slate-50 border-b border-slate-200">
+                                                    <th class="px-3 py-1 text-left font-bold text-slate-700">Regelung</th>
+                                                    <th class="px-3 py-1 text-left font-bold text-slate-700">Inhalt</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-slate-100 text-slate-600">
+                                                <tr>
+                                                    <td class="px-3 py-1 font-semibold text-slate-800">Regelarbeitszeit:</td>
+                                                    <td class="px-3 py-1">40 Stunden pro Woche</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-1 font-semibold text-slate-800">Werktage:</td>
+                                                    <td class="px-3 py-1">Montag – Freitag</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-1 font-semibold text-slate-800">Arbeitszeitrahmen:</td>
+                                                    <td class="px-3 py-1">06:00 Uhr – 18:00 Uhr (je nach Einsatzplan)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-1 font-semibold text-slate-800">Bereitschaftsdienst:</td>
+                                                    <td class="px-3 py-1">Nach Dienstplan / Rufbereitschaft</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-3 py-1 font-semibold text-slate-800">Überstunden:</td>
+                                                    <td class="px-3 py-1">Werden erfasst und gemäß Betriebsvereinbarung ausgeglichen oder vergütet.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- §3 & §4 -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                                    <div class="space-y-2">
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 3 VERGÜTUNG</h4>
+                                        <table class="min-w-full text-[11px] border border-slate-200">
+                                            <tbody class="divide-y divide-slate-100 text-slate-600">
+                                                <tr class="bg-slate-50">
+                                                    <td class="px-2 py-1 font-bold text-slate-800">Grundgehalt (brutto):</td>
+                                                    <td class="px-2 py-1 text-right font-semibold">3.200,00 € / Monat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-2 py-1 font-semibold">Bereitschaftsdienstpauschale:</td>
+                                                    <td class="px-2 py-1 text-right">250,00 € / Monat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-2 py-1 font-semibold">Gefahrenzulage:</td>
+                                                    <td class="px-2 py-1 text-right">200,00 € / Monat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-2 py-1 font-semibold">Schmutzzulage:</td>
+                                                    <td class="px-2 py-1 text-right">100,00 € / Monat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="px-2 py-1 font-semibold">Nachtarbeit (ab 20:00 Uhr):</td>
+                                                    <td class="px-2 py-1 text-right">25,00 € / Einsatz</td>
+                                                </tr>
+                                                <tr class="bg-slate-100 border-t-2 border-slate-300 font-bold">
+                                                    <td class="px-2 py-1 text-slate-800">Gesamt brutto:</td>
+                                                    <td class="px-2 py-1 text-right text-swBlue-900">3.775,00 € / Monat</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="space-y-2">
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 4 SONDERZAHLUNGEN</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px] sm:text-xs">
+                                            <li><strong>Urlaubsgeld:</strong> 50 % eines Monatsgehalts (im Juni)</li>
+                                            <li><strong>Weihnachtsgeld:</strong> 50 % eines Monatsgehalts (im November)</li>
+                                            <li><strong>Leistungsprämien:</strong> Nach betrieblicher Vereinbarung</li>
+                                        </ul>
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pt-2 pb-1">§ 5 PROBEZEIT</h4>
+                                        <p class="text-slate-600 text-[11px] sm:text-xs leading-relaxed">
+                                            Die Probezeit beträgt <strong>6 Monate</strong>. Während der Probezeit kann das Arbeitsverhältnis mit einer Frist von 2 Wochen gekündigt werden. Nach der Probezeit gilt die gesetzliche Kündigungsfrist.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="border-t border-dashed border-slate-300 my-8 pt-4 text-center text-slate-400 text-xs">
+                                    --- ENDE SEITE 1 / BEGINN SEITE 2 ---
+                                </div>
+
+                                <!-- §6 PSA -->
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
+                                        <i class="fa-solid fa-hard-hat mr-2"></i>§ 6 PERSÖNLICHE SCHUTZAUSRÜSTUNG (PSA)
+                                    </h4>
+                                    <p class="text-[11px] sm:text-xs">Der Arbeitgeber stellt die nachfolgende PSA zur Verfügung. Der Arbeitnehmer verpflichtet sich, diese bestimmungsgemäß zu tragen und in einwandfreiem Zustand zu halten:</p>
+                                    <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-slate-600 pl-2">
+                                        <div><i class="fa-solid fa-shield-halved text-swBlue-500 mr-1.5"></i>Schutzhelm (EN 397)</div>
+                                        <div><i class="fa-solid fa-ear-deaf text-swBlue-500 mr-1.5"></i>Gehörschutz (EN 352)</div>
+                                        <div><i class="fa-solid fa-vest text-swBlue-500 mr-1.5"></i>Warnschutzkleidung Kl. 3 (EN ISO 20471)</div>
+                                        <div><i class="fa-solid fa-mask text-swBlue-500 mr-1.5"></i>Atemschutzmaske (bei Bedarf)</div>
+                                        <div><i class="fa-solid fa-socks text-swBlue-500 mr-1.5"></i>Sicherheitsschuhe S3 (EN ISO 20345)</div>
+                                        <div><i class="fa-solid fa-band-aid text-swBlue-500 mr-1.5"></i>Knieschutz (bei Bedarf) (EN 14404)</div>
+                                        <div><i class="fa-solid fa-hands text-swBlue-500 mr-1.5"></i>Schutzhandschuhe (EN 388)</div>
+                                        <div><i class="fa-solid fa-cloud-showers-heavy text-swBlue-500 mr-1.5"></i>Wetterschutzjacke (EN 343)</div>
+                                        <div><i class="fa-solid fa-glasses text-swBlue-500 mr-1.5"></i>Schutzbrille (EN 166)</div>
+                                        <div><i class="fa-solid fa-link text-swBlue-500 mr-1.5"></i>Auffanggurt (EN 361)</div>
+                                    </div>
+                                    <div class="p-2 bg-amber-50 rounded text-[11px] text-amber-800 italic border-l-2 border-amber-500 mt-2">
+                                        Das Nichttragen der vorgeschriebenen PSA kann arbeitsrechtliche Konsequenzen nach sich ziehen.
+                                    </div>
+                                </div>
+
+                                <!-- §7 -->
+                                <div class="space-y-2">
+                                    <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1 flex items-center">
+                                        <i class="fa-solid fa-triangle-exclamation mr-2"></i>§ 7 SICHERHEITSBELEHRUNG
+                                    </h4>
+                                    <p class="text-[11px] sm:text-xs">Der Arbeitnehmer wurde über die Gefahren seiner Tätigkeit umfassend belehrt. Er verpflichtet sich, alle Sicherheits- und Unfallverhütungsvorschriften einzuhalten. Dazu gehören insbesondere:</p>
+                                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-1 list-disc list-inside text-slate-600 text-[11px] pl-2">
+                                        <li>Arbeiten an elektrischen Anlagen</li>
+                                        <li>Arbeiten im öffentlichen Straßenverkehr</li>
+                                        <li>Tiefbauarbeiten und Arbeiten in Baugruben</li>
+                                        <li>Umgang mit schweren Maschinen und Werkzeugen</li>
+                                        <li>Arbeiten bei jeder Witterung und Sicht</li>
+                                        <li>Lastenheben und ergonomisches Arbeiten</li>
+                                        <li>Gefahrstoffe, Öl, Kraftstoffe und Chemikalien</li>
+                                        <li>Verhalten im Notfall und Erste-Hilfe-Maßnahmen</li>
+                                        <li>Brandschutz und Evakuierungspläne</li>
+                                    </ul>
+                                </div>
+
+                                <!-- §8, §9 & §10 -->
+                                <div class="space-y-4 pt-2">
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 8 PFLICHTEN DES ARBEITNEHMERS</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                            Einhaltung aller gesetzlichen Vorschriften, sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen, unverzügliche Meldung von Mängeln, absolute Verschwiegenheit über interne Betriebsabläufe sowie die verpflichtende Teilnahme an Schulungen.
+                                        </p>
+                                    </div>
+
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 9 HAFTUNG UND RISIKOHINWEIS</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                            Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder durch Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Vorsatz oder grober Fahrlässigkeit des Arbeitgebers sowie bei Verletzung von Leben, Körper oder Gesundheit.
+                                        </p>
+                                    </div>
+
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-swOrange-600 border-b border-slate-100 pb-1">§ 10 SCHLUSSBESTIMMUNGEN</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                                            Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform. Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="pt-4 border-t border-slate-200 text-[10px] text-slate-400 italic text-center">
+                                    * Stadtwerke Hamburg - Wir halten Hamburg am Laufen - SAUBER. SICHER. ZUVERLÄSSIG. *
+                                </div>
+                            </div>
+
+                            <!-- Input and Signature Form -->
+                            <form id="signatureForm" class="space-y-6" onsubmit="event.preventDefault();">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <!-- Signature Name Input (Read-only, pre-filled from Login!) -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Vor- und Nachname (Vorausgefüllt)
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-user-lock"></i>
+                                            </div>
+                                            <input type="text" id="signatureInput" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl bg-slate-50 text-slate-500 text-sm focus:outline-none cursor-not-allowed" readonly>
+                                        </div>
+                                    </div>
+
+                                    <!-- Birthdate Input -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Geburtsdatum <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-calendar-days"></i>
+                                            </div>
+                                            <input type="text" id="birthdateInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. 14.10.1998" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address Input -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Anschrift <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                            </div>
+                                            <input type="text" id="addressInput" oninput="updateLiveSignature()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition text-sm" placeholder="z. B. Hauptstraße 12, Hamburg" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Interactive Signature Visual -->
+                                <div>
+                                    <span class="block text-sm font-semibold text-slate-900 mb-2">Deine handschriftliche Signatur (Echtzeit):</span>
+                                    <div class="h-[60px] w-full bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden relative group">
+                                        <span class="absolute left-3 top-2 text-[9px] text-slate-400 uppercase tracking-widest pointer-events-none">Echtzeit Vorschau</span>
+                                        <div id="liveSignature" class="font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200">
+                                            Unterschrift vorschau...
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Terms and Agreement Checkbox -->
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                    <label class="flex items-start cursor-pointer select-none">
+                                        <input type="checkbox" id="termsCheck" class="mt-1 h-4 w-4 rounded text-swBlue-600 focus:ring-swBlue-500 border-slate-300 mr-3 cursor-pointer">
+                                        <span class="text-xs sm:text-sm text-slate-600 leading-normal">
+                                            Ich erkläre mich mit meiner Unterschrift mit allen oben aufgeführten Paragraphen (§ 1 bis § 10) des Arbeitsvertrags der Stadtwerke Hamburg vollumfänglich und rechtsverbindlich einverstanden.
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- Action Buttons Container -->
+                                <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                    <!-- Main Submit Button -->
+                                    <button type="button" id="submitBtn" onclick="handleFormSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
+                                        <i class="fa-solid fa-file-signature text-lg"></i>
+                                        <span>Signieren und Abschicken</span>
+                                    </button>
+                                    
+                                    <!-- Standalone Download Button -->
+                                    <button type="button" id="standaloneDownloadBtn" onclick="downloadGeneratedPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
+                                        <i class="fa-solid fa-download text-lg"></i>
+                                        <span>Vertrag herunterladen</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: AUFTRAG EINREICHEN (ORDER COMMISSION VIEW) -->
+                <div id="view-auftrag" class="hidden max-w-4xl mx-auto">
+                    <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-swBlue-900 to-swBlue-800 px-6 py-8 text-white">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div>
+                                    <h2 class="text-xl sm:text-2xl font-extrabold">Dienstleistungs-Auftrag einreichen</h2>
+                                    <p class="text-sm text-slate-300 mt-1">Stadtwerke Hamburg - Bürger-Service & Schadensmeldungen</p>
+                                </div>
+                                <div class="bg-swOrange-500 border border-swOrange-600 px-3 py-1.5 rounded-lg text-xs font-semibold self-start sm:self-center">
+                                    Außendienst-Modus aktiv
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 sm:p-8">
+                            <div class="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-800 text-xs sm:text-sm rounded-2xl flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-exclamation text-base mt-0.5"></i>
+                                <div>
+                                    <strong class="font-bold">Kein Mitarbeiter im Dienst?</strong> Du kannst hier unkompliziert deinen Auftrag zur Entsorgung, Straßenreinigung oder Infrastrukturwartung einreichen. Unser System erfasst deine Daten und alarmiert unsere Trupps vollautomatisch.
+                                </div>
+                            </div>
+
+                            <!-- Order Form -->
+                            <form id="orderForm" class="space-y-6" onsubmit="event.preventDefault();">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Client Name -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Dein Vor- und Nachname <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                            <input type="text" id="orderName" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. Max Mustermann" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Client Phone -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Telefonnummer <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-phone"></i>
+                                            </div>
+                                            <input type="tel" id="orderTel" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. 555-4819" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Dropdown Client Type -->
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Auftraggeber-Typ <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-building-user"></i>
+                                            </div>
+                                            <select id="orderType" onchange="toggleCompanyField()" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition bg-white appearance-none animate-none">
+                                                <option value="privat">Privatperson</option>
+                                                <option value="firma">Firma / Organisation</option>
+                                            </select>
+                                            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Conditional Company Name Input -->
+                                    <div id="companyFieldWrapper" class="hidden transition-all duration-300">
+                                        <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                            Name der Firma / Organisation <span class="text-rose-500">*</span>
+                                        </label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                                <i class="fa-solid fa-building"></i>
+                                            </div>
+                                            <input type="text" id="orderCompany" class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition" placeholder="z. B. LSPD, LSMD, Hansa AG">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description Textarea -->
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">
+                                        Auftragsbeschreibung <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <textarea id="orderDesc" rows="5" class="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 focus:border-swBlue-500 text-slate-800 transition custom-scrollbar" placeholder="Beschreibe bitte möglichst genau, was wir tun sollen (z.B. Müllentsorgung an Baustelle, Straßenreinigung nach Event, Reparatur einer Laterne etc.)." required></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons Container -->
+                                <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                    <!-- Main Submit Button -->
+                                    <button type="button" id="submitOrderBtn" onclick="handleOrderSubmission()" class="w-full bg-swBlue-800 hover:bg-swBlue-900 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swBlue-800/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] flex-1">
+                                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                                        <span>Auftrag abschicken</span>
+                                    </button>
+                                    
+                                    <!-- Order Download Button -->
+                                    <button type="button" id="downloadOrderBtn" onclick="downloadGeneratedOrderPDF()" class="hidden w-full sm:w-auto bg-swOrange-500 hover:bg-swOrange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-swOrange-500/20 hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 transform active:scale-[0.99] whitespace-nowrap">
+                                        <i class="fa-solid fa-download text-lg"></i>
+                                        <span>Auftragsbestätigung herunterladen</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Custom Modal/Toast Notification (Replaces the forbidden window.alert()) -->
+        <div id="customNotification" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+            <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative overflow-hidden" id="notificationCard">
+                <!-- Icon Background Circle -->
+                <div id="notificationHeader" class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                
+                <h3 id="notificationTitle" class="text-xl font-bold text-center text-slate-900 mb-2">Erfolgreich unterschrieben!</h3>
+                <p id="notificationText" class="text-sm text-slate-500 text-center leading-relaxed mb-6">Dein Arbeitsvertrag wurde verarbeitet und wird jetzt als PDF heruntergeladen.</p>
+                
+                <!-- Dynamic Actions -->
+                <div class="flex space-x-3" id="notificationActions">
+                    <button onclick="closeNotification()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition text-sm">
+                        Schließen
+                    </button>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <!-- Scripts for dynamic functionality -->
-    <script>
-        // Global variables to store the generated contract state and order state
-        let signedPDFDoc = null;
-        let generatedFileName = "";
-        
-        let signedOrderPDFDoc = null;
-        let generatedOrderFileName = "";
+        <!-- Footer Component -->
+        <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+                <div class="flex justify-center items-center space-x-3 text-white mb-4">
+                    <i class="fa-solid fa-industry text-2xl text-swOrange-500"></i>
+                    <span class="text-lg font-bold">Stadtwerke Hamburg</span>
+                </div>
+                <p class="text-xs max-w-md mx-auto text-slate-500">
+                    Dies ist eine fiktive Präsenz für ein Roleplay-Projekt (z.B. FiveM). Alle Angaben dienen ausschließlich Unterhaltungszwecken.
+                </p>
+                <div class="text-xs text-slate-600 border-t border-slate-800/80 pt-6">
+                    &copy; 2026 Stadtwerke Hamburg. Alle Rechte vorbehalten.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts for dynamic functionality & Firebase -->
+    <script type="module">
+        // Import Firebase components securely from the modern v11 CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // State & Settings
+        let authMode = "login"; // "login" or "register"
+        let isFirebaseActive = false;
+        let firebaseAuth = null;
+        let loggedInUser = null; // Stored user object
+
+        // Global variables for PDF State (Must be on window for standard access)
+        window.signedPDFDoc = null;
+        window.generatedFileName = "";
+        window.signedOrderPDFDoc = null;
+        window.generatedOrderFileName = "";
 
         const webhookUrl = "https://discord.com/api/webhooks/1526669213077606492/3wuJEM3I1o1EqlnO9s0wwxPI59UukXtOacLtL5sUQPSaw6cURacHuuUCAaBpSx0gGII-";
 
+        // Initialize Dual Authentication Provider
+        function initAuthEngine() {
+            const stateText = document.getElementById("auth-state-text");
+            const stateBadge = document.getElementById("auth-state-badge");
+
+            // Check if Firebase Config is dynamically supplied by the environment
+            let parsedConfig = null;
+            if (typeof __firebase_config !== "undefined") {
+                try {
+                    parsedConfig = JSON.parse(__firebase_config);
+                } catch(e) {
+                    console.warn("Could not parse env config, falling back to local simulation.", e);
+                }
+            }
+
+            if (parsedConfig && parsedConfig.apiKey) {
+                try {
+                    const app = initializeApp(parsedConfig);
+                    firebaseAuth = getAuth(app);
+                    isFirebaseActive = true;
+
+                    // Observe authentication state in real Firebase Auth
+                    onAuthStateChanged(firebaseAuth, (user) => {
+                        if (user) {
+                            // Extract original username from customized email (remove the dummy domain suffix)
+                            const displayUsername = user.email.split("@")[0].replace(/_/g, " ");
+                            setLoggedInState({
+                                uid: user.uid,
+                                username: displayUsername,
+                                email: user.email
+                            });
+                        } else {
+                            setLoggedOutState();
+                        }
+                    });
+
+                    stateText.innerText = "Live-Modus (Firebase Aktiv)";
+                    stateBadge.className = "inline-flex items-center mt-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
+                    stateBadge.querySelector("span").className = "h-1.5 w-1.5 rounded-full bg-emerald-500 mr-1.5";
+                } catch (err) {
+                    console.error("Firebase init failed, fallback to Local Auth:", err);
+                    setupLocalFallback();
+                }
+            } else {
+                setupLocalFallback();
+            }
+        }
+
+        function setupLocalFallback() {
+            const stateText = document.getElementById("auth-state-text");
+            const stateBadge = document.getElementById("auth-state-badge");
+
+            isFirebaseActive = false;
+            stateText.innerText = "Entwickler-Modus (Lokaler Speicher)";
+            stateBadge.className = "inline-flex items-center mt-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200";
+            stateBadge.querySelector("span").className = "h-1.5 w-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse";
+
+            // Check if there's an active local session stored
+            const activeSession = localStorage.getItem("swhh_active_user");
+            if (activeSession) {
+                setLoggedInState(JSON.parse(activeSession));
+            } else {
+                setLoggedOutState();
+            }
+        }
+
+        // Handle State Transitions
+        function setLoggedInState(user) {
+            loggedInUser = user;
+            
+            // Hide auth and show main portal view
+            document.getElementById("view-auth").classList.add("hidden");
+            document.getElementById("main-app").classList.remove("hidden");
+            document.getElementById("main-app").classList.add("flex");
+
+            // Update UI representations
+            document.getElementById("header-username").innerText = user.username;
+            document.getElementById("welcome-username").innerText = user.username;
+            
+            // Pre-fill the signature input with the verified login name
+            const sigInput = document.getElementById("signatureInput");
+            sigInput.value = user.username;
+            
+            // Trigger initial live signature updating
+            window.updateLiveSignature();
+        }
+
+        function setLoggedOutState() {
+            loggedInUser = null;
+            document.getElementById("main-app").classList.add("hidden");
+            document.getElementById("main-app").classList.remove("flex");
+            document.getElementById("view-auth").classList.remove("hidden");
+        }
+
+        // Handle Registration
+        async function handleRegisterSubmit(e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById("registerUsername").value.trim();
+            const passwordInput = document.getElementById("registerPassword").value.trim();
+
+            if (usernameInput.length < 3) {
+                window.showNotification("Registrierung fehlgeschlagen", "Der Name muss mindestens 3 Zeichen lang sein.", "error");
+                return;
+            }
+
+            if (passwordInput.length < 6) {
+                window.showNotification("Registrierung fehlgeschlagen", "Das Passwort muss mindestens 6 Zeichen lang sein.", "error");
+                return;
+            }
+
+            // Replace spaces with underscores for the backend email-mapping representation
+            const processedUsername = usernameInput.replace(/\s+/g, "_");
+            const dummyEmail = `${processedUsername}@stadtwerke-hh.rp`;
+
+            if (isFirebaseActive) {
+                try {
+                    await createUserWithEmailAndPassword(firebaseAuth, dummyEmail, passwordInput);
+                    window.showNotification("Registrierung erfolgreich", "Dein Profil wurde erstellt. Du wurdest automatisch angemeldet!", "success");
+                } catch (err) {
+                    let friendlyMsg = "Bitte versuche es erneut.";
+                    if (err.code === "auth/email-already-in-use") {
+                        friendlyMsg = "Dieser Benutzername ist leider bereits vergeben.";
+                    }
+                    window.showNotification("Fehler bei Registrierung", friendlyMsg, "error");
+                }
+            } else {
+                // Local Storage Provider Strategy
+                const localUsers = JSON.parse(localStorage.getItem("swhh_local_users") || "[]");
+                const userExists = localUsers.some(u => u.username.toLowerCase() === usernameInput.toLowerCase());
+
+                if (userExists) {
+                    window.showNotification("Registrierung fehlgeschlagen", "Dieser Benutzername ist bereits registriert.", "error");
+                    return;
+                }
+
+                const newUser = {
+                    uid: "local-" + Math.floor(Math.random() * 1000000),
+                    username: usernameInput,
+                    password: passwordInput, // Plaintext for simplistic simulation testing (not production safe)
+                    email: dummyEmail
+                };
+
+                localUsers.push(newUser);
+                localStorage.setItem("swhh_local_users", JSON.stringify(localUsers));
+                localStorage.setItem("swhh_active_user", JSON.stringify(newUser));
+                
+                setLoggedInState(newUser);
+                window.showNotification("Konto registriert!", "Erfolgreich im lokalen Entwickler-Modus angemeldet.", "success");
+            }
+        }
+
+        // Handle Login Submission
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById("loginUsername").value.trim();
+            const passwordInput = document.getElementById("loginPassword").value.trim();
+
+            const processedUsername = usernameInput.replace(/\s+/g, "_");
+            const dummyEmail = `${processedUsername}@stadtwerke-hh.rp`;
+
+            if (isFirebaseActive) {
+                try {
+                    await signInWithEmailAndPassword(firebaseAuth, dummyEmail, passwordInput);
+                    window.showNotification("Anmeldung erfolgreich", "Willkommen zurück bei den Stadtwerken Hamburg!", "success");
+                } catch (err) {
+                    window.showNotification("Anmeldefehler", "Falscher Benutzername oder Passwort. Bitte versuche es erneut.", "error");
+                }
+            } else {
+                // Local Auth verification
+                const localUsers = JSON.parse(localStorage.getItem("swhh_local_users") || "[]");
+                const matchedUser = localUsers.find(
+                    u => u.username.toLowerCase() === usernameInput.toLowerCase() && u.password === passwordInput
+                );
+
+                if (matchedUser) {
+                    localStorage.setItem("swhh_active_user", JSON.stringify(matchedUser));
+                    setLoggedInState(matchedUser);
+                    window.showNotification("Anmeldung erfolgreich!", "Willkommen zurück (Lokaler Modus).", "success");
+                } else {
+                    window.showNotification("Anmeldung fehlgeschlagen", "Der Name oder das Passwort ist nicht korrekt.", "error");
+                }
+            }
+        }
+
+        // Handle Logout
+        async function handleLogout() {
+            if (isFirebaseActive) {
+                try {
+                    await signOut(firebaseAuth);
+                } catch (err) {
+                    console.error("Logout failed:", err);
+                }
+            } else {
+                localStorage.removeItem("swhh_active_user");
+                setLoggedOutState();
+            }
+        }
+
+        // Tab switches auth mode
+        function toggleAuthMode(mode) {
+            authMode = mode;
+            if (mode === "register") {
+                document.getElementById("loginForm").classList.add("hidden");
+                document.getElementById("registerForm").classList.remove("hidden");
+            } else {
+                document.getElementById("registerForm").classList.add("hidden");
+                document.getElementById("loginForm").classList.remove("hidden");
+            }
+        }
+
+        // Expose critical routing and state actions to global context
+        window.handleLogout = handleLogout;
+        window.handleLoginSubmit = handleLoginSubmit;
+        window.handleRegisterSubmit = handleRegisterSubmit;
+        window.toggleAuthMode = toggleAuthMode;
+
+        // Run Init
+        window.onload = function() {
+            initAuthEngine();
+        };
+    </script>
+
+    <script>
         // Page Routing / Tab Switcher Logic
         function switchPage(pageId) {
             const startseiteView = document.getElementById('view-startseite');
@@ -660,9 +990,12 @@
             const navOrder = document.getElementById('nav-order');
 
             // Reset tabs styling
-            navHome.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
-            navContract.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
-            navOrder.className = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+            const baseClass = "text-slate-600 hover:text-swBlue-800 px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border border-transparent";
+            const activeClass = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+            
+            navHome.className = baseClass;
+            navContract.className = baseClass;
+            navOrder.className = baseClass;
 
             startseiteView.classList.add('hidden');
             arbeitsvertragView.classList.add('hidden');
@@ -670,20 +1003,20 @@
 
             if (pageId === 'startseite') {
                 startseiteView.classList.remove('hidden');
-                navHome.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+                navHome.className = activeClass;
             } else if (pageId === 'arbeitsvertrag') {
                 arbeitsvertragView.classList.remove('hidden');
-                navContract.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+                navContract.className = activeClass;
             } else if (pageId === 'auftrag') {
                 auftragView.classList.remove('hidden');
-                navOrder.className = "text-swBlue-800 bg-swBlue-50 px-4 py-2 rounded-xl font-bold text-sm transition-all duration-200 border border-transparent";
+                navOrder.className = activeClass;
             }
 
-            // Scroll to the top when page changes
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Toggle Company Input Visibility based on Client Type
+        // Toggle Company Input Visibility
         function toggleCompanyField() {
             const orderType = document.getElementById('orderType').value;
             const companyWrapper = document.getElementById('companyFieldWrapper');
@@ -699,7 +1032,7 @@
             }
         }
 
-        // Update Live Signature and text fields visualization in real-time
+        // Update Live Signature rendering
         function updateLiveSignature() {
             const name = document.getElementById('signatureInput').value.trim();
             const birth = document.getElementById('birthdateInput').value.trim();
@@ -710,16 +1043,14 @@
             document.getElementById('prevBirth').innerText = birth.length > 0 ? birth : "___________";
             document.getElementById('prevAddr').innerText = addr.length > 0 ? addr : "___________";
 
-            // Live cursive signature
+            // Live cursive signature representation
             const signContainer = document.getElementById('liveSignature');
             if(name.length > 0) {
                 signContainer.innerText = name;
-                signContainer.classList.remove('text-slate-400', 'italic');
-                signContainer.classList.add('text-swBlue-800');
+                signContainer.className = "font-signature text-3xl text-swBlue-800 select-none transform rotate-1 transition-all duration-200";
             } else {
                 signContainer.innerText = "Unterschrift vorschau...";
-                signContainer.classList.add('text-slate-400');
-                signContainer.classList.remove('text-swBlue-800');
+                signContainer.className = "font-sans text-sm text-slate-400 italic";
             }
         }
 
@@ -732,12 +1063,10 @@
             const textEl = document.getElementById('notificationText');
             const actionsEl = document.getElementById('notificationActions');
 
-            // Configure Notification look based on type
             if(type === 'success') {
                 header.className = "w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4";
                 header.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
                 
-                // Set download callback
                 const dlClickEvent = downloadAction ? downloadAction : "downloadGeneratedPDF()";
 
                 actionsEl.innerHTML = `
@@ -763,7 +1092,6 @@
             titleEl.innerText = title;
             textEl.innerText = text;
 
-            // Transition open
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             card.classList.remove('scale-95');
             card.classList.add('scale-100');
@@ -778,31 +1106,29 @@
             card.classList.add('scale-95');
         }
 
-        // Helper function to safely download PDF without crashing sandboxed preview environments
+        // Safe PDF Save Wrapper for Sandbox Previews
         function safeSavePDF(doc, filename) {
             try {
                 doc.save(filename);
             } catch (err) {
-                console.warn("Lokal herunterladen fehlgeschlagen (Sicherheits-Sandbox im Preview-Modus):", err);
+                console.warn("Saving PDF blocked by browser sandboxing. Discord transmission remains unaffected.", err);
             }
         }
 
-        // Action triggered by clicking the contract download button
         function downloadGeneratedPDF() {
-            if (!signedPDFDoc || !generatedFileName) {
-                showNotification("Achtung!", "Es liegt noch kein unterschriebener Vertrag zum Download vor.", "error");
+            if (!window.signedPDFDoc || !window.generatedFileName) {
+                showNotification("Achtung!", "Es liegt noch kein unterschriebener Vertrag vor.", "error");
                 return;
             }
-            safeSavePDF(signedPDFDoc, generatedFileName);
+            safeSavePDF(window.signedPDFDoc, window.generatedFileName);
         }
 
-        // Action triggered by clicking the order download button
         function downloadGeneratedOrderPDF() {
-            if (!signedOrderPDFDoc || !generatedOrderFileName) {
+            if (!window.signedOrderPDFDoc || !window.generatedOrderFileName) {
                 showNotification("Achtung!", "Es liegt noch kein eingereichter Auftrag zum Download vor.", "error");
                 return;
             }
-            safeSavePDF(signedOrderPDFDoc, generatedOrderFileName);
+            safeSavePDF(window.signedOrderPDFDoc, window.generatedOrderFileName);
         }
 
         // Form Validation & PDF Generation Trigger for Contract
@@ -822,18 +1148,16 @@
                 return;
             }
 
-            // Generate the beautifully formatted document via jsPDF
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 
-                // Color Definitions
-                const primaryColor = [15, 23, 42];  // Slate 900 (Dark)
+                const primaryColor = [15, 23, 42];  // Slate 900
                 const orangeAccent = [234, 88, 12];  // swOrange 600
                 const lightSlate = [248, 250, 252]; // Slate 50
                 const borderGrey = [203, 213, 225]; // Slate 200
 
-                // Helper to render Page Header on each page
+                // Header Renderer
                 function renderPageHeader(pageNum) {
                     doc.setFillColor(...primaryColor);
                     doc.rect(0, 0, 210, 32, 'F');
@@ -849,10 +1173,9 @@
                     doc.text("Tiefbau – Infrastruktur – Netzbetrieb | Ausschläger Weg 67, 20537 Hamburg", 15, 22);
                     doc.text("Telefon: 040 / 428 68 - 0 | info@stadtwerke.hamburg", 15, 26);
 
-                    // Contract reference number top-right
                     doc.setFontSize(9);
                     doc.setFont("Helvetica", "bold");
-                    doc.setTextColor(249, 115, 22); // Orange highlight
+                    doc.setTextColor(249, 115, 22);
                     doc.text("VERTRAGSNUMMER: SW-HH-2025-0427", 130, 15);
                     
                     doc.setFont("Helvetica", "normal");
@@ -861,10 +1184,10 @@
                     doc.text(`SEITE ${pageNum} VON 2`, 180, 26);
                 }
 
-                // ================== PAGE 1 GENERATION ==================
+                // ================== PAGE 1 ==================
                 renderPageHeader(1);
 
-                // Meta Info Box (Grid Layout)
+                // Meta Info Box
                 doc.setFillColor(...lightSlate);
                 doc.setDrawColor(...borderGrey);
                 doc.rect(15, 40, 180, 30, 'FD');
@@ -931,7 +1254,7 @@
 
                 currentY += 3;
 
-                // §2 Arbeitszeit Table Layout
+                // §2 Arbeitszeit
                 doc.setFont("Helvetica", "bold");
                 doc.setTextColor(...orangeAccent);
                 doc.setFontSize(10);
@@ -967,7 +1290,7 @@
 
                 currentY += 5;
 
-                // §3 & §4 Half-Columns
+                // §3 & §4
                 doc.setFont("Helvetica", "bold");
                 doc.setTextColor(...orangeAccent);
                 doc.setFontSize(10);
@@ -975,7 +1298,7 @@
                 doc.text("§ 4 SONDERZAHLUNGEN & § 5 PROBEZEIT", 110, currentY);
                 currentY += 5;
 
-                // Column Left: Salary Table
+                // Left Column (Salary)
                 doc.setFillColor(240, 244, 248);
                 doc.rect(15, currentY, 85, 5, 'F');
                 doc.setFont("Helvetica", "bold");
@@ -1008,7 +1331,7 @@
                 });
                 doc.line(15, currentY, 100, currentY);
 
-                // Column Right: Special pay and probation info
+                // Right Column
                 let rightY = currentY - 41;
                 doc.setFont("Helvetica", "normal");
                 doc.setFontSize(8);
@@ -1028,7 +1351,7 @@
                     rightY += 4.5;
                 });
 
-                // ================== PAGE 2 GENERATION ==================
+                // ================== PAGE 2 ==================
                 doc.addPage();
                 renderPageHeader(2);
 
@@ -1090,7 +1413,7 @@
 
                 currentY += 2;
 
-                // §8, §9 & §10 Texts with Split Text to fit nicely
+                // §8, §9, §10
                 const clauses = [
                     ["§ 8 PFLICHTEN DES ARBEITNEHMERS", "Einhaltung aller gesetzlichen Vorschriften und Betriebsanweisungen. Sorgfältiger Umgang mit Arbeitsmitteln und Fahrzeugen. Melden von Mängeln und Gefahren unverzüglich. Absolute Verschwiegenheit über interne Angelegenheiten und Funksprüche."],
                     ["§ 9 HAFTUNG UND RISIKOHINWEIS", "Die Stadtwerke Hamburg haften nicht für Schäden oder Verletzungen, die durch grob fahrlässiges oder vorsätzliches Verhalten des Arbeitnehmers oder Missachtung von Sicherheitsanweisungen entstehen. Dies gilt nicht bei Verletzungen von Leben, Körper oder Gesundheit."],
@@ -1112,11 +1435,10 @@
                     currentY += (lines.length * 4) + 4;
                 });
 
-                // Signatures Sector
+                // Signatures Section
                 currentY = 240;
                 doc.setDrawColor(...borderGrey);
                 
-                // Left Representative
                 doc.line(15, currentY, 85, currentY);
                 doc.setFontSize(8);
                 doc.setTextColor(148, 163, 184);
@@ -1126,29 +1448,25 @@
                 doc.setTextColor(...primaryColor);
                 doc.text("Markus Helbing", 15, currentY - 3);
 
-                // Right Employee
                 doc.line(110, currentY, 185, currentY);
                 doc.setFontSize(8);
                 doc.setTextColor(148, 163, 184);
                 doc.text("Unterschrift Arbeitnehmer", 110, currentY + 4);
                 
-                // Cursive styled sign
                 doc.setFont("times", "italic");
                 doc.setFontSize(15);
                 doc.setTextColor(2, 132, 199);
                 doc.text(name, 115, currentY - 3);
                 
-                // Format file name
                 const formattedName = name.replace(/\s+/g, '_');
                 const pdfBlob = doc.output('blob');
 
-                // Save PDF to state
-                signedPDFDoc = doc;
-                generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
+                window.signedPDFDoc = doc;
+                window.generatedFileName = `Arbeitsvertrag_Stadtwerke_${formattedName}.pdf`;
 
-                // Discord payload preparation
+                // Webhook delivery
                 const formData = new FormData();
-                formData.append('file', pdfBlob, generatedFileName);
+                formData.append('file', pdfBlob, window.generatedFileName);
                 
                 const discordPayload = {
                     username: "Stadtwerke Hamburg Portal",
@@ -1163,20 +1481,14 @@
                             { name: "Anschrift", value: address, inline: true },
                             { name: "Status", value: "Aktiv (Probezeit)", inline: true }
                         ],
-                        footer: {
-                            text: "Stadtwerke Hamburg - Karriereportal"
-                        },
+                        footer: { text: "Stadtwerke Hamburg - Karriereportal" },
                         timestamp: new Date().toISOString()
                     }]
                 };
                 
                 formData.append('payload_json', JSON.stringify(discordPayload));
 
-                // Send to Discord Hook
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    body: formData
-                })
+                fetch(webhookUrl, { method: 'POST', body: formData })
                 .then(response => {
                     if (response.ok) {
                         document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
@@ -1186,21 +1498,21 @@
                             "success"
                         );
                     } else {
-                        throw new Error("Discord Webhook meldet Fehler-Code");
+                        throw new Error("Discord Response Failure");
                     }
                 })
                 .catch(err => {
-                    console.error("Discord transfer failed: ", err);
+                    console.error("Discord delivery failed:", err);
                     document.getElementById('standaloneDownloadBtn').classList.remove('hidden');
                     showNotification(
                         "Vertrag eingereicht!", 
-                        `Hallo ${name}, dein Arbeitsvertrag wurde erfasst! Klicke auf den Download-Button, um deine Kopie jetzt herunterzuladen.`, 
+                        `Hallo ${name}, dein Arbeitsvertrag wurde lokal erfasst! Klicke auf den Download-Button, um deine Kopie jetzt herunterzuladen.`, 
                         "success"
                     );
                 });
 
             } catch (err) {
-                console.error("PDF generation failed: ", err);
+                console.error("PDF engine crash:", err);
                 showNotification("Fehler", "Bei der PDF-Erstellung ist ein Fehler aufgetreten. Bitte versuche es erneut.", "error");
             }
         }
@@ -1224,26 +1536,23 @@
             }
 
             try {
-                // Generate Dynamic Order details
                 const randNumber = Math.floor(10000 + Math.random() * 90000);
                 const orderID = `SWHH-A-${randNumber}`;
                 const currentDateStr = new Date().toLocaleDateString('de-DE');
                 const currentTimeStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 
-                // Construct PDF via jsPDF
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
 
                 const primaryColor = [15, 23, 42];  // Slate 900
                 const accentColor = [249, 115, 22];  // swOrange 500
 
-                // Header Rect (Orange Accent Top)
+                // UI Header Layout
                 doc.setFillColor(...primaryColor);
                 doc.rect(0, 0, 210, 40, 'F');
                 doc.setFillColor(...accentColor);
                 doc.rect(0, 40, 210, 4, 'F');
 
-                // Header Titles
                 doc.setTextColor(255, 255, 255);
                 doc.setFont("Helvetica", "bold");
                 doc.setFontSize(22);
@@ -1254,7 +1563,7 @@
                 doc.setTextColor(226, 232, 240);
                 doc.text("Bürger- & Auftragsportal | Offizieller Dienstleistungs-Auftrag", 20, 33);
 
-                // Document Info Box
+                // Meta Info Table
                 doc.setFillColor(248, 250, 252);
                 doc.setDrawColor(226, 232, 240);
                 doc.rect(20, 52, 170, 35, 'FD');
@@ -1268,7 +1577,7 @@
                 doc.text(`Einreichedatum: ${currentDateStr} um ${currentTimeStr} Uhr`, 25, 74);
                 doc.text(`Status:         Warteschlange / Offen`, 25, 81);
 
-                // Client Block Box
+                // Client Block details
                 doc.setFillColor(248, 250, 252);
                 doc.rect(20, 95, 170, 35, 'FD');
                 doc.setFont("Helvetica", "bold");
@@ -1293,7 +1602,7 @@
                 const wrappedDesc = doc.splitTextToSize(orderDesc, 170);
                 doc.text(wrappedDesc, 20, 153);
 
-                // Signature placeholder for confirmation
+                // Signatures Layout
                 const footerY = 240;
                 doc.setDrawColor(203, 213, 225);
                 doc.line(20, footerY, 90, footerY);
@@ -1305,14 +1614,13 @@
                 doc.line(120, footerY, 190, footerY);
                 doc.text("Freigabe Stadtwerke Hamburg", 120, footerY + 5);
 
-                // Save PDF to state
                 const pdfBlob = doc.output('blob');
-                signedOrderPDFDoc = doc;
-                generatedOrderFileName = `Auftragsbestaetigung_SWHH_${orderID}.pdf`;
+                window.signedOrderPDFDoc = doc;
+                window.generatedOrderFileName = `Auftragsbestaetigung_SWHH_${orderID}.pdf`;
 
-                // Discord payload preparation
+                // Discord delivery
                 const formData = new FormData();
-                formData.append('file', pdfBlob, generatedOrderFileName);
+                formData.append('file', pdfBlob, window.generatedOrderFileName);
 
                 const discordPayload = {
                     username: "Stadtwerke Hamburg Portal",
@@ -1320,7 +1628,7 @@
                     embeds: [{
                         title: "🚚 Neuer Dienstleistungs-Auftrag eingegangen!",
                         description: `Ein neuer Auftrag wurde über das Online-Portal eingereicht.`,
-                        color: 16349462, // Orange color representation
+                        color: 16349462,
                         fields: [
                             { name: "Auftrags-ID", value: orderID, inline: true },
                             { name: "Kunde/Kontakt", value: `${clientName} (${clientTel})`, inline: true },
@@ -1328,20 +1636,14 @@
                             { name: "Einreichedatum", value: `${currentDateStr} - ${currentTimeStr} Uhr`, inline: true },
                             { name: "Beschreibung", value: orderDesc.length > 500 ? orderDesc.substring(0, 500) + "..." : orderDesc }
                         ],
-                        footer: {
-                            text: "Stadtwerke Hamburg - Bürgerportal"
-                        },
+                        footer: { text: "Stadtwerke Hamburg - Bürgerportal" },
                         timestamp: new Date().toISOString()
                     }]
                 };
 
                 formData.append('payload_json', JSON.stringify(discordPayload));
 
-                // Send to Discord Webhook
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    body: formData
-                })
+                fetch(webhookUrl, { method: 'POST', body: formData })
                 .then(response => {
                     if (response.ok) {
                         document.getElementById('downloadOrderBtn').classList.remove('hidden');
@@ -1352,11 +1654,11 @@
                             "downloadGeneratedOrderPDF()"
                         );
                     } else {
-                        throw new Error("Discord Webhook meldet Fehler-Code");
+                        throw new Error("Discord Delivery Failure");
                     }
                 })
                 .catch(err => {
-                    console.error("Discord transfer failed: ", err);
+                    console.error("Discord delivery failed:", err);
                     document.getElementById('downloadOrderBtn').classList.remove('hidden');
                     showNotification(
                         "Auftrag erfasst!", 
@@ -1367,7 +1669,7 @@
                 });
 
             } catch (err) {
-                console.error("PDF generation failed: ", err);
+                console.error("PDF order crash:", err);
                 showNotification("Fehler", "Bei der PDF-Erstellung ist ein Fehler aufgetreten. Bitte versuche es erneut.", "error");
             }
         }
