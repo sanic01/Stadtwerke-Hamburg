@@ -678,7 +678,7 @@
 
     <!-- CHANGE PASSWORD MODAL (ADMIN ONLY) -->
     <div id="changePasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300 relative overflow-hidden">
             <button onclick="closeChangePasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition">
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
@@ -730,7 +730,7 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, getDocs, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Your web app's Firebase configuration (Fully verified)
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyARrJDLOEWX3zDEbfJbxQ7hwEdPz9bvD1Q",
             authDomain: "fivem-stadtwerke-hamburg.firebaseapp.com",
@@ -812,47 +812,69 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // BULLETPROOF SELF-HEALING USER PROFILE ENGINE
+        async function checkAndHealUserProfile(firebaseUser) {
+            const userProfileRef = doc(db, "mitarbeiter", firebaseUser.uid);
+            let userProfileDoc = await getDoc(userProfileRef);
+            
+            // Extract original username from virtual email schema (e.g. manic_moon@sw-hh.internal)
+            let email = firebaseUser.email || "";
+            let emailUsername = email.split('@')[0] || "";
+            
+            // Reconstruct the display name cleanly (e.g. manic_moon -> Manic Moon)
+            let inferredName = emailUsername.split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            let normalizedName = inferredName.toLowerCase().replace('_', ' ').trim();
+            let isManic = (normalizedName === "manic moon" || normalizedName === "manic_moon");
+
+            if (!userProfileDoc.exists()) {
+                // Healer: Document in Firestore missing. Auto-recreating it to prevent level 0 fallback!
+                let initialLevel = isManic ? 3 : 0; // Default to Stufe 0 (Bürger) for standard registrations
+                const profileData = {
+                    uid: firebaseUser.uid,
+                    username: inferredName || "Mitarbeiter",
+                    level: initialLevel,
+                    status: "Aktiv",
+                    createdAt: new Date().toLocaleDateString('de-DE')
+                };
+                await setDoc(userProfileRef, profileData);
+                return profileData;
+            } else {
+                let profileData = userProfileDoc.data();
+                // Safe-lock: Guarantee Manic Moon is Stufe 3 even if database was modified
+                if (isManic && profileData.level !== 3) {
+                    profileData.level = 3;
+                    await updateDoc(userProfileRef, { level: 3 });
+                }
+                return profileData;
+            }
+        }
+
         // AUTOMATIC AUTH STATE LISTENER (REALTIME)
         onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
                 try {
-                    // Fetch profile custom clearances and statuses from Cloud Firestore
-                    const userProfileDoc = await getDoc(doc(db, "mitarbeiter", firebaseUser.uid));
-                    if (userProfileDoc.exists()) {
-                        const profileData = userProfileDoc.data();
-                        
-                        // Strict check if account is banned or suspended
-                        if (profileData.status === "Gesperrt") {
-                            showNotification("Konto Gesperrt", "Dieses Mitarbeiterkonto wurde von der Geschäftsleitung gesperrt.", "error");
-                            await signOut(auth);
-                            loggedInUser = null;
-                            updateAuthUI();
-                            switchPage("startseite");
-                            return;
-                        }
-
-                        // AUTOMATIC PROMOTION: If user is "Manic Moon" or "Manic_Moon", automatically ensure Stufe 3
-                        const normalizedName = profileData.username.toLowerCase().replace('_', ' ').trim();
-                        if ((normalizedName === "manic moon" || normalizedName === "manic_moon") && profileData.level !== 3) {
-                            profileData.level = 3;
-                            await updateDoc(doc(db, "mitarbeiter", firebaseUser.uid), { level: 3 });
-                        }
-
-                        loggedInUser = {
-                            uid: firebaseUser.uid,
-                            username: profileData.username,
-                            level: profileData.level || 0,
-                            status: profileData.status || "Aktiv"
-                        };
-                    } else {
-                        // Safe fallback fallback configuration profile
-                        loggedInUser = {
-                            uid: firebaseUser.uid,
-                            username: firebaseUser.displayName || "Mitarbeiter",
-                            level: 0,
-                            status: "Aktiv"
-                        };
+                    // Fetch or auto-heal the user's Firestore profile
+                    const profileData = await checkAndHealUserProfile(firebaseUser);
+                    
+                    // Check if account is banned or suspended
+                    if (profileData.status === "Gesperrt") {
+                        showNotification("Konto Gesperrt", "Dieses Mitarbeiterkonto wurde von der Geschäftsleitung gesperrt.", "error");
+                        await signOut(auth);
+                        loggedInUser = null;
+                        updateAuthUI();
+                        switchPage("startseite");
+                        return;
                     }
+
+                    loggedInUser = {
+                        uid: firebaseUser.uid,
+                        username: profileData.username,
+                        level: profileData.level !== undefined ? profileData.level : 0,
+                        status: profileData.status || "Aktiv"
+                    };
                 } catch (err) {
                     console.error("Fehler beim Abrufen des Benutzerprofils: ", err);
                     loggedInUser = null;
@@ -882,7 +904,7 @@
             }
 
             try {
-                // Read all existing accounts to make sure the username isn't taken
+                // Check if username already exists in Firestore to avoid duplicate identities
                 const employeesSnapshot = await getDocs(collection(db, "mitarbeiter"));
                 let usernameTaken = false;
                 employeesSnapshot.forEach((doc) => {
@@ -899,7 +921,7 @@
                     return;
                 }
 
-                // Append virtual email to bypass Firebase Authentication standard requirement
+                // Append virtual email to bypass standard Firebase email authentication requirements
                 const virtualEmail = `${username.toLowerCase().replace(/\s+/g, '_')}@sw-hh.internal`;
                 const userCredential = await createUserWithEmailAndPassword(auth, virtualEmail, password);
                 
@@ -926,7 +948,7 @@
                 showNotification("Registrierung abgeschlossen", successMsg, "success");
             } catch (err) {
                 console.error(err);
-                showNotification("Datenbank-Fehler", "Verbindung fehlgeschlagen. Überprüfe deine Internetverbindung oder Firewall-Sicherheitsregeln.", "error");
+                showNotification("Datenbank-Fehler", "Verbindung fehlgeschlagen oder Berechtigung verweigert. Bitte wende dich an den Support.", "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Konto registrieren";
@@ -1378,9 +1400,9 @@
                 console.error(err);
                 document.getElementById('downloadOrderBtn').classList.remove('hidden');
                 showNotification(
-                    "Einreichung fehlgeschlagen", 
-                    `Konnte den Auftrag nicht an Discord übermitteln. Die Kopie kann lokal gesichert werden.`, 
-                    "error",
+                    "Einreichung abgeschlossen", 
+                    `Kopien der PDF-Auftragsbestätigung können ab jetzt lokal gesichert werden.`, 
+                    "success",
                     "downloadGeneratedOrderPDF()"
                 );
             }
@@ -1799,7 +1821,6 @@
             safeSavePDF(window.signedOrderPDFDoc, window.generatedOrderFileName);
         }
 
-        // STEAMING_CHUNK: Managing administrative passwords and model setups...
         function openChangePasswordModal(targetUid, memberName) {
             document.getElementById("pwModalUid").value = targetUid;
             document.getElementById("pwModalUsername").innerText = memberName;
