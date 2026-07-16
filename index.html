@@ -349,8 +349,8 @@
                                     <input type="tel" id="appTel" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. 555-0199">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-900 mb-2">E-Mail-Adresse</label>
-                                    <input type="email" id="appEmail" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. max.mustermann@email.de">
+                                    <label class="block text-sm font-semibold text-slate-900 mb-2">Name im Email Verteiler</label>
+                                    <input type="text" id="appEmail" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-swBlue-500 text-slate-800 transition" placeholder="z. B. max.mustermann">
                                 </div>
                             </div>
 
@@ -2168,7 +2168,7 @@
                 docPdf.setFont("Helvetica", "normal");
                 docPdf.text(`Name:           ${fullName || 'Nicht angegeben'}`, 25, 103);
                 docPdf.text(`Telefonnummer:  ${tel || 'Nicht angegeben'}`, 25, 110);
-                docPdf.text(`E-Mail:         ${email || 'Nicht angegeben'}`, 25, 117);
+                docPdf.text(`Name im Email Verteiler: ${email || 'Nicht angegeben'}`, 25, 117);
                 docPdf.text(`Alter:          ${age || 'Nicht angegeben'}`, 25, 124);
 
                 let currentY = 143;
@@ -2230,7 +2230,7 @@
                             { name: "Bewerbungs-ID", value: applicationID, inline: true },
                             { name: "Name", value: fullName || "Nicht angegeben", inline: true },
                             { name: "Telefonnummer", value: tel || "Nicht angegeben", inline: true },
-                            { name: "E-Mail", value: email || "Nicht angegeben", inline: true },
+                            { name: "Name im Email Verteiler", value: email || "Nicht angegeben", inline: true },
                             { name: "Alter", value: age || "Nicht angegeben", inline: true },
                             { name: "Wunschbereich", value: desiredArea || "Nicht angegeben", inline: true },
                             { name: "Zeitstempel", value: `${currentDateStr} um ${currentTimeStr} Uhr`, inline: true }
