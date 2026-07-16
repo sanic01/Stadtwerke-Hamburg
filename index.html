@@ -1613,7 +1613,7 @@
         async function updateOrderStatus(docId, newStatus) {
             try {
                 await updateDoc(doc(db, "meldungen", docId), { status: newStatus });
-                showNotification("Status geändert", `Der Auftrag wurde erfolgreich in den Status '${newStatus}' überführt.`, "success", "false");
+                showNotification("Status geändert", `Der Auftrag wurde erfolgreich in den Status '${newStatus}' überführt.`, "success");
             } catch (err) {
                 console.error("Fehler beim Status-Update: ", err);
                 showNotification("Fehler", "Statusänderung konnte nicht übertragen werden.", "error");
@@ -1625,7 +1625,7 @@
             showConfirmNotification("Meldung löschen?", "Möchtest du diese Meldung wirklich dauerhaft aus der Datenbank entfernen?", async () => {
                 try {
                     await deleteDoc(doc(db, "meldungen", docId));
-                    showNotification("Gelöscht", "Der Auftrag wurde restlos entfernt.", "success", "false");
+                    showNotification("Gelöscht", "Der Auftrag wurde restlos entfernt.", "success");
                 } catch (err) {
                     console.error("Fehler beim Löschen der Meldung: ", err);
                     showNotification("Fehler", "Der Auftrag konnte nicht gelöscht werden.", "error");
@@ -1701,7 +1701,7 @@
             try {
                 const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { level: parseInt(newLevel) });
-                showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success", "false");
+                showNotification("Stufe aktualisiert", "Die Freigabestufe wurde erfolgreich geändert.", "success");
             } catch (err) {
                 console.error("Error changing clearance level:", err);
                 showNotification("Fehler", "Stufe konnte nicht geändert werden.", "error");
@@ -1713,7 +1713,7 @@
             try {
                 const userRef = doc(db, "mitarbeiter", targetUid);
                 await updateDoc(userRef, { status: newStatus });
-                showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success", "false");
+                showNotification("Status geändert", `Das Konto ist nun im Status: ${newStatus}`, "success");
             } catch (err) {
                 console.error("Error setting status:", err);
                 showNotification("Fehler", "Status konnte nicht geändert werden.", "error");
@@ -1726,7 +1726,7 @@
                 try {
                     const userRef = doc(db, "mitarbeiter", targetUid);
                     await deleteDoc(userRef);
-                    showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success", "false");
+                    showNotification("Gelöscht", "Das Mitarbeiterkonto wurde erfolgreich aus der Cloud entfernt.", "success");
                 } catch (err) {
                     console.error(err);
                     showNotification("Fehler", "Das Konto konnte nicht gelöscht werden.", "error");
@@ -1763,14 +1763,6 @@
             grid.classList.remove("hidden");
             emptyState.classList.add("hidden");
 
-            // Ab 3 Meldungen: kompaktes 3-Spalten-Raster (wie bisher).
-            // Bei 1-2 Meldungen: großes, prominenteres 2-Spalten-Format.
-            const isCompact = list.length >= 3;
-
-            grid.className = isCompact
-                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                : "grid grid-cols-1 md:grid-cols-2 gap-6";
-
             grid.innerHTML = "";
             list.forEach(item => {
                 let catIcon = "fa-circle-info";
@@ -1791,7 +1783,7 @@
                     badgeText = "Netzstörung";
                 }
 
-                const card = isCompact ? `
+                const card = `
                     <div class="border border-slate-200 rounded-2xl p-5 shadow-sm bg-white hover:shadow-md transition-all duration-300 flex flex-col justify-between gap-4">
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
@@ -1805,22 +1797,6 @@
                         </div>
                         <div class="text-[10px] text-slate-400 font-semibold border-t border-slate-100 pt-3 flex items-center gap-1">
                             <i class="fa-solid fa-user text-[9px] text-slate-300"></i> Erstellt von: <strong class="text-slate-600">${item.createdBy || 'Stadtwerke Hamburg'}</strong>
-                        </div>
-                    </div>
-                ` : `
-                    <div class="border border-slate-200 rounded-3xl p-8 shadow-md bg-white hover:shadow-lg transition-all duration-300 flex flex-col justify-between gap-5">
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="inline-flex items-center gap-2 text-sm font-bold px-3.5 py-1.5 rounded-full bg-gradient-to-r ${catColor} text-white uppercase tracking-wider">
-                                    <i class="fa-solid ${catIcon} text-xs"></i> ${badgeText}
-                                </span>
-                                <span class="text-xs text-slate-400 font-bold font-mono"><i class="fa-solid fa-clock mr-1"></i>${item.date} - ${item.time}</span>
-                            </div>
-                            <h3 class="text-2xl font-extrabold text-slate-900 leading-snug">${item.title}</h3>
-                            <p class="text-slate-600 text-base leading-relaxed">${item.content}</p>
-                        </div>
-                        <div class="text-xs text-slate-400 font-semibold border-t border-slate-100 pt-4 flex items-center gap-1">
-                            <i class="fa-solid fa-user text-[10px] text-slate-300"></i> Erstellt von: <strong class="text-slate-600">${item.createdBy || 'Stadtwerke Hamburg'}</strong>
                         </div>
                     </div>
                 `;
@@ -1918,14 +1894,31 @@
                 }
 
                 // 3. Dispatch to Discord
-                // Hinweis: Statusmeldungen werden bewusst NICHT mehr an Discord gesendet.
-                // Discord-Benachrichtigungen erfolgen nur noch beim Arbeitsvertrag und beim Einreichen eines Auftrags.
+                const discordPayload = {
+                    username: "Stadtwerke Hamburg Portal",
+                    embeds: [{
+                        title: `📢 Neue Bürgerinformation: ${title}`,
+                        description: `**Kategorie:** ${categoryLabel}\n\n${content}`,
+                        color: categoryColor,
+                        fields: [
+                            { name: "Veröffentlicht von", value: author, inline: true },
+                            { name: "Datum / Uhrzeit", value: `${currentDateStr} um ${currentTimeStr} Uhr`, inline: true }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+
+                await fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(discordPayload)
+                });
 
                 // Reset forms
                 document.getElementById("statusTitle").value = "";
                 document.getElementById("statusContent").value = "";
 
-                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht.", "success", "false");
+                showNotification("Meldung live!", "Die Bürgerinformation wurde im Ticker veröffentlicht und an den Discord gesendet.", "success");
             } catch (err) {
                 console.error("Fehler beim Speichern der Statusmeldung: ", err);
                 showNotification("Fehler", "Datenbankverbindung gescheitert.", "error");
@@ -1937,7 +1930,7 @@
             showConfirmNotification("Meldung löschen?", `Möchten Sie den Beitrag "${title}" wirklich löschen und vom Ticker entfernen?`, async () => {
                 try {
                     await deleteDoc(doc(db, "statusmeldungen", docId));
-                    showNotification("Gelöscht", "Die Bürgerinformation wurde gelöscht.", "success", "false");
+                    showNotification("Gelöscht", "Die Bürgerinformation wurde gelöscht.", "success");
                 } catch (err) {
                     console.error("Fehler beim Löschen: ", err);
                     showNotification("Fehler", "Löschvorgang abgebrochen.", "error");
@@ -2085,44 +2078,42 @@
             }
         }
 
-        // ONLINE-BEWERBUNG: PDF-ERSTELLUNG + DISCORD-VERSAND (ALLE FELDER FREIWILLIG)
+        // ONLINE APPLICATIONS SYSTEM (SAVES TO FIRESTORE, GENERATES PDF, DISPATCHES TO DISCORD)
         async function handleApplicationSubmission() {
             const firstName = document.getElementById('appFirstName').value.trim();
             const lastName = document.getElementById('appLastName').value.trim();
-            const tel = document.getElementById('appTel').value.trim();
+            const phone = document.getElementById('appTel').value.trim();
             const email = document.getElementById('appEmail').value.trim();
             const age = document.getElementById('appAge').value.trim();
             const desiredArea = document.getElementById('appDesiredArea').value.trim();
             const about = document.getElementById('appAbout').value.trim();
             const experience = document.getElementById('appExperience').value.trim();
 
-            const fullName = `${firstName} ${lastName}`.trim();
-            const displayName = fullName || "Bewerber(in)";
-
+            const fullName = `${firstName} ${lastName}`.trim() || "Anonymer Bewerber";
+            const randNumber = Math.floor(10000 + Math.random() * 90000);
+            const appID = `SWHH-B-${randNumber}`;
             const currentDateStr = new Date().toLocaleDateString('de-DE');
             const currentTimeStr = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
 
-            const randNumber = Math.floor(10000 + Math.random() * 90000);
-            const applicationID = `SWHH-B-${randNumber}`;
-
-            const newApplicationPayload = {
-                applicationID: applicationID,
+            const newAppPayload = {
+                appID: appID,
                 firstName: firstName,
                 lastName: lastName,
-                phone: tel,
+                phone: phone,
                 email: email,
                 age: age,
                 desiredArea: desiredArea,
                 about: about,
                 experience: experience,
                 date: currentDateStr,
-                time: currentTimeStr
+                time: currentTimeStr,
+                status: "Eingegangen"
             };
 
-            // 1. Save directly into Cloud Firestore (best effort)
+            // 1. Save directly into Cloud Firestore (collection "bewerbungen")
             try {
                 const bewerbungenCol = collection(db, "bewerbungen");
-                await addDoc(bewerbungenCol, newApplicationPayload);
+                await addDoc(bewerbungenCol, newAppPayload);
             } catch (err) {
                 console.error("Firestore write blocked. Saving locally: ", err);
             }
@@ -2132,108 +2123,99 @@
                 const { jsPDF } = window.jspdf;
                 const docPdf = new jsPDF();
 
-                const primaryColor = [15, 23, 42];
-                const accentColor = [249, 115, 22];
+                const primaryColor = [12, 74, 110];  // swBlue-900
+                const accentColor = [249, 115, 22];  // swOrange-500
 
+                // Header Background
                 docPdf.setFillColor(...primaryColor);
                 docPdf.rect(0, 0, 210, 40, 'F');
                 docPdf.setFillColor(...accentColor);
                 docPdf.rect(0, 40, 210, 4, 'F');
 
+                // Header text
                 docPdf.setTextColor(255, 255, 255);
                 docPdf.setFont("Helvetica", "bold");
                 docPdf.setFontSize(22);
                 docPdf.text("STADTWERKE HAMBURG", 20, 25);
                 docPdf.setFontSize(10);
                 docPdf.setTextColor(226, 232, 240);
-                docPdf.text("Karriereportal | Online-Bewerbung", 20, 33);
+                docPdf.text("Karriereportal | Offizielle Online-Bewerbung", 20, 33);
 
+                // Application Status Box
                 docPdf.setFillColor(248, 250, 252);
                 docPdf.setDrawColor(226, 232, 240);
-                docPdf.rect(20, 52, 170, 28, 'FD');
-
+                docPdf.rect(20, 52, 170, 35, 'FD');
+                
                 docPdf.setFontSize(10);
                 docPdf.setTextColor(71, 85, 105);
                 docPdf.setFont("Helvetica", "bold");
-                docPdf.text("EINGEGANGENE BEWERBUNG", 25, 60);
+                docPdf.text("DOKUMENTEN-INFORMATION", 25, 60);
                 docPdf.setFont("Helvetica", "normal");
-                docPdf.text(`Bewerbungs-Nr: ${applicationID}`, 25, 67);
-                docPdf.text(`Eingereicht am: ${currentDateStr} - ${currentTimeStr} Uhr`, 25, 74);
+                docPdf.text(`Bewerber-ID:    ${appID}`, 25, 67);
+                docPdf.text(`Einreichedatum: ${currentDateStr} - ${currentTimeStr} Uhr`, 25, 74);
+                docPdf.text(`Status:         Eingegangen / Geprüft`, 25, 81);
 
+                // Personal details Box
                 docPdf.setFillColor(248, 250, 252);
-                docPdf.rect(20, 88, 170, 42, 'FD');
+                docPdf.rect(20, 95, 170, 45, 'FD');
                 docPdf.setFont("Helvetica", "bold");
-                docPdf.setTextColor(...primaryColor);
-                docPdf.text("KONTAKTDATEN", 25, 96);
+                docPdf.text("PERSÖNLICHE ANGABEN", 25, 103);
                 docPdf.setFont("Helvetica", "normal");
-                docPdf.text(`Name:           ${fullName || 'Nicht angegeben'}`, 25, 103);
-                docPdf.text(`Telefonnummer:  ${tel || 'Nicht angegeben'}`, 25, 110);
-                docPdf.text(`Name im Email Verteiler: ${email || 'Nicht angegeben'}`, 25, 117);
-                docPdf.text(`Alter:          ${age || 'Nicht angegeben'}`, 25, 124);
+                docPdf.text(`Name:           ${fullName}`, 25, 110);
+                docPdf.text(`Alter:          ${age || 'Keine Angabe'} Jahre`, 25, 117);
+                docPdf.text(`Telefonnummer:   ${phone || 'Keine Angabe'}`, 25, 124);
+                docPdf.text(`Name im Verteiler: ${email || 'Keine Angabe'}`, 25, 131);
 
-                let currentY = 143;
+                // Desired position
                 docPdf.setFont("Helvetica", "bold");
-                docPdf.setFontSize(11);
                 docPdf.setTextColor(...primaryColor);
-                docPdf.text("Wunschbereich:", 20, currentY);
+                docPdf.setFontSize(11);
+                docPdf.text(`Angestrebter Wunschbereich: ${desiredArea || 'Allgemein'}`, 20, 155);
+
+                // About details
+                docPdf.setFont("Helvetica", "bold");
+                docPdf.text("Über den Bewerber:", 20, 168);
                 docPdf.setFont("Helvetica", "normal");
                 docPdf.setFontSize(10);
                 docPdf.setTextColor(51, 65, 85);
-                currentY += 6;
-                const wrappedArea = docPdf.splitTextToSize(desiredArea || "Nicht angegeben", 170);
-                docPdf.text(wrappedArea, 20, currentY);
-                currentY += wrappedArea.length * 5 + 8;
+                const wrappedAbout = docPdf.splitTextToSize(about || "Keine Informationen hinterlegt.", 170);
+                docPdf.text(wrappedAbout, 20, 175);
 
+                // Experiences
+                let expY = 175 + (wrappedAbout.length * 5) + 10;
                 docPdf.setFont("Helvetica", "bold");
-                docPdf.setFontSize(11);
                 docPdf.setTextColor(...primaryColor);
-                docPdf.text("Über mich:", 20, currentY);
+                docPdf.setFontSize(11);
+                docPdf.text("Bisherige Erfahrungen & Qualifikationen:", 20, expY);
                 docPdf.setFont("Helvetica", "normal");
                 docPdf.setFontSize(10);
                 docPdf.setTextColor(51, 65, 85);
-                currentY += 6;
-                const wrappedAbout = docPdf.splitTextToSize(about || "Nicht angegeben", 170);
-                docPdf.text(wrappedAbout, 20, currentY);
-                currentY += wrappedAbout.length * 5 + 8;
-
-                if (currentY > 250) {
-                    docPdf.addPage();
-                    currentY = 20;
-                }
-
-                docPdf.setFont("Helvetica", "bold");
-                docPdf.setFontSize(11);
-                docPdf.setTextColor(...primaryColor);
-                docPdf.text("Berufliche Erfahrungen:", 20, currentY);
-                docPdf.setFont("Helvetica", "normal");
-                docPdf.setFontSize(10);
-                docPdf.setTextColor(51, 65, 85);
-                currentY += 6;
-                const wrappedExperience = docPdf.splitTextToSize(experience || "Nicht angegeben", 170);
-                docPdf.text(wrappedExperience, 20, currentY);
+                const wrappedExp = docPdf.splitTextToSize(experience || "Keine Erfahrungen hinterlegt.", 170);
+                docPdf.text(wrappedExp, 20, expY + 7);
 
                 const pdfBlob = docPdf.output('blob');
                 window.signedApplicationPDFDoc = docPdf;
-                window.generatedApplicationFileName = `Bewerbung_SWHH_${applicationID}.pdf`;
+                window.generatedApplicationFileName = `Bewerbung_SWHH_${appID}_${fullName.replace(/\s+/g, '_')}.pdf`;
 
                 // 3. Send to Discord Webhook
                 const formData = new FormData();
                 formData.append('file', pdfBlob, window.generatedApplicationFileName);
 
                 const discordPayload = {
-                    username: "Stadtwerke Hamburg Portal",
+                    username: "Stadtwerke Hamburg Karriereportal",
                     embeds: [{
-                        title: "🧑‍💼 Neue Online-Bewerbung eingegangen!",
-                        description: `Eine neue Bewerbung wurde über das Karriereportal eingereicht.`,
-                        color: 2201331,
+                        title: "💼 Neue Online-Bewerbung eingegangen!",
+                        description: `Eine neue Bewerbung wurde über das Online-Portal eingereicht.`,
+                        color: 1478144, // swBlue hex equivalent
                         fields: [
-                            { name: "Bewerbungs-ID", value: applicationID, inline: true },
-                            { name: "Name", value: fullName || "Nicht angegeben", inline: true },
-                            { name: "Telefonnummer", value: tel || "Nicht angegeben", inline: true },
-                            { name: "Name im Email Verteiler", value: email || "Nicht angegeben", inline: true },
-                            { name: "Alter", value: age || "Nicht angegeben", inline: true },
-                            { name: "Wunschbereich", value: desiredArea || "Nicht angegeben", inline: true },
-                            { name: "Zeitstempel", value: `${currentDateStr} um ${currentTimeStr} Uhr`, inline: true }
+                            { name: "Bewerber-ID", value: appID, inline: true },
+                            { name: "Name", value: fullName, inline: true },
+                            { name: "Alter", value: age || 'Keine Angabe', inline: true },
+                            { name: "Telefon", value: phone || 'Keine Angabe', inline: true },
+                            { name: "Email-Verteiler", value: email || 'Keine Angabe', inline: true },
+                            { name: "Wunschbereich", value: desiredArea || 'Keine Angabe', inline: true },
+                            { name: "Über mich", value: about ? (about.length > 500 ? about.substring(0, 500) + "..." : about) : 'Keine Angabe' },
+                            { name: "Berufliche Erfahrungen", value: experience ? (experience.length > 500 ? experience.substring(0, 500) + "..." : experience) : 'Keine Angabe' }
                         ],
                         timestamp: new Date().toISOString()
                     }]
@@ -2243,9 +2225,13 @@
 
                 await fetch(discordWebhookUrl, { method: 'POST', body: formData });
                 document.getElementById('downloadApplicationBtn').classList.remove('hidden');
+                
+                // Formular zurücksetzen
+                document.getElementById('applicationForm').reset();
+
                 showNotification(
-                    "Bewerbung übermittelt!",
-                    `Vielen Dank, ${displayName}! Deine Bewerbung ist bei uns eingegangen.`,
+                    "Bewerbung übermittelt!", 
+                    `Hallo ${fullName}, deine Bewerbung wurde erfolgreich in der Personal-Datenbank registriert (ID: ${appID}). Du kannst dir deine Kopie nun sichern.`, 
                     "success",
                     "downloadGeneratedApplicationPDF()"
                 );
@@ -2253,8 +2239,8 @@
                 console.error(err);
                 document.getElementById('downloadApplicationBtn').classList.remove('hidden');
                 showNotification(
-                    "Bewerbung erfasst!",
-                    `Deine Bewerbung wurde lokal erfasst. Du kannst deine Kopie jetzt herunterladen.`,
+                    "Übermittlung abgeschlossen", 
+                    `Deine Bewerbung wurde erfasst. Du kannst deine Bewerbungsunterlagen nun als PDF herunterladen.`, 
                     "success",
                     "downloadGeneratedApplicationPDF()"
                 );
@@ -2733,7 +2719,7 @@
                 // Direct modification within firestore
                 await updateDoc(userRef, { password: newPassword });
                 closeChangePasswordModal();
-                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success", "false");
+                showNotification("Passwort geändert", `Das Passwort für ${memberName} wurde erfolgreich aktualisiert.`, "success");
             } catch (err) {
                 console.error("Error resetting member password:", err);
                 showNotification("Fehler", "Passwort konnte nicht geändert werden.", "error");
